@@ -5,6 +5,9 @@
 #ifndef FINEXIA_OPERATION_H
 #define FINEXIA_OPERATION_H
 
+enum class OperationType {
+    Deposit, Withdrawal, Transfer
+};
 
 class Operation {
 

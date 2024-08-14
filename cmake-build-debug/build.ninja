@@ -79,14 +79,14 @@ build CMakeFiles/Finexia.dir/Operation.cpp.o: CXX_COMPILER__Finexia_unscanned_De
   OBJECT_DIR = CMakeFiles/Finexia.dir
   OBJECT_FILE_DIR = CMakeFiles/Finexia.dir
 
-build CMakeFiles/Finexia.dir/ScheduledOperations.cpp.o: CXX_COMPILER__Finexia_unscanned_Debug /home/user/ClionProjects/Finexia/ScheduledOperations.cpp || cmake_object_order_depends_target_Finexia
-  DEP_FILE = CMakeFiles/Finexia.dir/ScheduledOperations.cpp.o.d
+build CMakeFiles/Finexia.dir/ScheduledOperation.cpp.o: CXX_COMPILER__Finexia_unscanned_Debug /home/user/ClionProjects/Finexia/ScheduledOperation.cpp || cmake_object_order_depends_target_Finexia
+  DEP_FILE = CMakeFiles/Finexia.dir/ScheduledOperation.cpp.o.d
   FLAGS = -g -std=gnu++23 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles/Finexia.dir
   OBJECT_FILE_DIR = CMakeFiles/Finexia.dir
 
-build CMakeFiles/Finexia.dir/CardOperations.cpp.o: CXX_COMPILER__Finexia_unscanned_Debug /home/user/ClionProjects/Finexia/CardOperations.cpp || cmake_object_order_depends_target_Finexia
-  DEP_FILE = CMakeFiles/Finexia.dir/CardOperations.cpp.o.d
+build CMakeFiles/Finexia.dir/CardOperation.cpp.o: CXX_COMPILER__Finexia_unscanned_Debug /home/user/ClionProjects/Finexia/CardOperation.cpp || cmake_object_order_depends_target_Finexia
+  DEP_FILE = CMakeFiles/Finexia.dir/CardOperation.cpp.o.d
   FLAGS = -g -std=gnu++23 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles/Finexia.dir
   OBJECT_FILE_DIR = CMakeFiles/Finexia.dir
@@ -99,7 +99,7 @@ build CMakeFiles/Finexia.dir/CardOperations.cpp.o: CXX_COMPILER__Finexia_unscann
 #############################################
 # Link the executable Finexia
 
-build Finexia: CXX_EXECUTABLE_LINKER__Finexia_Debug CMakeFiles/Finexia.dir/main.cpp.o CMakeFiles/Finexia.dir/BankAccount.cpp.o CMakeFiles/Finexia.dir/CreditCard.cpp.o CMakeFiles/Finexia.dir/DebitCard.cpp.o CMakeFiles/Finexia.dir/Operation.cpp.o CMakeFiles/Finexia.dir/ScheduledOperations.cpp.o CMakeFiles/Finexia.dir/CardOperations.cpp.o
+build Finexia: CXX_EXECUTABLE_LINKER__Finexia_Debug CMakeFiles/Finexia.dir/main.cpp.o CMakeFiles/Finexia.dir/BankAccount.cpp.o CMakeFiles/Finexia.dir/CreditCard.cpp.o CMakeFiles/Finexia.dir/DebitCard.cpp.o CMakeFiles/Finexia.dir/Operation.cpp.o CMakeFiles/Finexia.dir/ScheduledOperation.cpp.o CMakeFiles/Finexia.dir/CardOperation.cpp.o
   FLAGS = -g
   OBJECT_DIR = CMakeFiles/Finexia.dir
   POST_BUILD = :

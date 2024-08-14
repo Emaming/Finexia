@@ -12,7 +12,7 @@ add_executable(Finexia main.cpp
         DebitCard.h
         Operation.cpp
         Operation.h
-        ScheduledOperations.cpp
-        ScheduledOperations.h
-        CardOperations.cpp
-        CardOperations.h)
+        ScheduledOperation.cpp
+        ScheduledOperation.h
+        CardOperation.cpp
+        CardOperation.h)

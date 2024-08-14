@@ -15,6 +15,12 @@
 #include "ScheduledOperation.h"
 
 class BankAccount {
+private:
+    std::vector<std::shared_ptr<Operation>> operations;
+    std::vector<std::shared_ptr<ScheduledOperation>> scheduledOperations;
+    std::list<std::shared_ptr<CardOperation>> cardsOperations;
+    std::string IBAN;
+    double balance;
 public:
     BankAccount();
     ~BankAccount() = default;
@@ -64,13 +70,6 @@ public:
     std::string printIban() const;
 
     std::string printBalance() const;
-
-private:
-    std::vector<std::shared_ptr<Operation>> operations;
-    std::vector<std::shared_ptr<ScheduledOperation>> scheduledOperations;
-    std::list<std::shared_ptr<CardOperation>> cardsOperations;
-    std::string IBAN;
-    double balance;
 };
 
 

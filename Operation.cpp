@@ -36,3 +36,7 @@ void Operation::printOperation() const {
 
 }
 
+const std::chrono::system_clock::time_point &Operation::getDate() const {
+    return date;
+}
+

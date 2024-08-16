@@ -19,10 +19,13 @@ protected:
     double amount;
     std::chrono::system_clock::time_point date;
     OperationType type;
+public:
 
     virtual void printOperation() const;
 
     virtual std::string printOperationString() const;
+
+    const std::chrono::system_clock::time_point &getDate() const;
 
     std::string printOperationType() const;
 
@@ -30,8 +33,8 @@ protected:
 
     std::string printDateTime() const;
 
-public:
 explicit Operation(double a,OperationType type);
+
 ~Operation() = default;
 
     double getAmount() const;

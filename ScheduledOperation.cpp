@@ -1,13 +1,11 @@
-//
-// Created by user on 13/08/24.
-//
-
 #include "ScheduledOperation.h"
+#include "Operation.h"
 #include <sstream>
 #include <iomanip>
 #include <chrono>
 #include <ctime>
 
+// Funzione libera per convertire il time_point in una stringa
 std::string timePointToString(const std::chrono::system_clock::time_point& timePoint) {
     std::time_t time = std::chrono::system_clock::to_time_t(timePoint);
     std::stringstream ss;
@@ -15,11 +13,24 @@ std::string timePointToString(const std::chrono::system_clock::time_point& timeP
     return ss.str();
 }
 
-void ScheduledOperation::updateNextExecutionDate() {
+// Funzione di supporto per convertire OperationType in stringa
+std::string operationTypeToString(OperationType type) {
+    switch (type) {
+        case OperationType::Deposit:
+            return "Deposit";
+        case OperationType::Withdrawal:
+            return "Withdrawal";
+        case OperationType::Transfer:
+            return "Transfer";
+        default:
+            return "Unknown";
+    }
+}
 
+void ScheduledOperation::updateNextExecutionDate() {
     switch (frequency) {
         case Frequency::One:
-            // No date update, just one time
+            // Nessun aggiornamento della data, solo una volta
             break;
         case Frequency::Daily:
             scheduledExecutionDate += std::chrono::hours(24);
@@ -28,17 +39,17 @@ void ScheduledOperation::updateNextExecutionDate() {
             scheduledExecutionDate += std::chrono::hours(24 * 7);
             break;
         case Frequency::Monthly:
-            scheduledExecutionDate += std::chrono::hours(24 * 30);  // Rough approximation
+            scheduledExecutionDate += std::chrono::hours(24 * 30);  // Approssimazione
             break;
         case Frequency::Yearly:
-            scheduledExecutionDate += std::chrono::hours(24 * 365); // Rough approximation
+            scheduledExecutionDate += std::chrono::hours(24 * 365); // Approssimazione
             break;
     }
 }
 
 std::string ScheduledOperation::printOperationString() const {
     std::stringstream transaction;
-    transaction << printOperationType() << ", amount: " << amount;
+    transaction << operationTypeToString(operation->getType()) << ", amount: " << operation->getAmount();
     transaction << ", scheduled execution date: " << timePointToString(scheduledExecutionDate);
     transaction << ", frequency: " << printFrequency() << std::endl;
     return transaction.str();
@@ -60,7 +71,7 @@ std::string ScheduledOperation::printFrequency() const {
     return "";
 }
 
-const std::chrono::system_clock::time_point &ScheduledOperation::getScheduledExecutionDate() const {
+const std::chrono::system_clock::time_point& ScheduledOperation::getScheduledExecutionDate() const {
     return scheduledExecutionDate;
 }
 

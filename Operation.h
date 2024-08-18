@@ -1,49 +1,35 @@
-//
-// Created by user on 13/08/24.
-//
+#ifndef OPERATION_H
+#define OPERATION_H
 
-#ifndef FINEXIA_OPERATION_H
-#define FINEXIA_OPERATION_H
-
+#include <chrono>
 #include <string>
-#include <ctime>
-#include <iostream>
-#include "chrono"
 
-enum class OperationType {
-    Deposit, Withdrawal, Transfer
-};
+enum class OperationType { Deposit, Withdrawal, Transfer };
 
 class Operation {
-protected:
+private:
+    int id; // Identificativo dell'operazione
     double amount;
-    std::chrono::system_clock::time_point date;
     OperationType type;
+    std::chrono::system_clock::time_point date;
+
 public:
+    // Costruttore per creare un'operazione con tutti i dati
+    Operation(int id, double amount, OperationType type, std::chrono::system_clock::time_point date);
 
-    virtual void printOperation() const;
+    // Costruttore per creare un'operazione con solo amount e type
+    Operation(double a, OperationType type);
 
-    virtual std::string printOperationString() const;
-
-    const std::chrono::system_clock::time_point &getDate() const;
-
-    std::string printOperationType() const;
-
-    static std::string printOperationTypes();
-
-    std::string printDateTime() const;
-
-explicit Operation(double a,OperationType type);
-
-~Operation() = default;
-
+    int getId() const;
     double getAmount() const;
-
     OperationType getType() const;
+    std::chrono::system_clock::time_point getDate() const;
 
-
-
+    void printOperation() const;
+    std::string printOperationString() const;
+    static std::string printOperationTypes();
+    std::string printOperationType() const;
+    std::string printDateTime() const;
 };
 
-
-#endif //FINEXIA_OPERATION_H
+#endif // OPERATION_H

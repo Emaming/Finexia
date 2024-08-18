@@ -1,0 +1,14 @@
+# ninja log v6
+7	67	1723989821277552087	CMakeFiles/Finexia.dir/CreditCard.cpp.o	4d83974e1f8f99c
+8	67	1723989821277552087	CMakeFiles/Finexia.dir/DebitCard.cpp.o	af0fc0edc4d8cfb4
+8	688	1723989821277552087	CMakeFiles/Finexia.dir/ScheduledOperation.cpp.o	2e31c80703289985
+8	695	1723989821277552087	CMakeFiles/Finexia.dir/Operation.cpp.o	a2bccede7078f5a5
+9	722	1723989821277552087	CMakeFiles/Finexia.dir/CardOperation.cpp.o	1de5d742ddafca05
+7	1347	1723989821277552087	CMakeFiles/Finexia.dir/BankAccount.cpp.o	f28d201e9c03883
+6	831	1723989821273552088	CMakeFiles/Finexia.dir/main.cpp.o	1d15580525650230
+2	535	1723993188239602153	CMakeFiles/Finexia.dir/Operation.cpp.o	a2bccede7078f5a5
+3	638	1723993188239602153	CMakeFiles/Finexia.dir/ScheduledOperation.cpp.o	2e31c80703289985
+2	726	1723993188239602153	CMakeFiles/Finexia.dir/main.cpp.o	1d15580525650230
+3	794	1723993188239602153	CMakeFiles/Finexia.dir/CardOperation.cpp.o	1de5d742ddafca05
+2	1162	1723993188239602153	CMakeFiles/Finexia.dir/BankAccount.cpp.o	f28d201e9c03883
+1162	1259	1723993189399605273	Finexia	690c9221c8e52fa1

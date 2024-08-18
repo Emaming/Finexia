@@ -15,4 +15,5 @@ add_executable(Finexia main.cpp
         ScheduledOperation.cpp
         ScheduledOperation.h
         CardOperation.cpp
-        CardOperation.h)
+        CardOperation.h
+        TimeUtils.h)

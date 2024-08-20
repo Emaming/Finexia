@@ -1,14 +1,11 @@
-//
-// Created by user on 13/08/24.
-//
+// CreditCard.h
+#ifndef CREDITCARD_H
+#define CREDITCARD_H
 
-#ifndef FINEXIA_CREDITCARD_H
-#define FINEXIA_CREDITCARD_H
+#include "Card.h"
 
-
-class CreditCard {
-
+class CreditCard : public Card {
+    // CreditCard-specific functionality
 };
 
-
-#endif //FINEXIA_CREDITCARD_H
+#endif // CREDITCARD_H

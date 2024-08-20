@@ -4,7 +4,8 @@
 #include <chrono>
 #include <string>
 
-enum class OperationType { Deposit, Withdrawal, Transfer };
+enum class OperationType { Deposit, Withdrawal, Transfer,DebitCard,  // New type for Debit Card creation
+    CreditCard };
 
 class Operation {
 private:

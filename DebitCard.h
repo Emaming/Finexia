@@ -1,14 +1,11 @@
-//
-// Created by user on 13/08/24.
-//
+// DebitCard.h
+#ifndef DEBITCARD_H
+#define DEBITCARD_H
 
-#ifndef FINEXIA_DEBITCARD_H
-#define FINEXIA_DEBITCARD_H
+#include "Card.h"
 
-
-class DebitCard {
-
+class DebitCard : public Card {
+    // DebitCard-specific functionality
 };
 
-
-#endif //FINEXIA_DEBITCARD_H
+#endif // DEBITCARD_H

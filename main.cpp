@@ -4,7 +4,6 @@
 #include <chrono>
 #include <string>
 #include <sstream>
-
 #include "BankAccount.h"
 #include "Operation.h"
 #include "ScheduledOperation.h"
@@ -18,13 +17,15 @@ void printMenu() {
     std::cout << "4. Share Transaction History" << std::endl;
     std::cout << "5. Card Operations" << std::endl;
     std::cout << "6. Execute Planned Transactions" << std::endl;
-    std::cout << "7. Exit" << std::endl;
+    std::cout << "7. Save to File" << std::endl;
+    std::cout << "8. Load from File" << std::endl;
+    std::cout << "9. Exit" << std::endl;
 }
 
 int main() {
     BankAccount account;
-
     int choice;
+
     do {
         printMenu();
         std::cin >> choice;
@@ -55,8 +56,10 @@ int main() {
 
                 auto transaction = std::make_shared<Operation>(1, amount, type, now);
                 account.addTransaction(transaction);
+                std::cout << "Transaction added successfully." << std::endl;
                 break;
             }
+
             case 2: {
                 int searchMethod;
                 std::cout << "Select search method:" << std::endl;
@@ -104,7 +107,11 @@ int main() {
                         std::cin >> month;
                         std::cout << "Enter day (1-31): ";
                         std::cin >> day;
-                        auto date = std::chrono::system_clock::now(); // Dummy date, replace with actual conversion
+                        std::tm tm = {};
+                        tm.tm_year = year - 1900;
+                        tm.tm_mon = month - 1;
+                        tm.tm_mday = day;
+                        auto date = std::chrono::system_clock::from_time_t(std::mktime(&tm));
                         auto results = account.findOperationByDate(date);
                         account.printOperations(results);
                         break;
@@ -115,6 +122,7 @@ int main() {
                 }
                 break;
             }
+
             case 3: {
                 int transactionType;
                 std::cout << "Select transaction type to cancel:" << std::endl;
@@ -169,12 +177,15 @@ int main() {
                                 std::cin >> month;
                                 std::cout << "Enter day (1-31): ";
                                 std::cin >> day;
-                                auto date = std::chrono::system_clock::now(); // Dummy date, replace with actual conversion
+                                std::tm tm = {};
+                                tm.tm_year = year - 1900;
+                                tm.tm_mon = month - 1;
+                                tm.tm_mday = day;
+                                auto date = std::chrono::system_clock::from_time_t(std::mktime(&tm));
                                 toCancel = account.findOperationByDate(date);
                                 break;
                             }
                             default:
-                                std::cerr << "Invalid choice!";
                                 std::cerr << "Invalid choice!" << std::endl;
                                 continue;
                         }
@@ -196,7 +207,7 @@ int main() {
                                 double amount;
                                 std::cout << "Enter amount: ";
                                 std::cin >> amount;
-                                toCancel = account.findPlannedDate(amount);
+                                toCancel = account.findScheduledByAmount(amount);
                                 break;
                             }
                             case 2: {
@@ -207,8 +218,12 @@ int main() {
                                 std::cin >> month;
                                 std::cout << "Enter day (1-31): ";
                                 std::cin >> day;
-                                auto date = std::chrono::system_clock::now(); // Dummy date, replace with actual conversion
-                                toCancel = account.findNextExecutionDate(date);
+                                std::tm tm = {};
+                                tm.tm_year = year - 1900;
+                                tm.tm_mon = month - 1;
+                                tm.tm_mday = day;
+                                auto date = std::chrono::system_clock::from_time_t(std::mktime(&tm));
+                                toCancel = account.findScheduledByDate(date);
                                 break;
                             }
                             default:
@@ -226,36 +241,93 @@ int main() {
                 }
                 break;
             }
+
             case 4: {
                 std::cout << "Transaction History:" << std::endl;
-                std::cout << "Operations:" << std::endl;
-                auto operations = account.findOperationByAmount(0); // Dummy parameter, adjust if needed
-                account.printOperations(operations);
-                std::cout << "Planned Transactions:" << std::endl;
-                auto planned = account.findPlannedDate(std::chrono::system_clock::now()); // Dummy parameter, adjust if needed
-                account.printPlannedTransactions(planned);
+                std::string history = account.getTransactionHistory(); // Ensure getTransactionHistory is public
+                std::cout << history << std::endl;
                 break;
             }
+
             case 5: {
-                std::cout << "Card Operations:" << std::endl;
-                account.printCards();
+                int cardOperationChoice;
+                do {
+                    std::cout << "Select operation to perform:" << std::endl;
+                    std::cout << "1. Creation of a new Debit card" << std::endl;
+                    std::cout << "2. Creation of a new Credit card" << std::endl;
+                    std::cout << "3. Visualize personal cards info" << std::endl;
+                    std::cout << "4. Exit Card Operations" << std::endl;
+                    std::cin >> cardOperationChoice;
+                } while (cardOperationChoice < 1 || cardOperationChoice > 4);
+
+                switch (cardOperationChoice) {
+                    case 1: {
+                        std::string cardName;
+                        std::cout << "Select a name for the Debit card:" << std::endl;
+                        std::cin.ignore(); // Ignore leftover newline from previous input
+                        std::getline(std::cin, cardName);
+                        account.addCard(cardName, false); // false for Debit card
+                        std::cout << "Debit card created successfully." << std::endl;
+                        break;
+                    }
+                    case 2: {
+                        std::string cardName;
+                        std::cout << "Select a name for the Credit card:" << std::endl;
+                        std::cin.ignore(); // Ignore leftover newline from previous input
+                        std::getline(std::cin, cardName);
+                        account.addCard(cardName, true); // true for Credit card
+                        std::cout << "Credit card created successfully." << std::endl;
+                        break;
+                    }
+                    case 3: {
+                        std::cout << "Personal Card Information:" << std::endl;
+                        account.printCards();
+                        break;
+                    }
+                    case 4:
+                        std::cout << "Exiting Card Operations." << std::endl;
+                        break;
+                    default:
+                        std::cerr << "Invalid choice!" << std::endl;
+                        break;
+                }
+
                 break;
             }
+
             case 6: {
-                std::cout << "Executing planned transactions..." << std::endl;
                 account.executePlannedTransactions();
-                std::cout << "Planned transactions executed." << std::endl;
+                std::cout << "Planned transactions have been executed." << std::endl;
                 break;
             }
-            case 7:
-                std::cout << "Exiting program." << std::endl;
+
+            case 7: {
+                std::string filename;
+                std::cout << "Enter filename to save: ";
+                std::cin >> filename;
+                account.saveToFile(filename);
+                std::cout << "Account data saved to " << filename << std::endl;
                 break;
+            }
+
+            case 8: {
+                std::string filename;
+                std::cout << "Enter filename to load: ";
+                std::cin >> filename;
+                account.loadFromFile(filename);
+                std::cout << "Account data loaded from " << filename << std::endl;
+                break;
+            }
+
+            case 9:
+                std::cout << "Exiting the program." << std::endl;
+                break;
+
             default:
-                std::cerr << "Invalid choice! Please select a valid option." << std::endl;
+                std::cerr << "Invalid choice! Please select a valid option from the menu." << std::endl;
                 break;
         }
-
-    } while (choice != 7);
+    } while (choice != 9);
 
     return 0;
 }

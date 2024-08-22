@@ -78,3 +78,19 @@ const std::chrono::system_clock::time_point& ScheduledOperation::getScheduledExe
 Frequency ScheduledOperation::getFrequency() const {
     return frequency;
 }
+#include "ScheduledOperation.h"
+
+std::string ScheduledOperation::frequencyToString() const {
+    switch (frequency) {
+        case Frequency::Daily:
+            return "Daily";
+        case Frequency::Weekly:
+            return "Weekly";
+        case Frequency::Monthly:
+            return "Monthly";
+        case Frequency::Yearly:
+            return "Yearly";
+        default:
+            return "Unknown";
+    }
+}

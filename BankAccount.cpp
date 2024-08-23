@@ -9,6 +9,7 @@
     #include "Card.h"
     #include "CreditCard.h"
     #include "DebitCard.h"
+#include <unordered_set>
 
 
     // Costruttore
@@ -190,23 +191,24 @@
     }
 
     void BankAccount::cancelOperations(const std::vector<std::shared_ptr<Operation>>& operationsToCancel) {
-        for (const auto& op : operationsToCancel) {
-            operations.erase(
-                    std::remove_if(operations.begin(), operations.end(),
-                                   [&op](const std::shared_ptr<Operation>& o) { return o->getId() == op->getId(); }),
-                    operations.end()
-            );
-        }
+        // Creiamo un unordered_set per un accesso veloce durante la rimozione
+        std::unordered_set<std::shared_ptr<Operation>> cancelSet(operationsToCancel.begin(), operationsToCancel.end());
+
+        // Rimuoviamo tutte le operazioni che sono nel cancelSet
+        operations.remove_if([&cancelSet](const std::shared_ptr<Operation>& op) {
+            return cancelSet.find(op) != cancelSet.end();
+        });
     }
 
     void BankAccount::removeScheduledOperation(const std::vector<std::shared_ptr<ScheduledOperation>>& operationsToRemove) {
-        for (const auto& op : operationsToRemove) {
-            scheduledOperations.erase(
-                    std::remove_if(scheduledOperations.begin(), scheduledOperations.end(),
-                                   [&op](const std::shared_ptr<ScheduledOperation>& o) { return o->getOperation()->getId() == op->getOperation()->getId(); }),
-                    scheduledOperations.end()
-            );
-        }
+        // Creiamo un unordered_set per un accesso veloce durante la rimozione
+        std::unordered_set<std::shared_ptr<ScheduledOperation>> cancelSet(
+                operationsToRemove.begin(), operationsToRemove.end());
+
+        // Rimuoviamo tutte le operazioni pianificate che sono nel cancelSet
+        scheduledOperations.remove_if([&cancelSet](const std::shared_ptr<ScheduledOperation>& op) {
+            return cancelSet.find(op) != cancelSet.end();
+        });
     }
 
     std::vector<std::shared_ptr<Operation>> BankAccount::findOperationByAmount(double amount) const {
@@ -259,6 +261,17 @@
                 result.push_back(schedOp);
             }
         }
+        return result;
+    }
+    std::vector<std::shared_ptr<ScheduledOperation>> BankAccount::findScheduledByType(OperationType type) const {
+        std::vector<std::shared_ptr<ScheduledOperation>> result;
+
+        for (const auto& schedOp : scheduledOperations) {
+            if (schedOp->getOperation()->getType() == type) {
+                result.push_back(schedOp);
+            }
+        }
+
         return result;
     }
 

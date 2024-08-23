@@ -5,6 +5,7 @@
 #include <memory>
 #include <string>
 #include <chrono>
+#include "list"
 
 #include "Operation.h"
 #include "ScheduledOperation.h"
@@ -14,8 +15,8 @@ class BankAccount {
 private:
     double balance;
     std::string IBAN;
-    std::vector<std::shared_ptr<Operation>> operations;
-    std::vector<std::shared_ptr<ScheduledOperation>> scheduledOperations;
+    std::list<std::shared_ptr<Operation>> operations;
+    std::list<std::shared_ptr<ScheduledOperation>> scheduledOperations;
     std::vector<std::shared_ptr<CardOperation>> cardsOperations;
 
 public:
@@ -39,6 +40,7 @@ public:
     std::vector<std::shared_ptr<ScheduledOperation>> findScheduledByAmount(double amount) const;
     std::vector<std::shared_ptr<ScheduledOperation>> findScheduledByDate(std::chrono::system_clock::time_point date) const;
     std::vector<std::shared_ptr<ScheduledOperation>> findNextExecutionDate(std::chrono::system_clock::time_point date) const;
+    std::vector<std::shared_ptr<ScheduledOperation>> findScheduledByType(OperationType type) const;
 
     void printOperations(const std::vector<std::shared_ptr<Operation>>& operations) const;
 
@@ -50,7 +52,6 @@ public:
 
     void printPlannedTransactions() const;
 
-private:
     std::string timePointToString(std::chrono::system_clock::time_point tp) const;
 
 };

@@ -24,6 +24,7 @@ public:
 
     void saveToFile(const std::string& filename) const;
     void loadFromFile(const std::string& filename);
+    void removeCard(const std::string& cardName);
 
     void addCard(const std::string& cardName, bool isCredit = false);  // isCredit defaults to false
     void addTransaction(const std::shared_ptr<Operation>& transaction);

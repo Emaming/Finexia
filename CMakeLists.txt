@@ -3,19 +3,17 @@ project(Finexia)
 
 set(CMAKE_CXX_STANDARD 23)
 
-add_executable(Finexia main.cpp
+# Aggiungi le directory dei file header, se necessario
+include_directories(${PROJECT_SOURCE_DIR})
+
+# Aggiungi l'eseguibile del progetto principale
+add_executable(Finexia
+        main.cpp
         BankAccount.cpp
-        BankAccount.h
         CreditCard.cpp
-        CreditCard.h
         DebitCard.cpp
-        DebitCard.h
         Operation.cpp
-        Operation.h
         ScheduledOperation.cpp
-        ScheduledOperation.h
         CardOperation.cpp
-        CardOperation.h
-        TimeUtils.h
         Card.cpp
-        Card.h)
+)

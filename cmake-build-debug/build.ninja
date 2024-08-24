@@ -52,48 +52,56 @@ build cmake_object_order_depends_target_Finexia: phony || .
 build CMakeFiles/Finexia.dir/main.cpp.o: CXX_COMPILER__Finexia_unscanned_Debug /home/user/ClionProjects/Finexia/main.cpp || cmake_object_order_depends_target_Finexia
   DEP_FILE = CMakeFiles/Finexia.dir/main.cpp.o.d
   FLAGS = -g -std=gnu++23 -fdiagnostics-color=always
+  INCLUDES = -I/home/user/ClionProjects/Finexia
   OBJECT_DIR = CMakeFiles/Finexia.dir
   OBJECT_FILE_DIR = CMakeFiles/Finexia.dir
 
 build CMakeFiles/Finexia.dir/BankAccount.cpp.o: CXX_COMPILER__Finexia_unscanned_Debug /home/user/ClionProjects/Finexia/BankAccount.cpp || cmake_object_order_depends_target_Finexia
   DEP_FILE = CMakeFiles/Finexia.dir/BankAccount.cpp.o.d
   FLAGS = -g -std=gnu++23 -fdiagnostics-color=always
+  INCLUDES = -I/home/user/ClionProjects/Finexia
   OBJECT_DIR = CMakeFiles/Finexia.dir
   OBJECT_FILE_DIR = CMakeFiles/Finexia.dir
 
 build CMakeFiles/Finexia.dir/CreditCard.cpp.o: CXX_COMPILER__Finexia_unscanned_Debug /home/user/ClionProjects/Finexia/CreditCard.cpp || cmake_object_order_depends_target_Finexia
   DEP_FILE = CMakeFiles/Finexia.dir/CreditCard.cpp.o.d
   FLAGS = -g -std=gnu++23 -fdiagnostics-color=always
+  INCLUDES = -I/home/user/ClionProjects/Finexia
   OBJECT_DIR = CMakeFiles/Finexia.dir
   OBJECT_FILE_DIR = CMakeFiles/Finexia.dir
 
 build CMakeFiles/Finexia.dir/DebitCard.cpp.o: CXX_COMPILER__Finexia_unscanned_Debug /home/user/ClionProjects/Finexia/DebitCard.cpp || cmake_object_order_depends_target_Finexia
   DEP_FILE = CMakeFiles/Finexia.dir/DebitCard.cpp.o.d
   FLAGS = -g -std=gnu++23 -fdiagnostics-color=always
+  INCLUDES = -I/home/user/ClionProjects/Finexia
   OBJECT_DIR = CMakeFiles/Finexia.dir
   OBJECT_FILE_DIR = CMakeFiles/Finexia.dir
 
 build CMakeFiles/Finexia.dir/Operation.cpp.o: CXX_COMPILER__Finexia_unscanned_Debug /home/user/ClionProjects/Finexia/Operation.cpp || cmake_object_order_depends_target_Finexia
   DEP_FILE = CMakeFiles/Finexia.dir/Operation.cpp.o.d
   FLAGS = -g -std=gnu++23 -fdiagnostics-color=always
+  INCLUDES = -I/home/user/ClionProjects/Finexia
   OBJECT_DIR = CMakeFiles/Finexia.dir
   OBJECT_FILE_DIR = CMakeFiles/Finexia.dir
 
 build CMakeFiles/Finexia.dir/ScheduledOperation.cpp.o: CXX_COMPILER__Finexia_unscanned_Debug /home/user/ClionProjects/Finexia/ScheduledOperation.cpp || cmake_object_order_depends_target_Finexia
   DEP_FILE = CMakeFiles/Finexia.dir/ScheduledOperation.cpp.o.d
   FLAGS = -g -std=gnu++23 -fdiagnostics-color=always
+  INCLUDES = -I/home/user/ClionProjects/Finexia
   OBJECT_DIR = CMakeFiles/Finexia.dir
   OBJECT_FILE_DIR = CMakeFiles/Finexia.dir
 
 build CMakeFiles/Finexia.dir/CardOperation.cpp.o: CXX_COMPILER__Finexia_unscanned_Debug /home/user/ClionProjects/Finexia/CardOperation.cpp || cmake_object_order_depends_target_Finexia
   DEP_FILE = CMakeFiles/Finexia.dir/CardOperation.cpp.o.d
   FLAGS = -g -std=gnu++23 -fdiagnostics-color=always
+  INCLUDES = -I/home/user/ClionProjects/Finexia
   OBJECT_DIR = CMakeFiles/Finexia.dir
   OBJECT_FILE_DIR = CMakeFiles/Finexia.dir
 
 build CMakeFiles/Finexia.dir/Card.cpp.o: CXX_COMPILER__Finexia_unscanned_Debug /home/user/ClionProjects/Finexia/Card.cpp || cmake_object_order_depends_target_Finexia
   DEP_FILE = CMakeFiles/Finexia.dir/Card.cpp.o.d
   FLAGS = -g -std=gnu++23 -fdiagnostics-color=always
+  INCLUDES = -I/home/user/ClionProjects/Finexia
   OBJECT_DIR = CMakeFiles/Finexia.dir
   OBJECT_FILE_DIR = CMakeFiles/Finexia.dir
 

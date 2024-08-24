@@ -11,17 +11,24 @@
 
 void printMenu() {
     std::cout << "Select an option:" << std::endl;
+    std::cout << "---- Non-scheduled Transactions ----" << std::endl;
     std::cout << "1. Add Transaction" << std::endl;
-    std::cout << "2. Search Operations" << std::endl;
+    std::cout << "2. Search Transactions" << std::endl;
     std::cout << "3. Cancel Transactions" << std::endl;
-    std::cout << "4. Share Transaction History" << std::endl;
+    std::cout << "4. Print Transaction History" << std::endl;
     std::cout << "5. Card Operations" << std::endl;
-    std::cout << "6. Save to File" << std::endl;
-    std::cout << "7. Load from File" << std::endl;
-    std::cout << "8. Schedule Transaction" << std::endl;
-    std::cout << "9. Print Planned Transactions" << std::endl;
+
+    std::cout << "---- Scheduled Transactions ----" << std::endl;
+    std::cout << "6. Schedule Transaction" << std::endl;
+    std::cout << "7. Print Planned Transactions History" << std::endl;
+    std::cout << "8. Cancel Planned Transactions" << std::endl;
+
+
+    std::cout << "9. Save to File" << std::endl;
+    std::cout << "10. Load from File" << std::endl;
     std::cout << "0. Exit" << std::endl;
 }
+
 
 void handleAddTransaction(BankAccount& account) {
     int transactionType;
@@ -155,180 +162,156 @@ void handleSearchOperations(BankAccount& account) {
     } while (true);
 }
 
-void handleCancelTransactions(BankAccount& account) {
-    int transactionType;
-    std::cout << "Select transaction type to cancel:" << std::endl;
-    std::cout << "1. Regular transaction" << std::endl;
-    std::cout << "2. Planned transaction" << std::endl;
+void handleCancelRegularTransactions(BankAccount& account) {
+    int searchMethod;
+    std::cout << "Select search method for regular transactions:" << std::endl;
+    std::cout << "1. Amount" << std::endl;
+    std::cout << "2. Type" << std::endl;
+    std::cout << "3. Date" << std::endl;
     std::cout << "0. Return to main menu" << std::endl;
-    std::cin >> transactionType;
-    if (transactionType == 0)
-     return;
+    std::cin >> searchMethod;
 
-    else if (transactionType == 1) {
-        int searchMethod;
-        std::cout << "Select search method:" << std::endl;
-        std::cout << "1. Amount" << std::endl;
-        std::cout << "2. Type" << std::endl;
-        std::cout << "3. Date" << std::endl;
-        std::cout << "0. Return to main menu" << std::endl;
-        std::cin >> searchMethod;
+    std::vector<std::shared_ptr<Operation>> toCancel;
 
-        std::vector<std::shared_ptr<Operation>> toCancel;
-
-        switch (searchMethod) {
-            case 0: return;
-            case 1: {
-                double amount;
-                std::cout << "Enter amount (or 0 to return to previous menu): ";
-                std::cin >> amount;
-               if (amount==0) return;
-                toCancel = account.findOperationByAmount(amount);
-                break;
-            }
-            case 2: {
-                int typeChoice;
-                std::cout << "Select operation type:" << std::endl;
-                std::cout << "1. Deposit" << std::endl;
-                std::cout << "2. Withdrawal" << std::endl;
-                std::cout << "3. Transfer" << std::endl;
-                std::cout << "0. Return to main menu" << std::endl;
-                std::cin >> typeChoice;
-                if (typeChoice==0) return;
-
-
-                OperationType type;
-                switch (typeChoice) {
-                    case 1: type = OperationType::Deposit; break;
-                    case 2: type = OperationType::Withdrawal; break;
-                    case 3: type = OperationType::Transfer; break;
-                    default:
-                        std::cerr << "Invalid choice!" << std::endl;
-                        return; // Exit function if invalid choice
-                }
-
-                toCancel = account.findOperationByType(type);
-
-                break;
-            }
-            case 3: {
-                int year, month, day;
-                std::cout << "Enter year (or 0 to return to previous menu):";
-                std::cin >> year;
-                if(year == 0) return;
-                std::cout << "Enter month (1-12) (or 0 to return to previous menu):";
-                std::cin >> month;
-                if(month == 0) return;
-                std::cout << "Enter day (1-31) (or 0 to return to previous menu):";
-                std::cin >> day;
-                if(day == 0) return;
-                std::tm tm = {};
-                tm.tm_year = year - 1900;
-                tm.tm_mon = month - 1;
-                tm.tm_mday = day;
-                auto date = std::chrono::system_clock::from_time_t(std::mktime(&tm));
-                toCancel = account.findOperationByDate(date);
-                                break;
-            }
-            default:
-                std::cerr << "Invalid choice!" << std::endl;
-                return; // Exit function if invalid choice
+    switch (searchMethod) {
+        case 0: return;
+        case 1: {
+            double amount;
+            std::cout << "Enter amount (or 0 to return to previous menu): ";
+            std::cin >> amount;
+            if (amount == 0) return;
+            toCancel = account.findOperationByAmount(amount);
+            break;
         }
+        case 2: {
+            int typeChoice;
+            std::cout << "Select operation type:" << std::endl;
+            std::cout << "1. Deposit" << std::endl;
+            std::cout << "2. Withdrawal" << std::endl;
+            std::cout << "3. Transfer" << std::endl;
+            std::cout << "0. Return to main menu" << std::endl;
+            std::cin >> typeChoice;
+            if (typeChoice == 0) return;
 
-        // Verifica le operazioni trovate prima di procedere
-        if (toCancel.empty()) {
-            std::cout << "No operations found for the given criteria." << std::endl;
+            OperationType type;
+            switch (typeChoice) {
+                case 1: type = OperationType::Deposit; break;
+                case 2: type = OperationType::Withdrawal; break;
+                case 3: type = OperationType::Transfer; break;
+                default:
+                    std::cerr << "Invalid choice!" << std::endl;
+                    return;
+            }
+            toCancel = account.findOperationByType(type);
+            break;
+        }
+        case 3: {
+            int year, month, day;
+            std::cout << "Enter year (or 0 to return to previous menu): ";
+            std::cin >> year;
+            if (year == 0) return;
+            std::cout << "Enter month (1-12) (or 0 to return to previous menu): ";
+            std::cin >> month;
+            if (month == 0) return;
+            std::cout << "Enter day (1-31) (or 0 to return to previous menu): ";
+            std::cin >> day;
+            if (day == 0) return;
+            std::tm tm = {};
+            tm.tm_year = year - 1900;
+            tm.tm_mon = month - 1;
+            tm.tm_mday = day;
+            auto date = std::chrono::system_clock::from_time_t(std::mktime(&tm));
+            toCancel = account.findOperationByDate(date);
+            break;
+        }
+        default:
+            std::cerr << "Invalid choice!" << std::endl;
             return;
-        }
-
-        // Cancella le operazioni selezionate
-        account.cancelOperations(toCancel);
-        std::cout << "Selected regular transactions have been canceled." << std::endl;
-    } else if (transactionType == 2) {
-        int searchMethod;
-        std::cout << "Select search method for planned transactions:" << std::endl;
-        std::cout << "1. Amount" << std::endl;
-        std::cout << "2. Type" << std::endl;
-        std::cout << "3. Date" << std::endl;
-        std::cout << "0. Return to main menu" << std::endl;
-        std::cin >> searchMethod;
-
-        std::vector<std::shared_ptr<ScheduledOperation>> toCancel;
-
-        switch (searchMethod) {
-            case 0: return;
-            case 1: {
-                double amount;
-                std::cout << "Enter amount (or 0 to return to previous menu):";
-                std::cin >> amount;
-                if (amount == 0)return;
-                toCancel = account.findScheduledByAmount(amount);
-                break;
-            }
-            case 2: {
-                int typeChoice;
-                std::cout << "Select operation type:" << std::endl;
-                std::cout << "1. Deposit" << std::endl;
-                std::cout << "2. Withdrawal" << std::endl;
-                std::cout << "3. Transfer" << std::endl;
-                std::cout << "0. Return to main menu" << std::endl;
-                std::cin >> typeChoice;
-
-                OperationType type;
-                switch (typeChoice) {
-                    case 0:return;
-                    case 1: type = OperationType::Deposit; break;
-                    case 2: type = OperationType::Withdrawal; break;
-                    case 3: type = OperationType::Transfer; break;
-                    default:
-                        std::cerr << "Invalid choice!" << std::endl;
-                        return; // Exit function if invalid choice
-                }
-
-                // Assicurati che toCancel sia una variabile di tipo std::vector<std::shared_ptr<Operation>>
-                 toCancel = account.findScheduledByType(type);
-
-                break;
-            }
-
-            case 3: {
-                int year, month, day,result;
-                std::cout << "Enter year (or 0 to return to previous menu):";
-                std::cin >> year;
-                if(year == 0) return;
-                std::cout << "Enter month (1-12) (or 0 to return to previous menu):";
-                std::cin >> month;
-                if(month == 0) return;
-                std::cout << "Enter day (1-31) (or 0 to return to previous menu):";
-                std::cin >> day;
-                if(day == 0) return;
-
-
-                std::tm tm = {};
-                tm.tm_year = year - 1900;
-                tm.tm_mon = month - 1;
-                tm.tm_mday = day;
-                auto date = std::chrono::system_clock::from_time_t(std::mktime(&tm));
-                toCancel = account.findScheduledByDate(date);
-                break;
-            }
-            default:
-                std::cerr << "Invalid choice!" << std::endl;
-                return; // Exit function if invalid choice
-        }
-
-        // Verifica le operazioni pianificate trovate prima di procedere
-        if (toCancel.empty()) {
-            std::cout << "No scheduled operations found for the given criteria." << std::endl;
-            return;
-        }
-
-        // Rimuovi le operazioni pianificate selezionate
-        account.removeScheduledOperation(toCancel);
-        std::cout << "Selected planned transactions have been canceled." << std::endl;
-    } else {
-        std::cerr << "Invalid choice!" << std::endl;
     }
+
+    if (toCancel.empty()) {
+        std::cout << "No operations found for the given criteria." << std::endl;
+        return;
+    }
+
+    account.cancelOperations(toCancel);
+    std::cout << "Selected regular transactions have been canceled." << std::endl;
+}
+
+void handleCancelScheduledTransactions(BankAccount& account) {
+    int searchMethod;
+    std::cout << "Select search method for planned transactions:" << std::endl;
+    std::cout << "1. Amount" << std::endl;
+    std::cout << "2. Type" << std::endl;
+    std::cout << "3. Date" << std::endl;
+    std::cout << "0. Return to main menu" << std::endl;
+    std::cin >> searchMethod;
+
+    std::vector<std::shared_ptr<ScheduledOperation>> toCancel;
+
+    switch (searchMethod) {
+        case 0: return;
+        case 1: {
+            double amount;
+            std::cout << "Enter amount (or 0 to return to previous menu): ";
+            std::cin >> amount;
+            if (amount == 0) return;
+            toCancel = account.findScheduledByAmount(amount);
+            break;
+        }
+        case 2: {
+            int typeChoice;
+            std::cout << "Select operation type:" << std::endl;
+            std::cout << "1. Deposit" << std::endl;
+            std::cout << "2. Withdrawal" << std::endl;
+            std::cout << "3. Transfer" << std::endl;
+            std::cout << "0. Return to main menu" << std::endl;
+            std::cin >> typeChoice;
+            if (typeChoice == 0) return;
+
+            OperationType type;
+            switch (typeChoice) {
+                case 1: type = OperationType::Deposit; break;
+                case 2: type = OperationType::Withdrawal; break;
+                case 3: type = OperationType::Transfer; break;
+                default:
+                    std::cerr << "Invalid choice!" << std::endl;
+                    return;
+            }
+            toCancel = account.findScheduledByType(type);
+            break;
+        }
+        case 3: {
+            int year, month, day;
+            std::cout << "Enter year (or 0 to return to previous menu): ";
+            std::cin >> year;
+            if (year == 0) return;
+            std::cout << "Enter month (1-12) (or 0 to return to previous menu): ";
+            std::cin >> month;
+            if (month == 0) return;
+            std::cout << "Enter day (1-31) (or 0 to return to previous menu): ";
+            std::cin >> day;
+            if (day == 0) return;
+            std::tm tm = {};
+            tm.tm_year = year - 1900;
+            tm.tm_mon = month - 1;
+            tm.tm_mday = day;
+            auto date = std::chrono::system_clock::from_time_t(std::mktime(&tm));
+            toCancel = account.findScheduledByDate(date);
+            break;
+        }
+        default:
+            std::cerr << "Invalid choice!" << std::endl;
+            return;
+    }
+
+    if (toCancel.empty()) {
+        std::cout << "No scheduled operations found for the given criteria." << std::endl;
+        return;
+    }
+
+    account.removeScheduledOperation(toCancel);
+    std::cout << "Selected planned transactions have been canceled." << std::endl;
 }
 
 void handleShareTransactionHistory(BankAccount& account) {
@@ -343,6 +326,7 @@ void handleCardOperations(BankAccount& account) {
         std::cout << "Select card operation (or 0 to return to main menu):" << std::endl;
         std::cout << "1. Add Card" << std::endl;
         std::cout << "2. Print Cards" << std::endl;
+        std::cout << "3. Remove Card" << std::endl;
         std::cout << "0. Return to previous menu" << std::endl;
         std::cin >> cardOption;
 
@@ -353,26 +337,46 @@ void handleCardOperations(BankAccount& account) {
                 std::string cardName;
                 bool isCreditCard;
 
-                // Aggiunto loop per consentire all'utente di tornare indietro
                 do {
                     std::cout << "Enter card name (or 0 to return to previous menu): ";
                     std::cin.ignore();  // Ignora il newline residuo
                     std::getline(std::cin, cardName);
 
-                    if (cardName == "0") break;  // Torna al menu precedente
+                    if (cardName == "0") {
+                        std::cout << "Returning to previous menu." << std::endl;
+                        break;  // Torna al menu precedente
+                    }
+
+                    if (cardName.empty()) {
+                        std::cerr << "Card name cannot be empty. Please enter a valid card name." << std::endl;
+                        continue;  // Continua a chiedere un nome valido
+                    }
 
                     std::cout << "Is it a credit card? (1 for yes, 0 for no): ";
                     std::cin >> isCreditCard;
+
+                    // Assicurati di svuotare il buffer del cin per evitare problemi
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
                     account.addCard(cardName, isCreditCard);
                     std::cout << "Card added successfully." << std::endl;
-                    break;
+                    break;  // Esci dal loop dopo aver aggiunto la carta
                 } while (true);
 
                 break;
             }
+
             case 2:
                 account.printCards();
                 break;
+            case 3: {
+                std::string cardName;
+                std::cout << "Enter card name to remove: ";
+                std::cin.ignore();  // Ignora il newline residuo
+                std::getline(std::cin, cardName);
+                account.removeCard(cardName);
+                break;
+            }
             default:
                 std::cerr << "Invalid choice!" << std::endl;
                 continue;  // Torna al menu di operazioni delle carte
@@ -538,13 +542,14 @@ int main() {
         switch (choice) {
             case 1: handleAddTransaction(account); break;
             case 2: handleSearchOperations(account); break;
-            case 3: handleCancelTransactions(account); break;
+            case 3: handleCancelRegularTransactions(account); break;
             case 4: handleShareTransactionHistory(account); break;
             case 5: handleCardOperations(account); break;
-            case 6: handleSaveToFile(account); break;
-            case 7: handleLoadFromFile(account); break;
-            case 8: handleScheduleTransaction(account); break;
-            case 9: handlePrintPlannedTransactions(account); break;
+            case 6: handleScheduleTransaction(account); break;
+            case 7: handlePrintPlannedTransactions(account); break;
+            case 8:handleCancelScheduledTransactions(account);break;
+            case 9: handleSaveToFile(account); break;
+            case 10: handleLoadFromFile(account); break;
             case 0: std::cout << "Exiting program." << std::endl; break;
             default: std::cerr << "Invalid choice! Please try again." << std::endl; break;
         }

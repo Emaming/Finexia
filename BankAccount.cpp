@@ -6,7 +6,6 @@
     #include <random>
     #include <chrono>
     #include "memory"
-    #include "Card.h"
     #include "CreditCard.h"
     #include "DebitCard.h"
 #include <unordered_set>
@@ -383,3 +382,15 @@
         }
     }
 
+    void BankAccount::removeCard(const std::string& cardName) {
+        auto it = std::remove_if(cardsOperations.begin(), cardsOperations.end(),
+                                 [&cardName](const std::shared_ptr<CardOperation>& cardOp) {
+                                     return cardOp->getCardId() == cardName;
+                                 });
+        if (it != cardsOperations.end()) {
+            cardsOperations.erase(it, cardsOperations.end());
+            std::cout << "Card with name " << cardName << " has been removed." << std::endl;
+        } else {
+            std::cout << "No card found with name " << cardName << "." << std::endl;
+        }
+    }

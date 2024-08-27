@@ -21,6 +21,11 @@
 		{
 			"isCMake" : true,
 			"isExternal" : true,
+			"path" : "/snap/clion/291/bin/cmake/linux/x64/share/cmake-3.29/Modules/CMakeUnixFindMake.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
 			"path" : "/snap/clion/291/bin/cmake/linux/x64/share/cmake-3.29/Modules/CMakeSystemSpecificInitialize.cmake"
 		},
 		{
@@ -778,8 +783,8 @@
 	"kind" : "cmakeFiles",
 	"paths" : 
 	{
-		"build" : "/home/user/ClionProjects/Finexia/cmake-build-debug",
-		"source" : "/home/user/ClionProjects/Finexia"
+		"build" : "/home/user/ClionProjects/tesst1Finexa/cmake-build-debug",
+		"source" : "/home/user/ClionProjects/tesst1Finexa"
 	},
 	"version" : 
 	{

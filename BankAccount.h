@@ -28,27 +28,19 @@ public:
 
     void addCard(const std::string& cardName, bool isCredit = false);  // isCredit defaults to false
     void addTransaction(const std::shared_ptr<Operation>& transaction);
-    void addScheduledOperation(const std::shared_ptr<ScheduledOperation>& operation);
     void cancelOperations(const std::vector<std::shared_ptr<Operation>>& operationsToCancel);
     void removeScheduledOperation(const std::vector<std::shared_ptr<ScheduledOperation>>& scheduledOperationsToRemove);
     void scheduleOperation(const std::shared_ptr<Operation>& operation, std::chrono::system_clock::time_point startDate, Frequency frequency);
-    void executePlannedTransactions();
-    void printPlannedTransactions(const std::vector<std::shared_ptr<ScheduledOperation>>& ops) const;
-
     std::vector<std::shared_ptr<Operation>> findOperationByAmount(double amount) const;
     std::vector<std::shared_ptr<Operation>> findOperationByType(OperationType type) const;
     std::vector<std::shared_ptr<Operation>> findOperationByDate(std::chrono::system_clock::time_point date) const;
     std::vector<std::shared_ptr<ScheduledOperation>> findScheduledByAmount(double amount) const;
     std::vector<std::shared_ptr<ScheduledOperation>> findScheduledByDate(std::chrono::system_clock::time_point date) const;
-    std::vector<std::shared_ptr<ScheduledOperation>> findNextExecutionDate(std::chrono::system_clock::time_point date) const;
     std::vector<std::shared_ptr<ScheduledOperation>> findScheduledByType(OperationType type) const;
 
     void printOperations(const std::vector<std::shared_ptr<Operation>>& operations) const;
 
     void printCards() const;  // Updated method name
-
-    std::string printIban() const;
-    std::string printBalance() const;
     std::string getTransactionHistory() const;
 
     void printPlannedTransactions() const;

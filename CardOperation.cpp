@@ -42,7 +42,7 @@ CardOperation::CardOperation(const std::string& name)
 std::string CardOperation::printCardString() const {
     std::stringstream cardStream;
     cardStream << "Card Name: " << cardId << ", Card Number: " << cardNumber
-               << ", CVV: " << cvv << ", Expiration Date: " << timePointToString(expirationDate);
+               << ", CVV: " << cvv << ", Expiration Date: " << timePointToString(expirationDate) << " \n";
     return cardStream.str();
 }
 

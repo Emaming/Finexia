@@ -185,10 +185,6 @@
         operations.push_back(transaction);
     }
 
-    void BankAccount::addScheduledOperation(const std::shared_ptr<ScheduledOperation>& operation) {
-        scheduledOperations.push_back(operation);
-    }
-
     void BankAccount::cancelOperations(const std::vector<std::shared_ptr<Operation>>& operationsToCancel) {
         // Creiamo un unordered_set per un accesso veloce durante la rimozione
         std::unordered_set<std::shared_ptr<Operation>> cancelSet(operationsToCancel.begin(), operationsToCancel.end());
@@ -284,17 +280,6 @@
         return result;
     }
 
-    std::vector<std::shared_ptr<ScheduledOperation>> BankAccount::findNextExecutionDate(std::chrono::system_clock::time_point date) const {
-        std::vector<std::shared_ptr<ScheduledOperation>> result;
-        for (const auto& schedOp : scheduledOperations) {
-            if (schedOp->getScheduledExecutionDate() >= date) {
-                result.push_back(schedOp);
-            }
-        }
-        return result;
-    }
-
-
 
     void BankAccount::printOperations(const std::vector<std::shared_ptr<Operation>>& ops) const {
         for (const auto& op : ops) {
@@ -309,17 +294,8 @@
     void BankAccount::printCards() const {
         for (const auto& card : cardsOperations) {
             std::cout << card->printCardString();
+
         }
-    }
-
-    std::string BankAccount::printIban() const {
-        return IBAN;
-    }
-
-    std::string BankAccount::printBalance() const {
-        std::ostringstream oss;
-        oss << balance;
-        return oss.str();
     }
 
     std::string BankAccount::getTransactionHistory() const {
@@ -346,27 +322,6 @@
     void BankAccount::scheduleOperation(const std::shared_ptr<Operation>& operation, std::chrono::system_clock::time_point startDate, Frequency frequency) {
         auto schedOp = std::make_shared<ScheduledOperation>(operation, startDate, frequency);
         scheduledOperations.push_back(schedOp);
-    }
-
-// Esegui le transazioni pianificate
-    void BankAccount::executePlannedTransactions() {
-        auto now = std::chrono::system_clock::now();
-        auto initialSize = scheduledOperations.size();
-
-        scheduledOperations.erase(
-                std::remove_if(scheduledOperations.begin(), scheduledOperations.end(),
-                               [&now, this](const std::shared_ptr<ScheduledOperation>& schedOp) {
-                                   if (schedOp->getScheduledExecutionDate() <= now) {
-                                       addTransaction(schedOp->getOperation());
-                                       return true; // Rimuovi questo elemento
-                                   }
-                                   return false; // Mantieni questo elemento
-                               }),
-                scheduledOperations.end()
-        );
-
-        auto removedCount = initialSize - scheduledOperations.size();
-        std::cout << removedCount << " planned transactions have been executed and removed." << std::endl;
     }
 
 // Stampa le transazioni pianificate

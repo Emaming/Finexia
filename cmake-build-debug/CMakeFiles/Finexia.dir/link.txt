@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/Finexia.dir/main.cpp.o CMakeFiles/Finexia.dir/BankAccount.cpp.o CMakeFiles/Finexia.dir/CreditCard.cpp.o CMakeFiles/Finexia.dir/DebitCard.cpp.o CMakeFiles/Finexia.dir/Operation.cpp.o CMakeFiles/Finexia.dir/ScheduledOperation.cpp.o CMakeFiles/Finexia.dir/CardOperation.cpp.o CMakeFiles/Finexia.dir/Card.cpp.o -o Finexia

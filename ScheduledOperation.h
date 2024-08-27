@@ -18,9 +18,6 @@ public:
     ScheduledOperation(std::shared_ptr<Operation> op, std::chrono::system_clock::time_point date, Frequency freq)
             : operation(op), scheduledExecutionDate(date), frequency(freq) {}
 
-    void updateNextExecutionDate();
-    std::string printOperationString() const;
-    std::string printFrequency() const;
     const std::chrono::system_clock::time_point& getScheduledExecutionDate() const;
     Frequency getFrequency() const;
     std::shared_ptr<Operation> getOperation() const { return operation; }

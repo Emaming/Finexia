@@ -1,5 +1,5 @@
 CMakeFiles/Finexia.dir/CreditCard.cpp.o: \
- /home/user/ClionProjects/tesst1Finexa/CreditCard.cpp \
+ /home/user/ClionProjects/TestFinexa/CreditCard.cpp \
  /usr/include/stdc-predef.h \
- /home/user/ClionProjects/tesst1Finexa/CreditCard.h \
- /home/user/ClionProjects/tesst1Finexa/Card.h
+ /home/user/ClionProjects/TestFinexa/CreditCard.h \
+ /home/user/ClionProjects/TestFinexa/Card.h

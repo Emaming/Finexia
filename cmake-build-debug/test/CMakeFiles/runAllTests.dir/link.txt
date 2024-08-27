@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/runAllTests.dir/runAllTests.cpp.o CMakeFiles/runAllTests.dir/BankAccountTest.cpp.o CMakeFiles/runAllTests.dir/OperationTest.cpp.o CMakeFiles/runAllTests.dir/ScheduledOperationTest.cpp.o -o runAllTests  ../lib/libgtest.a ../lib/libgtest_main.a ../libFinexia_lib.a ../lib/libgtest.a

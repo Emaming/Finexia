@@ -1,6 +1,6 @@
 CMakeFiles/Finexia.dir/main.cpp.o: \
- /home/user/ClionProjects/tesst1Finexa/main.cpp \
- /usr/include/stdc-predef.h /usr/include/c++/11/iostream \
+ /home/user/ClionProjects/TestFinexa/main.cpp /usr/include/stdc-predef.h \
+ /usr/include/c++/11/iostream \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
  /usr/include/features.h /usr/include/features-time64.h \
@@ -206,14 +206,14 @@ CMakeFiles/Finexia.dir/main.cpp.o: \
  /usr/include/c++/11/ratio /usr/include/c++/11/limits \
  /usr/include/c++/11/ctime /usr/include/c++/11/bits/parse_numbers.h \
  /usr/include/c++/11/sstream /usr/include/c++/11/bits/sstream.tcc \
- /home/user/ClionProjects/tesst1Finexa/BankAccount.h \
+ /home/user/ClionProjects/TestFinexa/BankAccount.h \
  /usr/include/c++/11/list /usr/include/c++/11/bits/stl_list.h \
  /usr/include/c++/11/bits/list.tcc \
- /home/user/ClionProjects/tesst1Finexa/Operation.h \
- /home/user/ClionProjects/tesst1Finexa/ScheduledOperation.h \
- /home/user/ClionProjects/tesst1Finexa/CardOperation.h \
- /home/user/ClionProjects/tesst1Finexa/CreditCard.h \
- /home/user/ClionProjects/tesst1Finexa/Card.h \
- /home/user/ClionProjects/tesst1Finexa/DebitCard.h \
+ /home/user/ClionProjects/TestFinexa/Operation.h \
+ /home/user/ClionProjects/TestFinexa/ScheduledOperation.h \
+ /home/user/ClionProjects/TestFinexa/CardOperation.h \
+ /home/user/ClionProjects/TestFinexa/CreditCard.h \
+ /home/user/ClionProjects/TestFinexa/Card.h \
+ /home/user/ClionProjects/TestFinexa/DebitCard.h \
  /usr/include/c++/11/variant \
  /usr/include/c++/11/bits/enable_special_members.h

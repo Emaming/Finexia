@@ -1,39 +1,32 @@
-cmake_minimum_required(VERSION 3.10)
-project(BankAccountTests)
+cmake_minimum_required(VERSION 3.28)
 
-# Imposta la versione C++ richiesta
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_STANDARD 23)
 
-# Aggiungi il percorso ai file di intestazione del progetto principale
-include_directories(${PROJECT_SOURCE_DIR}/src)
+#aggiungo una sottocartella dove inserirò google test
+add_subdirectory(./lib/googletest)
+#definisco la cartella dove si trova google test (ovvero la sottocartella)
+set(gtest_SOURCE_DIR ./lib/googletest/)
+#includo gli header della libreria di google test cercandoli nella sottocartella appena creata
+include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
-# Trova GoogleTest
-find_package(GTest REQUIRED)
-include_directories(${GTEST_INCLUDE_DIRS})
-
-# Aggiungi i file sorgenti del progetto principale ai test
-set(SOURCES
-        ${PROJECT_SOURCE_DIR}/src/BankAccount.cpp
-        ${PROJECT_SOURCE_DIR}/src/Operation.cpp
-        ${PROJECT_SOURCE_DIR}/src/ScheduledOperation.cpp
-        ${PROJECT_SOURCE_DIR}/src/CardOperation.cpp
-        ${PROJECT_SOURCE_DIR}/src/Card.cpp
+set(TEST_SOURCE_FILES runAllTests.cpp BankAccountTest.cpp OperationTest.cpp
+        ScheduledOperationTest.cpp
 )
 
-# Aggiungi i file di test
-set(TEST_SOURCES
-        ${PROJECT_SOURCE_DIR}/test/BankAccountTest.cpp
-        ${PROJECT_SOURCE_DIR}/test/OperationTest.cpp
-        ${PROJECT_SOURCE_DIR}/test/ScheduledOperationTest.cpp
-)
-
-# Crea un eseguibile per tutti i test
-add_executable(RunAllTests ${TEST_SOURCES} ${SOURCES})
-
-# Collega le librerie GoogleTest e pthread all'eseguibile di test
-target_link_libraries(RunAllTests ${GTEST_LIBRARIES} pthread)
-
-# Usa la funzione add_test per registrare i test
-enable_testing()
-add_test(NAME RunAllTests COMMAND RunAllTests)
+#crea l'eseguibile con i file cpp che contengono i test (riga 14)
+add_executable(runAllTests ${TEST_SOURCE_FILES})
+#crea l'eseguibile con il singolo file cpp di test di BankAccount
+add_executable(runBankAccountTest BankAccountTest.cpp)
+#crea l'eseguibile con il singolo file cpp di test di TransactionTest
+add_executable(runOperationTest OperationTest.cpp)
+#crea l'eseguibile con il singolo file cpp di test di PlannedTransactionTest
+add_executable(runScheduledOperationTest ScheduledOperationTest.cpp)
+#crea l'eseguibile con il singolo file cpp di test di DateTest
+#collega l'eseguibile di test (riga 17) con la libreria creata nell'altro CMakeLists.txt che contiene i SOURCE_FILES da testare
+target_link_libraries(runAllTests gtest gtest_main ${CMAKE_PROJECT_NAME}_lib)
+#collega l'eseguibile di test (riga 19) con la libreria creata nell'altro CMakeLists.txt che contiene i SOURCE_FILES da testare
+target_link_libraries(runBankAccountTest gtest gtest_main ${CMAKE_PROJECT_NAME}_lib)
+#collega l'eseguibile di test (riga 21) con la libreria creata nell'altro CMakeLists.txt che contiene i SOURCE_FILES da testare
+target_link_libraries(runOperationTest gtest gtest_main ${CMAKE_PROJECT_NAME}_lib)
+#collega l'eseguibile di test (riga 23) con la libreria creata nell'altro CMakeLists.txt che contiene i SOURCE_FILES da testare
+target_link_libraries(runScheduledOperationTest gtest gtest_main ${CMAKE_PROJECT_NAME}_lib)

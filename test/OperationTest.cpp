@@ -48,19 +48,7 @@ TEST_F(OperationTest, ConstructorWithAmountAndType) {
 }
 
 // Test printOperationString method
-TEST_F(OperationTest, PrintOperationString) {
-    int id = 2;
-    double amount = 75.25;
-    OperationType type = OperationType::Transfer;
-    std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
 
-    Operation op(id, amount, type, now);
-
-    std::string opString = op.printOperationString();
-    EXPECT_NE(opString.find("Transfer"), std::string::npos);
-    EXPECT_NE(opString.find("amount: 75.25"), std::string::npos);
-    EXPECT_NE(opString.find("time info:"), std::string::npos);
-}
 
 // Test printOperationType method
 TEST_F(OperationTest, PrintOperationType) {
@@ -79,21 +67,5 @@ TEST_F(OperationTest, PrintOperationType) {
     EXPECT_EQ(op.printOperationType(), "Unknown");
 }
 
-// Test printOperationTypes method
-TEST_F(OperationTest, PrintOperationTypes) {
-    std::string expected = "1. Deposit\n2. Withdrawal\n3. Transfer\n";
-    EXPECT_EQ(Operation::printOperationTypes(), expected);
-}
 
-// Test printDateTime method
-TEST_F(OperationTest, PrintDateTime) {
-    std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
-    Operation op(1, 100.0, OperationType::Deposit, now);
-
-    std::time_t time = std::chrono::system_clock::to_time_t(now);
-    std::stringstream expected;
-    expected << std::put_time(std::localtime(&time), "%Y-%m-%d %H:%M:%S");
-
-    EXPECT_EQ(op.printDateTime(), expected.str());
-}
 

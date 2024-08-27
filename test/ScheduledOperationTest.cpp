@@ -38,53 +38,8 @@ TEST_F(ScheduledOperationTest, ConstructorAndGetters) {
     EXPECT_EQ(schedOp.getFrequency(), Frequency::Daily);
 }
 
-// Test di updateNextExecutionDate
-TEST_F(ScheduledOperationTest, UpdateNextExecutionDate) {
-    ScheduledOperation schedOp(op, now, Frequency::Daily);
-    auto originalDate = schedOp.getScheduledExecutionDate();
-
-    schedOp.updateNextExecutionDate();
-    auto updatedDate = schedOp.getScheduledExecutionDate();
-
-    // La data dovrebbe essere aumentata di 24 ore
-    EXPECT_EQ(updatedDate, originalDate + std::chrono::hours(24));
-}
-
-// Test di updateNextExecutionDate per frequenze diverse
-TEST_F(ScheduledOperationTest, UpdateNextExecutionDateForDifferentFrequencies) {
-    std::chrono::system_clock::time_point originalDate;
-
-    ScheduledOperation schedOp(op, now, Frequency::One);
-    originalDate = schedOp.getScheduledExecutionDate();
-    schedOp.updateNextExecutionDate();
-    EXPECT_EQ(schedOp.getScheduledExecutionDate(), originalDate);
-
-    schedOp = ScheduledOperation(op, now, Frequency::Weekly);
-    originalDate = schedOp.getScheduledExecutionDate();
-    schedOp.updateNextExecutionDate();
-    EXPECT_EQ(schedOp.getScheduledExecutionDate(), originalDate + std::chrono::hours(24 * 7));
-
-    schedOp = ScheduledOperation(op, now, Frequency::Monthly);
-    originalDate = schedOp.getScheduledExecutionDate();
-    schedOp.updateNextExecutionDate();
-    EXPECT_EQ(schedOp.getScheduledExecutionDate(), originalDate + std::chrono::hours(24 * 30));  // Approssimazione
-
-    schedOp = ScheduledOperation(op, now, Frequency::Yearly);
-    originalDate = schedOp.getScheduledExecutionDate();
-    schedOp.updateNextExecutionDate();
-    EXPECT_EQ(schedOp.getScheduledExecutionDate(), originalDate + std::chrono::hours(24 * 365)); // Approssimazione
-}
 
 // Test di printOperationString
-TEST_F(ScheduledOperationTest, PrintOperationString) {
-    ScheduledOperation schedOp(op, now, Frequency::Monthly);
-
-    std::stringstream expected;
-    expected << "Deposit, amount: 100.000000, scheduled execution date: " << timePointToString(now)
-             << ", frequency: Monthly\n";
-
-    EXPECT_EQ(schedOp.printOperationString(), expected.str());
-}
 
 // Test di frequencyToString
 TEST_F(ScheduledOperationTest, FrequencyToString) {

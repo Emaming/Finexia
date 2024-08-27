@@ -37,8 +37,11 @@ public:
     std::vector<std::shared_ptr<ScheduledOperation>> findScheduledByAmount(double amount) const;
     std::vector<std::shared_ptr<ScheduledOperation>> findScheduledByDate(std::chrono::system_clock::time_point date) const;
     std::vector<std::shared_ptr<ScheduledOperation>> findScheduledByType(OperationType type) const;
+    std::string printBalance() const;
 
     void printOperations(const std::vector<std::shared_ptr<Operation>>& operations) const;
+
+    std::vector<std::shared_ptr<CardOperation>> getCardsOperations() const;
 
     void printCards() const;  // Updated method name
     std::string getTransactionHistory() const;

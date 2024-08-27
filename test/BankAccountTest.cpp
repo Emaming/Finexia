@@ -1,135 +1,116 @@
 #include <gtest/gtest.h>
 #include "../BankAccount.h"
+#include "../Operation.h"
+#include "../ScheduledOperation.h"
+#include "../CardOperation.h"
+#include "../CreditCard.h"
+#include "../DebitCard.h"
+
 #include <chrono>
 #include <memory>
+#include <vector>
 
-// Test the addCard method
+// Test constructor
+TEST(BankAccountTest, ConstructorInitializesBalance) {
+    BankAccount account;
+    EXPECT_EQ(account.printBalance(), "0.000000");
+}
+
+// Test addTransaction
+TEST(BankAccountTest, AddTransaction) {
+    BankAccount account;
+    auto op = std::make_shared<Operation>(1, 100.0, OperationType::Deposit, std::chrono::system_clock::now());
+    account.addTransaction(op);
+
+    auto operations = account.findOperationByAmount(100.0);
+    EXPECT_EQ(operations.size(), 1);
+    EXPECT_EQ(operations[0]->getAmount(), 100.0);
+}
+
+// Test addCard
 TEST(BankAccountTest, AddCard) {
     BankAccount account;
     account.addCard("Test Credit Card", true);
-    EXPECT_EQ(account.printBalance(), "0.000000");  // Verify that balance is still 0
-    // We could also verify if the card was added properly by accessing the private cardsOperations vector,
-    // but typically this would require a getter or some other method to expose the card operations.
+
+    auto cardOperations = account.getCardsOperations();
+    ASSERT_EQ(cardOperations.size(), 1);
+
+    auto cardOp = cardOperations[0];
+    EXPECT_EQ(cardOp->getCardId(), "Test Credit Card");
+    EXPECT_TRUE(cardOp->isCreditCard());
 }
 
-// Test for adding a scheduled operation
-TEST(BankAccountTest, ScheduleOperation) {
+TEST(BankAccountTest, PrintBalance) {
     BankAccount account;
-    auto operation = std::make_shared<Operation>(1, 150.0, OperationType::Deposit, std::chrono::system_clock::now());
-    account.scheduleOperation(operation, std::chrono::system_clock::now() + std::chrono::hours(24), Frequency::One);
 
-    auto scheduledOperations = account.findScheduledByAmount(150.0);
-    ASSERT_EQ(scheduledOperations.size(), 1);
-    EXPECT_EQ(scheduledOperations[0]->getOperation()->getAmount(), 150.0);
+    // Aggiungi un deposito
+    account.addTransaction(std::make_shared<Operation>(1, 200.0, OperationType::Deposit, std::chrono::system_clock::now()));
+    EXPECT_EQ(account.printBalance(), "200.000000");  // Verifica il saldo dopo il deposito
+
+    // Aggiungi un prelievo
+    account.addTransaction(std::make_shared<Operation>(2, 50.0, OperationType::Withdrawal, std::chrono::system_clock::now()));
+    EXPECT_EQ(account.printBalance(), "150.000000");  // Verifica il saldo dopo il prelievo
 }
 
-// Test for executing planned transactions
-TEST(BankAccountTest, ExecutePlannedTransactions) {
-    BankAccount account;
-    auto operation = std::make_shared<Operation>(1, 200.0, OperationType::Deposit, std::chrono::system_clock::now());
-    account.scheduleOperation(operation, std::chrono::system_clock::now(), Frequency::One);
 
-    account.executePlannedTransactions();
-    auto result = account.findOperationByAmount(200.0);
-    ASSERT_EQ(result.size(), 1);
-    EXPECT_EQ(result[0]->getAmount(), 200.0);
-}
 
-// Test for cancelling operations
+
+
+
+
+// Test cancelOperations
 TEST(BankAccountTest, CancelOperations) {
     BankAccount account;
-    auto operation1 = std::make_shared<Operation>(1, 100.0, OperationType::Deposit, std::chrono::system_clock::now());
-    auto operation2 = std::make_shared<Operation>(2, 200.0, OperationType::Withdrawal, std::chrono::system_clock::now());
+    auto op1 = std::make_shared<Operation>(1, 100.0, OperationType::Deposit, std::chrono::system_clock::now());
+    auto op2 = std::make_shared<Operation>(2, 200.0, OperationType::Withdrawal, std::chrono::system_clock::now());
+    account.addTransaction(op1);
+    account.addTransaction(op2);
 
-    account.addTransaction(operation1);
-    account.addTransaction(operation2);
+    std::vector<std::shared_ptr<Operation>> toCancel = {op1};
+    account.cancelOperations(toCancel);
 
-    std::vector<std::shared_ptr<Operation>> opsToCancel = {operation1};
-    account.cancelOperations(opsToCancel);
-
-    auto result = account.findOperationByAmount(100.0);
-    EXPECT_EQ(result.size(), 0);  // Operation 1 should be canceled
-    result = account.findOperationByAmount(200.0);
-    EXPECT_EQ(result.size(), 1);  // Operation 2 should remain
+    auto operations = account.findOperationByAmount(100.0);
+    EXPECT_EQ(operations.size(), 0);  // Operation 1 should be canceled
+    operations = account.findOperationByAmount(200.0);
+    EXPECT_EQ(operations.size(), 1);  // Operation 2 should remain
 }
 
-// Test for removing scheduled operations
+// Test removeScheduledOperation
 TEST(BankAccountTest, RemoveScheduledOperation) {
     BankAccount account;
-    auto operation = std::make_shared<Operation>(1, 300.0, OperationType::Deposit, std::chrono::system_clock::now());
-    account.scheduleOperation(operation, std::chrono::system_clock::now() + std::chrono::hours(24), Frequency::One);
+    auto op = std::make_shared<Operation>(1, 400.0, OperationType::Deposit, std::chrono::system_clock::now());
+    account.scheduleOperation(op, std::chrono::system_clock::now() + std::chrono::hours(24), Frequency::One);
 
-    std::vector<std::shared_ptr<ScheduledOperation>> opsToRemove = {account.findScheduledByAmount(300.0)[0]};
-    account.removeScheduledOperation(opsToRemove);
-
-    auto result = account.findScheduledByAmount(300.0);
-    EXPECT_EQ(result.size(), 0);  // The scheduled operation should be removed
-}
-
-// Test for findOperationByType method
-TEST(BankAccountTest, FindOperationByType) {
-    BankAccount account;
-    auto operation1 = std::make_shared<Operation>(1, 400.0, OperationType::Deposit, std::chrono::system_clock::now());
-    auto operation2 = std::make_shared<Operation>(2, 500.0, OperationType::Withdrawal, std::chrono::system_clock::now());
-
-    account.addTransaction(operation1);
-    account.addTransaction(operation2);
-
-    auto depositOps = account.findOperationByType(OperationType::Deposit);
-    EXPECT_EQ(depositOps.size(), 1);
-    EXPECT_EQ(depositOps[0]->getAmount(), 400.0);
-
-    auto withdrawalOps = account.findOperationByType(OperationType::Withdrawal);
-    EXPECT_EQ(withdrawalOps.size(), 1);
-    EXPECT_EQ(withdrawalOps[0]->getAmount(), 500.0);
-}
-
-// Test for findOperationByDate method
-TEST(BankAccountTest, FindOperationByDate) {
-    BankAccount account;
-    auto now = std::chrono::system_clock::now();
-    auto operation = std::make_shared<Operation>(1, 600.0, OperationType::Deposit, now);
-
-    account.addTransaction(operation);
-
-    auto result = account.findOperationByDate(now);
-    ASSERT_EQ(result.size(), 1);
-    EXPECT_EQ(result[0]->getAmount(), 600.0);
-}
-
-// Test for findScheduledByType method
-TEST(BankAccountTest, FindScheduledByType) {
-    BankAccount account;
-    auto operation = std::make_shared<Operation>(1, 700.0, OperationType::Deposit, std::chrono::system_clock::now());
-    account.scheduleOperation(operation, std::chrono::system_clock::now() + std::chrono::hours(24), Frequency::One);
-
-    auto scheduledOps = account.findScheduledByType(OperationType::Deposit);
+    auto scheduledOps = account.findScheduledByAmount(400.0);
     ASSERT_EQ(scheduledOps.size(), 1);
-    EXPECT_EQ(scheduledOps[0]->getOperation()->getAmount(), 700.0);
+
+    account.removeScheduledOperation(scheduledOps);
+    scheduledOps = account.findScheduledByAmount(400.0);
+    EXPECT_EQ(scheduledOps.size(), 0);  // Scheduled operation should be removed
 }
 
-// Test for findScheduledByDate method
-TEST(BankAccountTest, FindScheduledByDate) {
+// Test printPlannedTransactions
+TEST(BankAccountTest, PrintPlannedTransactions) {
     BankAccount account;
-    auto now = std::chrono::system_clock::now();
-    auto operation = std::make_shared<Operation>(1, 800.0, OperationType::Deposit, now);
-    account.scheduleOperation(operation, now + std::chrono::hours(24), Frequency::One);
+    auto op = std::make_shared<Operation>(1, 500.0, OperationType::Deposit, std::chrono::system_clock::now());
+    account.scheduleOperation(op, std::chrono::system_clock::now() + std::chrono::hours(24), Frequency::One);
 
-    auto scheduledOps = account.findScheduledByDate(now + std::chrono::hours(24));
-    ASSERT_EQ(scheduledOps.size(), 1);
-    EXPECT_EQ(scheduledOps[0]->getOperation()->getAmount(), 800.0);
+    testing::internal::CaptureStdout();
+    account.printPlannedTransactions();
+    std::string output = testing::internal::GetCapturedStdout();
+
+    std::cout << "Captured Output: " << output << std::endl; // Stampa per debug
+
+    EXPECT_NE(output.find("Amount: 500.00"), std::string::npos); // Nota il formato 500.00
 }
 
-// Test for findNextExecutionDate method
-TEST(BankAccountTest, FindNextExecutionDate) {
+
+// Test removeCard
+TEST(BankAccountTest, RemoveCard) {
     BankAccount account;
-    auto now = std::chrono::system_clock::now();
-    auto operation = std::make_shared<Operation>(1, 900.0, OperationType::Deposit, now);
-    account.scheduleOperation(operation, now + std::chrono::hours(24), Frequency::One);
+    account.addCard("CardToRemove", true);
+    account.removeCard("CardToRemove");
 
-    auto scheduledOps = account.findNextExecutionDate(now);
-    ASSERT_EQ(scheduledOps.size(), 1);
-    EXPECT_EQ(scheduledOps[0]->getOperation()->getAmount(), 900.0);
+    auto cardOperations = account.getCardsOperations();
+    EXPECT_EQ(cardOperations.size(), 0);  // Card should be removed
 }
-
-

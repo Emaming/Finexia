@@ -21,17 +21,7 @@ double Operation::getAmount() const { return amount; }
 OperationType Operation::getType() const { return type; }
 std::chrono::system_clock::time_point Operation::getDate() const { return date; }
 
-void Operation::printOperation() const {
-    std::cout << printOperationType() << ", amount: " << amount
-              << ", time info: " << printDateTime() << std::endl;
-}
 
-std::string Operation::printOperationString() const {
-    std::stringstream transaction;
-    transaction << printOperationType() << ", amount: " << amount
-                << ", time info: " << printDateTime();
-    return transaction.str();
-}
 
 std::string Operation::printOperationType() const {
     switch (type) {
@@ -46,17 +36,4 @@ std::string Operation::printOperationType() const {
     }
 }
 
-std::string Operation::printOperationTypes() {
-    std::stringstream transactionTypes;
-    transactionTypes << "1. Deposit" << std::endl;
-    transactionTypes << "2. Withdrawal" << std::endl;
-    transactionTypes << "3. Transfer" << std::endl;
-    return transactionTypes.str();
-}
 
-std::string Operation::printDateTime() const {
-    std::time_t time = std::chrono::system_clock::to_time_t(date);
-    std::stringstream ss;
-    ss << std::put_time(std::localtime(&time), "%Y-%m-%d %H:%M:%S");
-    return ss.str();
-}

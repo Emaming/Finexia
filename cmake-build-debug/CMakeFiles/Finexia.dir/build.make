@@ -53,10 +53,10 @@ RM = /snap/clion/291/bin/cmake/linux/x64/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/user/ClionProjects/tesst1Finexa
+CMAKE_SOURCE_DIR = /home/user/ClionProjects/TestFinexa
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/user/ClionProjects/tesst1Finexa/cmake-build-debug
+CMAKE_BINARY_DIR = /home/user/ClionProjects/TestFinexa/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/Finexia.dir/depend.make
@@ -70,142 +70,31 @@ include CMakeFiles/Finexia.dir/progress.make
 include CMakeFiles/Finexia.dir/flags.make
 
 CMakeFiles/Finexia.dir/main.cpp.o: CMakeFiles/Finexia.dir/flags.make
-CMakeFiles/Finexia.dir/main.cpp.o: /home/user/ClionProjects/tesst1Finexa/main.cpp
+CMakeFiles/Finexia.dir/main.cpp.o: /home/user/ClionProjects/TestFinexa/main.cpp
 CMakeFiles/Finexia.dir/main.cpp.o: CMakeFiles/Finexia.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/user/ClionProjects/tesst1Finexa/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Finexia.dir/main.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Finexia.dir/main.cpp.o -MF CMakeFiles/Finexia.dir/main.cpp.o.d -o CMakeFiles/Finexia.dir/main.cpp.o -c /home/user/ClionProjects/tesst1Finexa/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/user/ClionProjects/TestFinexa/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Finexia.dir/main.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Finexia.dir/main.cpp.o -MF CMakeFiles/Finexia.dir/main.cpp.o.d -o CMakeFiles/Finexia.dir/main.cpp.o -c /home/user/ClionProjects/TestFinexa/main.cpp
 
 CMakeFiles/Finexia.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Finexia.dir/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/ClionProjects/tesst1Finexa/main.cpp > CMakeFiles/Finexia.dir/main.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/ClionProjects/TestFinexa/main.cpp > CMakeFiles/Finexia.dir/main.cpp.i
 
 CMakeFiles/Finexia.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Finexia.dir/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/ClionProjects/tesst1Finexa/main.cpp -o CMakeFiles/Finexia.dir/main.cpp.s
-
-CMakeFiles/Finexia.dir/BankAccount.cpp.o: CMakeFiles/Finexia.dir/flags.make
-CMakeFiles/Finexia.dir/BankAccount.cpp.o: /home/user/ClionProjects/tesst1Finexa/BankAccount.cpp
-CMakeFiles/Finexia.dir/BankAccount.cpp.o: CMakeFiles/Finexia.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/user/ClionProjects/tesst1Finexa/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Finexia.dir/BankAccount.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Finexia.dir/BankAccount.cpp.o -MF CMakeFiles/Finexia.dir/BankAccount.cpp.o.d -o CMakeFiles/Finexia.dir/BankAccount.cpp.o -c /home/user/ClionProjects/tesst1Finexa/BankAccount.cpp
-
-CMakeFiles/Finexia.dir/BankAccount.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Finexia.dir/BankAccount.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/ClionProjects/tesst1Finexa/BankAccount.cpp > CMakeFiles/Finexia.dir/BankAccount.cpp.i
-
-CMakeFiles/Finexia.dir/BankAccount.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Finexia.dir/BankAccount.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/ClionProjects/tesst1Finexa/BankAccount.cpp -o CMakeFiles/Finexia.dir/BankAccount.cpp.s
-
-CMakeFiles/Finexia.dir/CreditCard.cpp.o: CMakeFiles/Finexia.dir/flags.make
-CMakeFiles/Finexia.dir/CreditCard.cpp.o: /home/user/ClionProjects/tesst1Finexa/CreditCard.cpp
-CMakeFiles/Finexia.dir/CreditCard.cpp.o: CMakeFiles/Finexia.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/user/ClionProjects/tesst1Finexa/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Finexia.dir/CreditCard.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Finexia.dir/CreditCard.cpp.o -MF CMakeFiles/Finexia.dir/CreditCard.cpp.o.d -o CMakeFiles/Finexia.dir/CreditCard.cpp.o -c /home/user/ClionProjects/tesst1Finexa/CreditCard.cpp
-
-CMakeFiles/Finexia.dir/CreditCard.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Finexia.dir/CreditCard.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/ClionProjects/tesst1Finexa/CreditCard.cpp > CMakeFiles/Finexia.dir/CreditCard.cpp.i
-
-CMakeFiles/Finexia.dir/CreditCard.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Finexia.dir/CreditCard.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/ClionProjects/tesst1Finexa/CreditCard.cpp -o CMakeFiles/Finexia.dir/CreditCard.cpp.s
-
-CMakeFiles/Finexia.dir/DebitCard.cpp.o: CMakeFiles/Finexia.dir/flags.make
-CMakeFiles/Finexia.dir/DebitCard.cpp.o: /home/user/ClionProjects/tesst1Finexa/DebitCard.cpp
-CMakeFiles/Finexia.dir/DebitCard.cpp.o: CMakeFiles/Finexia.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/user/ClionProjects/tesst1Finexa/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Finexia.dir/DebitCard.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Finexia.dir/DebitCard.cpp.o -MF CMakeFiles/Finexia.dir/DebitCard.cpp.o.d -o CMakeFiles/Finexia.dir/DebitCard.cpp.o -c /home/user/ClionProjects/tesst1Finexa/DebitCard.cpp
-
-CMakeFiles/Finexia.dir/DebitCard.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Finexia.dir/DebitCard.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/ClionProjects/tesst1Finexa/DebitCard.cpp > CMakeFiles/Finexia.dir/DebitCard.cpp.i
-
-CMakeFiles/Finexia.dir/DebitCard.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Finexia.dir/DebitCard.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/ClionProjects/tesst1Finexa/DebitCard.cpp -o CMakeFiles/Finexia.dir/DebitCard.cpp.s
-
-CMakeFiles/Finexia.dir/Operation.cpp.o: CMakeFiles/Finexia.dir/flags.make
-CMakeFiles/Finexia.dir/Operation.cpp.o: /home/user/ClionProjects/tesst1Finexa/Operation.cpp
-CMakeFiles/Finexia.dir/Operation.cpp.o: CMakeFiles/Finexia.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/user/ClionProjects/tesst1Finexa/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Finexia.dir/Operation.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Finexia.dir/Operation.cpp.o -MF CMakeFiles/Finexia.dir/Operation.cpp.o.d -o CMakeFiles/Finexia.dir/Operation.cpp.o -c /home/user/ClionProjects/tesst1Finexa/Operation.cpp
-
-CMakeFiles/Finexia.dir/Operation.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Finexia.dir/Operation.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/ClionProjects/tesst1Finexa/Operation.cpp > CMakeFiles/Finexia.dir/Operation.cpp.i
-
-CMakeFiles/Finexia.dir/Operation.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Finexia.dir/Operation.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/ClionProjects/tesst1Finexa/Operation.cpp -o CMakeFiles/Finexia.dir/Operation.cpp.s
-
-CMakeFiles/Finexia.dir/ScheduledOperation.cpp.o: CMakeFiles/Finexia.dir/flags.make
-CMakeFiles/Finexia.dir/ScheduledOperation.cpp.o: /home/user/ClionProjects/tesst1Finexa/ScheduledOperation.cpp
-CMakeFiles/Finexia.dir/ScheduledOperation.cpp.o: CMakeFiles/Finexia.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/user/ClionProjects/tesst1Finexa/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Finexia.dir/ScheduledOperation.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Finexia.dir/ScheduledOperation.cpp.o -MF CMakeFiles/Finexia.dir/ScheduledOperation.cpp.o.d -o CMakeFiles/Finexia.dir/ScheduledOperation.cpp.o -c /home/user/ClionProjects/tesst1Finexa/ScheduledOperation.cpp
-
-CMakeFiles/Finexia.dir/ScheduledOperation.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Finexia.dir/ScheduledOperation.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/ClionProjects/tesst1Finexa/ScheduledOperation.cpp > CMakeFiles/Finexia.dir/ScheduledOperation.cpp.i
-
-CMakeFiles/Finexia.dir/ScheduledOperation.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Finexia.dir/ScheduledOperation.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/ClionProjects/tesst1Finexa/ScheduledOperation.cpp -o CMakeFiles/Finexia.dir/ScheduledOperation.cpp.s
-
-CMakeFiles/Finexia.dir/CardOperation.cpp.o: CMakeFiles/Finexia.dir/flags.make
-CMakeFiles/Finexia.dir/CardOperation.cpp.o: /home/user/ClionProjects/tesst1Finexa/CardOperation.cpp
-CMakeFiles/Finexia.dir/CardOperation.cpp.o: CMakeFiles/Finexia.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/user/ClionProjects/tesst1Finexa/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/Finexia.dir/CardOperation.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Finexia.dir/CardOperation.cpp.o -MF CMakeFiles/Finexia.dir/CardOperation.cpp.o.d -o CMakeFiles/Finexia.dir/CardOperation.cpp.o -c /home/user/ClionProjects/tesst1Finexa/CardOperation.cpp
-
-CMakeFiles/Finexia.dir/CardOperation.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Finexia.dir/CardOperation.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/ClionProjects/tesst1Finexa/CardOperation.cpp > CMakeFiles/Finexia.dir/CardOperation.cpp.i
-
-CMakeFiles/Finexia.dir/CardOperation.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Finexia.dir/CardOperation.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/ClionProjects/tesst1Finexa/CardOperation.cpp -o CMakeFiles/Finexia.dir/CardOperation.cpp.s
-
-CMakeFiles/Finexia.dir/Card.cpp.o: CMakeFiles/Finexia.dir/flags.make
-CMakeFiles/Finexia.dir/Card.cpp.o: /home/user/ClionProjects/tesst1Finexa/Card.cpp
-CMakeFiles/Finexia.dir/Card.cpp.o: CMakeFiles/Finexia.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/user/ClionProjects/tesst1Finexa/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/Finexia.dir/Card.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Finexia.dir/Card.cpp.o -MF CMakeFiles/Finexia.dir/Card.cpp.o.d -o CMakeFiles/Finexia.dir/Card.cpp.o -c /home/user/ClionProjects/tesst1Finexa/Card.cpp
-
-CMakeFiles/Finexia.dir/Card.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Finexia.dir/Card.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/ClionProjects/tesst1Finexa/Card.cpp > CMakeFiles/Finexia.dir/Card.cpp.i
-
-CMakeFiles/Finexia.dir/Card.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Finexia.dir/Card.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/ClionProjects/tesst1Finexa/Card.cpp -o CMakeFiles/Finexia.dir/Card.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/ClionProjects/TestFinexa/main.cpp -o CMakeFiles/Finexia.dir/main.cpp.s
 
 # Object files for target Finexia
 Finexia_OBJECTS = \
-"CMakeFiles/Finexia.dir/main.cpp.o" \
-"CMakeFiles/Finexia.dir/BankAccount.cpp.o" \
-"CMakeFiles/Finexia.dir/CreditCard.cpp.o" \
-"CMakeFiles/Finexia.dir/DebitCard.cpp.o" \
-"CMakeFiles/Finexia.dir/Operation.cpp.o" \
-"CMakeFiles/Finexia.dir/ScheduledOperation.cpp.o" \
-"CMakeFiles/Finexia.dir/CardOperation.cpp.o" \
-"CMakeFiles/Finexia.dir/Card.cpp.o"
+"CMakeFiles/Finexia.dir/main.cpp.o"
 
 # External object files for target Finexia
 Finexia_EXTERNAL_OBJECTS =
 
 Finexia: CMakeFiles/Finexia.dir/main.cpp.o
-Finexia: CMakeFiles/Finexia.dir/BankAccount.cpp.o
-Finexia: CMakeFiles/Finexia.dir/CreditCard.cpp.o
-Finexia: CMakeFiles/Finexia.dir/DebitCard.cpp.o
-Finexia: CMakeFiles/Finexia.dir/Operation.cpp.o
-Finexia: CMakeFiles/Finexia.dir/ScheduledOperation.cpp.o
-Finexia: CMakeFiles/Finexia.dir/CardOperation.cpp.o
-Finexia: CMakeFiles/Finexia.dir/Card.cpp.o
 Finexia: CMakeFiles/Finexia.dir/build.make
+Finexia: libFinexia_lib.a
 Finexia: CMakeFiles/Finexia.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/user/ClionProjects/tesst1Finexa/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable Finexia"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/user/ClionProjects/TestFinexa/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable Finexia"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Finexia.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -217,6 +106,6 @@ CMakeFiles/Finexia.dir/clean:
 .PHONY : CMakeFiles/Finexia.dir/clean
 
 CMakeFiles/Finexia.dir/depend:
-	cd /home/user/ClionProjects/tesst1Finexa/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/user/ClionProjects/tesst1Finexa /home/user/ClionProjects/tesst1Finexa /home/user/ClionProjects/tesst1Finexa/cmake-build-debug /home/user/ClionProjects/tesst1Finexa/cmake-build-debug /home/user/ClionProjects/tesst1Finexa/cmake-build-debug/CMakeFiles/Finexia.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/user/ClionProjects/TestFinexa /home/user/ClionProjects/TestFinexa /home/user/ClionProjects/TestFinexa/cmake-build-debug /home/user/ClionProjects/TestFinexa/cmake-build-debug /home/user/ClionProjects/TestFinexa/cmake-build-debug/CMakeFiles/Finexia.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/Finexia.dir/depend
 

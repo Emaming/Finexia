@@ -5,14 +5,15 @@
     #include <iostream>
     #include <random>
     #include <chrono>
+    #include "iomanip"
     #include "memory"
     #include "CreditCard.h"
     #include "DebitCard.h"
 #include <unordered_set>
 
-
     // Costruttore
     BankAccount::BankAccount() : balance(0.0) {}
+
 
     void BankAccount::saveToFile(const std::string& filename) const {
         std::ofstream file(filename);
@@ -22,10 +23,10 @@
             return;
         }
 
-        // Save balance and IBAN
+        // Salvataggio saldo e IBAN
         file << balance << '\n' << IBAN << '\n';
 
-        // Save operations
+        // Salvataggio operazioni
         file << operations.size() << '\n';
         for (const auto& op : operations) {
             file << op->getId() << ' '
@@ -34,7 +35,7 @@
                  << std::chrono::system_clock::to_time_t(op->getDate()) << '\n';
         }
 
-        // Save scheduled operations
+        // Salvataggio operazioni pianificate
         file << scheduledOperations.size() << '\n';
         for (const auto& schedOp : scheduledOperations) {
             file << schedOp->getOperation()->getId() << ' '
@@ -45,18 +46,23 @@
                  << static_cast<int>(schedOp->getFrequency()) << '\n';
         }
 
-        // Save card operations
+        // Salvataggio operazioni con le carte
         file << cardsOperations.size() << '\n';
         for (const auto& cardOp : cardsOperations) {
             file << cardOp->getCardId() << ' '
                  << cardOp->getOperation()->getId() << ' '
                  << cardOp->getOperation()->getAmount() << ' '
                  << static_cast<int>(cardOp->getOperation()->getType()) << ' '
-                 << (cardOp->isCreditCard() ? 0 : 1) << '\n'; // 0 for CreditCard, 1 for DebitCard
+                 << (cardOp->isCreditCard() ? 0 : 1) << ' '
+                 << cardOp->getCardNumber() << ' '
+                 << cardOp->getCvv() << ' '
+                 << std::chrono::system_clock::to_time_t(cardOp->getExpirationDate()) << '\n';
         }
 
         file.close();
     }
+
+
 
     void BankAccount::loadFromFile(const std::string& filename) {
         std::ifstream file(filename);
@@ -114,8 +120,13 @@
             double amount;
             int type;
             int cardType; // 0 for CreditCard, 1 for DebitCard
+            std::string cardNumber;
+            std::string cvv;
+            std::time_t expDate;
 
-            file >> cardId >> opId >> amount >> type >> cardType;
+            file >> cardId >> opId >> amount >> type >> cardType >> cardNumber >> cvv >> expDate;
+
+            std::cout << "Loaded card operation: " << cardId << ", type: " << cardType << ", number: " << cardNumber << ", CVV: " << cvv << ", expDate: " << std::ctime(&expDate) << std::endl;
 
             auto op = std::make_shared<Operation>(opId, amount, static_cast<OperationType>(type), std::chrono::system_clock::now());  // Dummy date
 
@@ -129,13 +140,18 @@
                 continue; // Handle unknown type if necessary
             }
 
-            auto cardOp = std::make_shared<CardOperation>(op, cardVariant, cardId, "", "", std::chrono::system_clock::now());  // Dummy data
+            auto cardOp = std::make_shared<CardOperation>(op, cardVariant, cardId, cardNumber, cvv, std::chrono::system_clock::from_time_t(expDate));
             cardsOperations.push_back(cardOp);
         }
 
         file.close();
     }
 
+
+
+    std::vector<std::shared_ptr<CardOperation>> BankAccount::getCardsOperations() const {
+        return cardsOperations;
+    }
 
 
     #include <cstdint> // For uint64_t
@@ -182,8 +198,21 @@
 
 
     void BankAccount::addTransaction(const std::shared_ptr<Operation>& transaction) {
+        double amount = transaction->getAmount();
+        OperationType type = transaction->getType();
+
+        // Aggiorna il saldo in base al tipo di operazione
+        if (type == OperationType::Deposit) {
+            balance += amount;
+        } else if (type == OperationType::Withdrawal) {
+            balance -= amount;  // Sottrai l'importo per i prelievi
+        }
+
+        // Aggiungi l'operazione alla lista
         operations.push_back(transaction);
     }
+
+
 
     void BankAccount::cancelOperations(const std::vector<std::shared_ptr<Operation>>& operationsToCancel) {
         // Creiamo un unordered_set per un accesso veloce durante la rimozione
@@ -318,22 +347,31 @@
         }
         return timeStr;
     }
-// Implementazione del metodo per pianificare un'operazione
+
+    // Implementazione del metodo per pianificare un'operazione
     void BankAccount::scheduleOperation(const std::shared_ptr<Operation>& operation, std::chrono::system_clock::time_point startDate, Frequency frequency) {
         auto schedOp = std::make_shared<ScheduledOperation>(operation, startDate, frequency);
         scheduledOperations.push_back(schedOp);
     }
 
-// Stampa le transazioni pianificate
+
+    std::string BankAccount::printBalance() const {
+        std::ostringstream oss;
+        oss << std::fixed << std::setprecision(6) << balance;
+        return oss.str();
+    }
+
+
+    // Stampa le transazioni pianificate
     void BankAccount::printPlannedTransactions() const {
         std::cout << "Planned Transactions:" << std::endl;
         for (const auto& schedOp : scheduledOperations) {
-            std::cout
-                    << "Amount: " << schedOp->getOperation()->getAmount()
-                    << ", Type: " << schedOp->getOperation()->printOperationType()
-                    << ", Operation Date: " << timePointToString(schedOp->getOperation()->getDate())
-                    << ", Scheduled Date: " << timePointToString(schedOp->getScheduledExecutionDate())
-                    << ", Frequency: " << schedOp->frequencyToString() << std::endl;
+            std::cout << std::fixed << std::setprecision(2)  // Imposta la precisione a due decimali
+                      << "Amount: " << schedOp->getOperation()->getAmount()
+                      << ", Type: " << schedOp->getOperation()->printOperationType()
+                      << ", Operation Date: " << timePointToString(schedOp->getOperation()->getDate())
+                      << ", Scheduled Date: " << timePointToString(schedOp->getScheduledExecutionDate())
+                      << ", Frequency: " << schedOp->frequencyToString() << std::endl;
         }
     }
 

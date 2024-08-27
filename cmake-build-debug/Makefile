@@ -57,10 +57,10 @@ RM = /snap/clion/291/bin/cmake/linux/x64/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/user/ClionProjects/tesst1Finexa
+CMAKE_SOURCE_DIR = /home/user/ClionProjects/TestFinexa
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/user/ClionProjects/tesst1Finexa/cmake-build-debug
+CMAKE_BINARY_DIR = /home/user/ClionProjects/TestFinexa/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -85,11 +85,56 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 .PHONY : rebuild_cache/fast
 
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Available install components are: \"gtest\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+.PHONY : list_install_components/fast
+
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Install the project..."
+	/snap/clion/291/bin/cmake/linux/x64/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Install the project..."
+	/snap/clion/291/bin/cmake/linux/x64/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
+
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing only the local directory..."
+	/snap/clion/291/bin/cmake/linux/x64/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing only the local directory..."
+	/snap/clion/291/bin/cmake/linux/x64/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local/fast
+
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing the project stripped..."
+	/snap/clion/291/bin/cmake/linux/x64/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing the project stripped..."
+	/snap/clion/291/bin/cmake/linux/x64/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip/fast
+
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/user/ClionProjects/tesst1Finexa/cmake-build-debug/CMakeFiles /home/user/ClionProjects/tesst1Finexa/cmake-build-debug//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/user/ClionProjects/TestFinexa/cmake-build-debug/CMakeFiles /home/user/ClionProjects/TestFinexa/cmake-build-debug//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/user/ClionProjects/tesst1Finexa/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/user/ClionProjects/TestFinexa/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -129,12 +174,103 @@ Finexia/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Finexia.dir/build.make CMakeFiles/Finexia.dir/build
 .PHONY : Finexia/fast
 
+#=============================================================================
+# Target rules for targets named Finexia_lib
+
+# Build rule for target.
+Finexia_lib: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Finexia_lib
+.PHONY : Finexia_lib
+
+# fast build rule for target.
+Finexia_lib/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Finexia_lib.dir/build.make CMakeFiles/Finexia_lib.dir/build
+.PHONY : Finexia_lib/fast
+
+#=============================================================================
+# Target rules for targets named runAllTests
+
+# Build rule for target.
+runAllTests: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 runAllTests
+.PHONY : runAllTests
+
+# fast build rule for target.
+runAllTests/fast:
+	$(MAKE) $(MAKESILENT) -f test/CMakeFiles/runAllTests.dir/build.make test/CMakeFiles/runAllTests.dir/build
+.PHONY : runAllTests/fast
+
+#=============================================================================
+# Target rules for targets named runBankAccountTest
+
+# Build rule for target.
+runBankAccountTest: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 runBankAccountTest
+.PHONY : runBankAccountTest
+
+# fast build rule for target.
+runBankAccountTest/fast:
+	$(MAKE) $(MAKESILENT) -f test/CMakeFiles/runBankAccountTest.dir/build.make test/CMakeFiles/runBankAccountTest.dir/build
+.PHONY : runBankAccountTest/fast
+
+#=============================================================================
+# Target rules for targets named runOperationTest
+
+# Build rule for target.
+runOperationTest: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 runOperationTest
+.PHONY : runOperationTest
+
+# fast build rule for target.
+runOperationTest/fast:
+	$(MAKE) $(MAKESILENT) -f test/CMakeFiles/runOperationTest.dir/build.make test/CMakeFiles/runOperationTest.dir/build
+.PHONY : runOperationTest/fast
+
+#=============================================================================
+# Target rules for targets named runScheduledOperationTest
+
+# Build rule for target.
+runScheduledOperationTest: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 runScheduledOperationTest
+.PHONY : runScheduledOperationTest
+
+# fast build rule for target.
+runScheduledOperationTest/fast:
+	$(MAKE) $(MAKESILENT) -f test/CMakeFiles/runScheduledOperationTest.dir/build.make test/CMakeFiles/runScheduledOperationTest.dir/build
+.PHONY : runScheduledOperationTest/fast
+
+#=============================================================================
+# Target rules for targets named gtest
+
+# Build rule for target.
+gtest: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gtest
+.PHONY : gtest
+
+# fast build rule for target.
+gtest/fast:
+	$(MAKE) $(MAKESILENT) -f test/lib/googletest/CMakeFiles/gtest.dir/build.make test/lib/googletest/CMakeFiles/gtest.dir/build
+.PHONY : gtest/fast
+
+#=============================================================================
+# Target rules for targets named gtest_main
+
+# Build rule for target.
+gtest_main: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gtest_main
+.PHONY : gtest_main
+
+# fast build rule for target.
+gtest_main/fast:
+	$(MAKE) $(MAKESILENT) -f test/lib/googletest/CMakeFiles/gtest_main.dir/build.make test/lib/googletest/CMakeFiles/gtest_main.dir/build
+.PHONY : gtest_main/fast
+
 BankAccount.o: BankAccount.cpp.o
 .PHONY : BankAccount.o
 
 # target to build an object file
 BankAccount.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Finexia.dir/build.make CMakeFiles/Finexia.dir/BankAccount.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Finexia_lib.dir/build.make CMakeFiles/Finexia_lib.dir/BankAccount.cpp.o
 .PHONY : BankAccount.cpp.o
 
 BankAccount.i: BankAccount.cpp.i
@@ -142,7 +278,7 @@ BankAccount.i: BankAccount.cpp.i
 
 # target to preprocess a source file
 BankAccount.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Finexia.dir/build.make CMakeFiles/Finexia.dir/BankAccount.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Finexia_lib.dir/build.make CMakeFiles/Finexia_lib.dir/BankAccount.cpp.i
 .PHONY : BankAccount.cpp.i
 
 BankAccount.s: BankAccount.cpp.s
@@ -150,7 +286,7 @@ BankAccount.s: BankAccount.cpp.s
 
 # target to generate assembly for a file
 BankAccount.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Finexia.dir/build.make CMakeFiles/Finexia.dir/BankAccount.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Finexia_lib.dir/build.make CMakeFiles/Finexia_lib.dir/BankAccount.cpp.s
 .PHONY : BankAccount.cpp.s
 
 Card.o: Card.cpp.o
@@ -158,7 +294,7 @@ Card.o: Card.cpp.o
 
 # target to build an object file
 Card.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Finexia.dir/build.make CMakeFiles/Finexia.dir/Card.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Finexia_lib.dir/build.make CMakeFiles/Finexia_lib.dir/Card.cpp.o
 .PHONY : Card.cpp.o
 
 Card.i: Card.cpp.i
@@ -166,7 +302,7 @@ Card.i: Card.cpp.i
 
 # target to preprocess a source file
 Card.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Finexia.dir/build.make CMakeFiles/Finexia.dir/Card.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Finexia_lib.dir/build.make CMakeFiles/Finexia_lib.dir/Card.cpp.i
 .PHONY : Card.cpp.i
 
 Card.s: Card.cpp.s
@@ -174,7 +310,7 @@ Card.s: Card.cpp.s
 
 # target to generate assembly for a file
 Card.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Finexia.dir/build.make CMakeFiles/Finexia.dir/Card.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Finexia_lib.dir/build.make CMakeFiles/Finexia_lib.dir/Card.cpp.s
 .PHONY : Card.cpp.s
 
 CardOperation.o: CardOperation.cpp.o
@@ -182,7 +318,7 @@ CardOperation.o: CardOperation.cpp.o
 
 # target to build an object file
 CardOperation.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Finexia.dir/build.make CMakeFiles/Finexia.dir/CardOperation.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Finexia_lib.dir/build.make CMakeFiles/Finexia_lib.dir/CardOperation.cpp.o
 .PHONY : CardOperation.cpp.o
 
 CardOperation.i: CardOperation.cpp.i
@@ -190,7 +326,7 @@ CardOperation.i: CardOperation.cpp.i
 
 # target to preprocess a source file
 CardOperation.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Finexia.dir/build.make CMakeFiles/Finexia.dir/CardOperation.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Finexia_lib.dir/build.make CMakeFiles/Finexia_lib.dir/CardOperation.cpp.i
 .PHONY : CardOperation.cpp.i
 
 CardOperation.s: CardOperation.cpp.s
@@ -198,7 +334,7 @@ CardOperation.s: CardOperation.cpp.s
 
 # target to generate assembly for a file
 CardOperation.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Finexia.dir/build.make CMakeFiles/Finexia.dir/CardOperation.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Finexia_lib.dir/build.make CMakeFiles/Finexia_lib.dir/CardOperation.cpp.s
 .PHONY : CardOperation.cpp.s
 
 CreditCard.o: CreditCard.cpp.o
@@ -206,7 +342,7 @@ CreditCard.o: CreditCard.cpp.o
 
 # target to build an object file
 CreditCard.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Finexia.dir/build.make CMakeFiles/Finexia.dir/CreditCard.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Finexia_lib.dir/build.make CMakeFiles/Finexia_lib.dir/CreditCard.cpp.o
 .PHONY : CreditCard.cpp.o
 
 CreditCard.i: CreditCard.cpp.i
@@ -214,7 +350,7 @@ CreditCard.i: CreditCard.cpp.i
 
 # target to preprocess a source file
 CreditCard.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Finexia.dir/build.make CMakeFiles/Finexia.dir/CreditCard.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Finexia_lib.dir/build.make CMakeFiles/Finexia_lib.dir/CreditCard.cpp.i
 .PHONY : CreditCard.cpp.i
 
 CreditCard.s: CreditCard.cpp.s
@@ -222,7 +358,7 @@ CreditCard.s: CreditCard.cpp.s
 
 # target to generate assembly for a file
 CreditCard.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Finexia.dir/build.make CMakeFiles/Finexia.dir/CreditCard.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Finexia_lib.dir/build.make CMakeFiles/Finexia_lib.dir/CreditCard.cpp.s
 .PHONY : CreditCard.cpp.s
 
 DebitCard.o: DebitCard.cpp.o
@@ -230,7 +366,7 @@ DebitCard.o: DebitCard.cpp.o
 
 # target to build an object file
 DebitCard.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Finexia.dir/build.make CMakeFiles/Finexia.dir/DebitCard.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Finexia_lib.dir/build.make CMakeFiles/Finexia_lib.dir/DebitCard.cpp.o
 .PHONY : DebitCard.cpp.o
 
 DebitCard.i: DebitCard.cpp.i
@@ -238,7 +374,7 @@ DebitCard.i: DebitCard.cpp.i
 
 # target to preprocess a source file
 DebitCard.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Finexia.dir/build.make CMakeFiles/Finexia.dir/DebitCard.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Finexia_lib.dir/build.make CMakeFiles/Finexia_lib.dir/DebitCard.cpp.i
 .PHONY : DebitCard.cpp.i
 
 DebitCard.s: DebitCard.cpp.s
@@ -246,7 +382,7 @@ DebitCard.s: DebitCard.cpp.s
 
 # target to generate assembly for a file
 DebitCard.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Finexia.dir/build.make CMakeFiles/Finexia.dir/DebitCard.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Finexia_lib.dir/build.make CMakeFiles/Finexia_lib.dir/DebitCard.cpp.s
 .PHONY : DebitCard.cpp.s
 
 Operation.o: Operation.cpp.o
@@ -254,7 +390,7 @@ Operation.o: Operation.cpp.o
 
 # target to build an object file
 Operation.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Finexia.dir/build.make CMakeFiles/Finexia.dir/Operation.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Finexia_lib.dir/build.make CMakeFiles/Finexia_lib.dir/Operation.cpp.o
 .PHONY : Operation.cpp.o
 
 Operation.i: Operation.cpp.i
@@ -262,7 +398,7 @@ Operation.i: Operation.cpp.i
 
 # target to preprocess a source file
 Operation.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Finexia.dir/build.make CMakeFiles/Finexia.dir/Operation.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Finexia_lib.dir/build.make CMakeFiles/Finexia_lib.dir/Operation.cpp.i
 .PHONY : Operation.cpp.i
 
 Operation.s: Operation.cpp.s
@@ -270,7 +406,7 @@ Operation.s: Operation.cpp.s
 
 # target to generate assembly for a file
 Operation.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Finexia.dir/build.make CMakeFiles/Finexia.dir/Operation.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Finexia_lib.dir/build.make CMakeFiles/Finexia_lib.dir/Operation.cpp.s
 .PHONY : Operation.cpp.s
 
 ScheduledOperation.o: ScheduledOperation.cpp.o
@@ -278,7 +414,7 @@ ScheduledOperation.o: ScheduledOperation.cpp.o
 
 # target to build an object file
 ScheduledOperation.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Finexia.dir/build.make CMakeFiles/Finexia.dir/ScheduledOperation.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Finexia_lib.dir/build.make CMakeFiles/Finexia_lib.dir/ScheduledOperation.cpp.o
 .PHONY : ScheduledOperation.cpp.o
 
 ScheduledOperation.i: ScheduledOperation.cpp.i
@@ -286,7 +422,7 @@ ScheduledOperation.i: ScheduledOperation.cpp.i
 
 # target to preprocess a source file
 ScheduledOperation.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Finexia.dir/build.make CMakeFiles/Finexia.dir/ScheduledOperation.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Finexia_lib.dir/build.make CMakeFiles/Finexia_lib.dir/ScheduledOperation.cpp.i
 .PHONY : ScheduledOperation.cpp.i
 
 ScheduledOperation.s: ScheduledOperation.cpp.s
@@ -294,7 +430,7 @@ ScheduledOperation.s: ScheduledOperation.cpp.s
 
 # target to generate assembly for a file
 ScheduledOperation.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Finexia.dir/build.make CMakeFiles/Finexia.dir/ScheduledOperation.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Finexia_lib.dir/build.make CMakeFiles/Finexia_lib.dir/ScheduledOperation.cpp.s
 .PHONY : ScheduledOperation.cpp.s
 
 main.o: main.cpp.o
@@ -328,8 +464,19 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... edit_cache"
+	@echo "... install"
+	@echo "... install/local"
+	@echo "... install/strip"
+	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... Finexia"
+	@echo "... Finexia_lib"
+	@echo "... gtest"
+	@echo "... gtest_main"
+	@echo "... runAllTests"
+	@echo "... runBankAccountTest"
+	@echo "... runOperationTest"
+	@echo "... runScheduledOperationTest"
 	@echo "... BankAccount.o"
 	@echo "... BankAccount.i"
 	@echo "... BankAccount.s"

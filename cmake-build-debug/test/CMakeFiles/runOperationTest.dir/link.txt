@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/runOperationTest.dir/OperationTest.cpp.o -o runOperationTest  ../lib/libgtest.a ../lib/libgtest_main.a ../libFinexia_lib.a ../lib/libgtest.a

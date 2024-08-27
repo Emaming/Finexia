@@ -26,11 +26,9 @@ public:
     OperationType getType() const;
     std::chrono::system_clock::time_point getDate() const;
 
-    void printOperation() const;
-    std::string printOperationString() const;
-    static std::string printOperationTypes();
+
     std::string printOperationType() const;
-    std::string printDateTime() const;
+
 };
 
 #endif // OPERATION_H

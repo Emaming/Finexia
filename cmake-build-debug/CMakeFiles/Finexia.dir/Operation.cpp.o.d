@@ -1,7 +1,7 @@
 CMakeFiles/Finexia.dir/Operation.cpp.o: \
- /home/user/ClionProjects/tesst1Finexa/Operation.cpp \
+ /home/user/ClionProjects/TestFinexa/Operation.cpp \
  /usr/include/stdc-predef.h \
- /home/user/ClionProjects/tesst1Finexa/Operation.h \
+ /home/user/ClionProjects/TestFinexa/Operation.h \
  /usr/include/c++/11/chrono /usr/include/c++/11/ratio \
  /usr/include/c++/11/type_traits \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \

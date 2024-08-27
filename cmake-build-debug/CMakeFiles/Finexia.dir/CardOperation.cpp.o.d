@@ -1,8 +1,8 @@
 CMakeFiles/Finexia.dir/CardOperation.cpp.o: \
- /home/user/ClionProjects/tesst1Finexa/CardOperation.cpp \
+ /home/user/ClionProjects/TestFinexa/CardOperation.cpp \
  /usr/include/stdc-predef.h \
- /home/user/ClionProjects/tesst1Finexa/CardOperation.h \
- /home/user/ClionProjects/tesst1Finexa/Operation.h \
+ /home/user/ClionProjects/TestFinexa/CardOperation.h \
+ /home/user/ClionProjects/TestFinexa/Operation.h \
  /usr/include/c++/11/chrono /usr/include/c++/11/ratio \
  /usr/include/c++/11/type_traits \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
@@ -141,9 +141,9 @@ CMakeFiles/Finexia.dir/CardOperation.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/types/error_t.h \
  /usr/include/c++/11/bits/charconv.h \
  /usr/include/c++/11/bits/basic_string.tcc \
- /home/user/ClionProjects/tesst1Finexa/CreditCard.h \
- /home/user/ClionProjects/tesst1Finexa/Card.h \
- /home/user/ClionProjects/tesst1Finexa/DebitCard.h \
+ /home/user/ClionProjects/TestFinexa/CreditCard.h \
+ /home/user/ClionProjects/TestFinexa/Card.h \
+ /home/user/ClionProjects/TestFinexa/DebitCard.h \
  /usr/include/c++/11/memory /usr/include/c++/11/bits/stl_uninitialized.h \
  /usr/include/c++/11/bits/stl_raw_storage_iter.h \
  /usr/include/c++/11/bits/align.h /usr/include/c++/11/bit \

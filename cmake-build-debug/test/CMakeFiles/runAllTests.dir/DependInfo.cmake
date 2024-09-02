@@ -8,10 +8,10 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/user/ClionProjects/TestFinexa/test/BankAccountTest.cpp" "test/CMakeFiles/runAllTests.dir/BankAccountTest.cpp.o" "gcc" "test/CMakeFiles/runAllTests.dir/BankAccountTest.cpp.o.d"
-  "/home/user/ClionProjects/TestFinexa/test/OperationTest.cpp" "test/CMakeFiles/runAllTests.dir/OperationTest.cpp.o" "gcc" "test/CMakeFiles/runAllTests.dir/OperationTest.cpp.o.d"
-  "/home/user/ClionProjects/TestFinexa/test/ScheduledOperationTest.cpp" "test/CMakeFiles/runAllTests.dir/ScheduledOperationTest.cpp.o" "gcc" "test/CMakeFiles/runAllTests.dir/ScheduledOperationTest.cpp.o.d"
-  "/home/user/ClionProjects/TestFinexa/test/runAllTests.cpp" "test/CMakeFiles/runAllTests.dir/runAllTests.cpp.o" "gcc" "test/CMakeFiles/runAllTests.dir/runAllTests.cpp.o.d"
+  "/home/user/ClionProjects/FinexiaTest/test/BankAccountTest.cpp" "test/CMakeFiles/runAllTests.dir/BankAccountTest.cpp.o" "gcc" "test/CMakeFiles/runAllTests.dir/BankAccountTest.cpp.o.d"
+  "/home/user/ClionProjects/FinexiaTest/test/OperationTest.cpp" "test/CMakeFiles/runAllTests.dir/OperationTest.cpp.o" "gcc" "test/CMakeFiles/runAllTests.dir/OperationTest.cpp.o.d"
+  "/home/user/ClionProjects/FinexiaTest/test/ScheduledOperationTest.cpp" "test/CMakeFiles/runAllTests.dir/ScheduledOperationTest.cpp.o" "gcc" "test/CMakeFiles/runAllTests.dir/ScheduledOperationTest.cpp.o.d"
+  "/home/user/ClionProjects/FinexiaTest/test/runAllTests.cpp" "test/CMakeFiles/runAllTests.dir/runAllTests.cpp.o" "gcc" "test/CMakeFiles/runAllTests.dir/runAllTests.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

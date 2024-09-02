@@ -1,7 +1,7 @@
 CMakeFiles/Finexia_lib.dir/BankAccount.cpp.o: \
- /home/user/ClionProjects/TestFinexa/BankAccount.cpp \
+ /home/user/ClionProjects/FinexiaTest/BankAccount.cpp \
  /usr/include/stdc-predef.h \
- /home/user/ClionProjects/TestFinexa/BankAccount.h \
+ /home/user/ClionProjects/FinexiaTest/BankAccount.h \
  /usr/include/c++/11/vector /usr/include/c++/11/bits/stl_algobase.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
@@ -207,22 +207,17 @@ CMakeFiles/Finexia_lib.dir/BankAccount.cpp.o: \
  /usr/include/c++/11/ratio /usr/include/c++/11/limits \
  /usr/include/c++/11/ctime /usr/include/c++/11/bits/parse_numbers.h \
  /usr/include/c++/11/list /usr/include/c++/11/bits/stl_list.h \
- /usr/include/c++/11/bits/list.tcc \
- /home/user/ClionProjects/TestFinexa/Operation.h \
- /home/user/ClionProjects/TestFinexa/ScheduledOperation.h \
- /home/user/ClionProjects/TestFinexa/CardOperation.h \
- /home/user/ClionProjects/TestFinexa/CreditCard.h \
- /home/user/ClionProjects/TestFinexa/Card.h \
- /home/user/ClionProjects/TestFinexa/DebitCard.h \
- /usr/include/c++/11/variant \
- /usr/include/c++/11/bits/enable_special_members.h \
- /usr/include/c++/11/fstream /usr/include/c++/11/istream \
- /usr/include/c++/11/bits/istream.tcc /usr/include/c++/11/bits/codecvt.h \
+ /usr/include/c++/11/bits/list.tcc /usr/include/c++/11/iostream \
+ /usr/include/c++/11/istream /usr/include/c++/11/bits/istream.tcc \
+ /home/user/ClionProjects/FinexiaTest/Operation.h \
+ /home/user/ClionProjects/FinexiaTest/ScheduledOperation.h \
+ /home/user/ClionProjects/FinexiaTest/Card.h /usr/include/c++/11/fstream \
+ /usr/include/c++/11/bits/codecvt.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
  /usr/include/c++/11/bits/fstream.tcc /usr/include/c++/11/sstream \
- /usr/include/c++/11/bits/sstream.tcc /usr/include/c++/11/iostream \
- /usr/include/c++/11/random /usr/include/c++/11/cmath /usr/include/math.h \
+ /usr/include/c++/11/bits/sstream.tcc /usr/include/c++/11/random \
+ /usr/include/c++/11/cmath /usr/include/math.h \
  /usr/include/x86_64-linux-gnu/bits/math-vector.h \
  /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
  /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
@@ -255,9 +250,14 @@ CMakeFiles/Finexia_lib.dir/BankAccount.cpp.o: \
  /usr/include/x86_64-linux-gnu/c++/11/bits/messages_members.h \
  /usr/include/libintl.h /usr/include/c++/11/bits/locale_facets_nonio.tcc \
  /usr/include/c++/11/bits/locale_conv.h \
- /usr/include/c++/11/bits/quoted_string.h \
- /usr/include/c++/11/unordered_set /usr/include/c++/11/bits/hashtable.h \
+ /usr/include/c++/11/bits/quoted_string.h /usr/include/c++/11/algorithm \
+ /usr/include/c++/11/bits/ranges_algo.h \
+ /usr/include/c++/11/bits/ranges_util.h \
+ /usr/include/c++/11/pstl/glue_algorithm_defs.h \
+ /usr/include/c++/11/functional /usr/include/c++/11/bits/std_function.h \
+ /usr/include/c++/11/unordered_map /usr/include/c++/11/bits/hashtable.h \
  /usr/include/c++/11/bits/hashtable_policy.h \
+ /usr/include/c++/11/bits/enable_special_members.h \
  /usr/include/c++/11/bits/node_handle.h \
- /usr/include/c++/11/bits/unordered_set.h \
+ /usr/include/c++/11/bits/unordered_map.h \
  /usr/include/c++/11/bits/erase_if.h

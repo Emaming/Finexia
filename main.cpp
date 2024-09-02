@@ -3,11 +3,10 @@
 #include <vector>
 #include <chrono>
 #include <string>
-#include <sstream>
 #include "BankAccount.h"
 #include "Operation.h"
 #include "ScheduledOperation.h"
-#include "CardOperation.h"
+
 
 void printMenu() {
     std::cout << "Select an option:" << std::endl;
@@ -26,6 +25,7 @@ void printMenu() {
 
     std::cout << "9. Save to File" << std::endl;
     std::cout << "10. Load from File" << std::endl;
+    std::cout << "11. Print Balance" << std::endl;
     std::cout << "0. Exit" << std::endl;
 }
 
@@ -78,7 +78,7 @@ void handleAddTransaction(BankAccount& account) {
             case 3: type = OperationType::Transfer; break;
         }
 
-        auto transaction = std::make_shared<Operation>(1, amount, type, now);
+        auto transaction = std::make_shared<Operation>(amount, type, now);
         account.addTransaction(transaction);
         std::cout << "Transaction added successfully." << std::endl;
         break;
@@ -327,6 +327,8 @@ void handleCardOperations(BankAccount& account) {
         std::cout << "1. Add Card" << std::endl;
         std::cout << "2. Print Cards" << std::endl;
         std::cout << "3. Remove Card" << std::endl;
+        std::cout << "4. Add Operation" << std::endl;
+        std::cout << "5. Print Card Operations" << std::endl;
         std::cout << "0. Return to previous menu" << std::endl;
         std::cin >> cardOption;
 
@@ -337,51 +339,89 @@ void handleCardOperations(BankAccount& account) {
                 std::string cardName;
                 bool isCreditCard;
 
-                do {
-                    std::cout << "Enter card name (or 0 to return to previous menu): ";
-                    std::cin.ignore();  // Ignora il newline residuo
-                    std::getline(std::cin, cardName);
+                std::cin.ignore();  // Ignora il newline residuo
+                std::cout << "Enter card name (or 0 to return to previous menu): ";
+                std::getline(std::cin, cardName);
 
-                    if (cardName == "0") {
-                        std::cout << "Returning to previous menu." << std::endl;
-                        break;  // Torna al menu precedente
-                    }
+                if (cardName == "0") {
+                    std::cout << "Returning to previous menu." << std::endl;
+                    break;
+                }
 
-                    if (cardName.empty()) {
-                        std::cerr << "Card name cannot be empty. Please enter a valid card name." << std::endl;
-                        continue;  // Continua a chiedere un nome valido
-                    }
+                if (cardName.empty()) {
+                    std::cerr << "Card name cannot be empty. Please enter a valid card name." << std::endl;
+                    continue;
+                }
 
-                    std::cout << "Is it a credit card? (1 for yes, 0 for no): ";
-                    std::cin >> isCreditCard;
+                std::cout << "Is it a credit card? (1 for yes, 0 for no): ";
+                std::cin >> isCreditCard;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-                    // Assicurati di svuotare il buffer del cin per evitare problemi
-                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
-                    account.addCard(cardName, isCreditCard);
-                    std::cout << "Card added successfully." << std::endl;
-                    break;  // Esci dal loop dopo aver aggiunto la carta
-                } while (true);
-
+                account.addCard(cardName, isCreditCard);
+                std::cout << "Card added successfully." << std::endl;
                 break;
             }
 
             case 2:
                 account.printCards();
                 break;
+
             case 3: {
                 std::string cardName;
-                std::cout << "Enter card name to remove: ";
                 std::cin.ignore();  // Ignora il newline residuo
+                std::cout << "Enter card name to remove: ";
                 std::getline(std::cin, cardName);
                 account.removeCard(cardName);
+                std::cout << "Card removed successfully." << std::endl;
                 break;
             }
+
+            case 4: {
+                std::string cardName;
+                double amount;
+                std::string description;
+
+                std::cin.ignore();  // Ignora il newline residuo
+                std::cout << "Enter card name to associate operation: ";
+                std::getline(std::cin, cardName);
+
+                if (cardName.empty()) {
+                    std::cerr << "Card name cannot be empty." << std::endl;
+                    continue;
+                }
+
+                std::cout << "Enter operation amount: ";
+                std::cin >> amount;
+
+                std::cin.ignore();  // Ignora il newline residuo
+                std::cout << "Enter operation description: ";
+                std::getline(std::cin, description);
+
+                if (description.empty()) {
+                    std::cerr << "Operation description cannot be empty." << std::endl;
+                    continue;
+                }
+
+                auto operation = std::make_shared<Operation>(amount, OperationType::Deposit, description);
+
+                account.addOperationToCard(cardName, operation);
+                std::cout << "Operation added to card successfully." << std::endl;
+                break;
+            }
+
+            case 5: {
+                std::string cardName;
+                std::cin.ignore();  // Ignora il newline residuo
+                std::cout << "Enter card name to print operations: ";
+                std::getline(std::cin, cardName);
+                account.printCardOperations(cardName);
+                break;
+            }
+
             default:
                 std::cerr << "Invalid choice!" << std::endl;
-                continue;  // Torna al menu di operazioni delle carte
+                continue;
         }
-        break;
     } while (true);
 }
 
@@ -520,7 +560,7 @@ void handleScheduleTransaction(BankAccount& account) {
                 continue;  // Torna al menu di selezione della frequenza
         }
 
-        auto transaction = std::make_shared<Operation>(1, amount, type, startDate);
+        auto transaction = std::make_shared<Operation>( amount, type, startDate);
         account.scheduleOperation(transaction, startDate, freq);
         std::cout << "Transaction scheduled successfully." << std::endl;
         break;  // Esci dal ciclo se la data è valida e l'operazione è programmata
@@ -529,6 +569,11 @@ void handleScheduleTransaction(BankAccount& account) {
 
 void handlePrintPlannedTransactions(BankAccount& account) {
     account.printPlannedTransactions();
+}
+
+void handlePrintBalance(const BankAccount& account) {
+    double balance = account.getBalance();
+    std::cout << "Current Balance: " << balance << std::endl;
 }
 
 int main() {
@@ -547,9 +592,10 @@ int main() {
             case 5: handleCardOperations(account); break;
             case 6: handleScheduleTransaction(account); break;
             case 7: handlePrintPlannedTransactions(account); break;
-            case 8:handleCancelScheduledTransactions(account);break;
+            case 8: handleCancelScheduledTransactions(account); break;
             case 9: handleSaveToFile(account); break;
             case 10: handleLoadFromFile(account); break;
+            case 11: handlePrintBalance(account); break;  // Add this line
             case 0: std::cout << "Exiting program." << std::endl; break;
             default: std::cerr << "Invalid choice! Please try again." << std::endl; break;
         }

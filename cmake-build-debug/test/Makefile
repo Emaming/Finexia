@@ -57,10 +57,10 @@ RM = /snap/clion/291/bin/cmake/linux/x64/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/user/ClionProjects/TestFinexa
+CMAKE_SOURCE_DIR = /home/user/ClionProjects/FinexiaTest
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/user/ClionProjects/TestFinexa/cmake-build-debug
+CMAKE_BINARY_DIR = /home/user/ClionProjects/FinexiaTest/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -85,61 +85,16 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 .PHONY : rebuild_cache/fast
 
-# Special rule for the target list_install_components
-list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Available install components are: \"gtest\""
-.PHONY : list_install_components
-
-# Special rule for the target list_install_components
-list_install_components/fast: list_install_components
-.PHONY : list_install_components/fast
-
-# Special rule for the target install
-install: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Install the project..."
-	/snap/clion/291/bin/cmake/linux/x64/bin/cmake -P cmake_install.cmake
-.PHONY : install
-
-# Special rule for the target install
-install/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Install the project..."
-	/snap/clion/291/bin/cmake/linux/x64/bin/cmake -P cmake_install.cmake
-.PHONY : install/fast
-
-# Special rule for the target install/local
-install/local: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing only the local directory..."
-	/snap/clion/291/bin/cmake/linux/x64/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local
-
-# Special rule for the target install/local
-install/local/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing only the local directory..."
-	/snap/clion/291/bin/cmake/linux/x64/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local/fast
-
-# Special rule for the target install/strip
-install/strip: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing the project stripped..."
-	/snap/clion/291/bin/cmake/linux/x64/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip
-
-# Special rule for the target install/strip
-install/strip/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing the project stripped..."
-	/snap/clion/291/bin/cmake/linux/x64/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip/fast
-
 # The main all target
 all: cmake_check_build_system
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_progress_start /home/user/ClionProjects/TestFinexa/cmake-build-debug/CMakeFiles /home/user/ClionProjects/TestFinexa/cmake-build-debug/test//CMakeFiles/progress.marks
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/user/ClionProjects/TestFinexa/cmake-build-debug/CMakeFiles 0
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_progress_start /home/user/ClionProjects/FinexiaTest/cmake-build-debug/CMakeFiles /home/user/ClionProjects/FinexiaTest/cmake-build-debug/test//CMakeFiles/progress.marks
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/user/ClionProjects/FinexiaTest/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test/clean
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test/clean
 .PHONY : clean
 
 # The main clean target
@@ -148,22 +103,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test/preinstall
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test/preinstall
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 test/CMakeFiles/runAllTests.dir/rule:
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test/CMakeFiles/runAllTests.dir/rule
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test/CMakeFiles/runAllTests.dir/rule
 .PHONY : test/CMakeFiles/runAllTests.dir/rule
 
 # Convenience name for target.
@@ -172,12 +127,12 @@ runAllTests: test/CMakeFiles/runAllTests.dir/rule
 
 # fast build rule for target.
 runAllTests/fast:
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runAllTests.dir/build.make test/CMakeFiles/runAllTests.dir/build
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runAllTests.dir/build.make test/CMakeFiles/runAllTests.dir/build
 .PHONY : runAllTests/fast
 
 # Convenience name for target.
 test/CMakeFiles/runBankAccountTest.dir/rule:
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test/CMakeFiles/runBankAccountTest.dir/rule
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test/CMakeFiles/runBankAccountTest.dir/rule
 .PHONY : test/CMakeFiles/runBankAccountTest.dir/rule
 
 # Convenience name for target.
@@ -186,12 +141,12 @@ runBankAccountTest: test/CMakeFiles/runBankAccountTest.dir/rule
 
 # fast build rule for target.
 runBankAccountTest/fast:
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runBankAccountTest.dir/build.make test/CMakeFiles/runBankAccountTest.dir/build
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runBankAccountTest.dir/build.make test/CMakeFiles/runBankAccountTest.dir/build
 .PHONY : runBankAccountTest/fast
 
 # Convenience name for target.
 test/CMakeFiles/runOperationTest.dir/rule:
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test/CMakeFiles/runOperationTest.dir/rule
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test/CMakeFiles/runOperationTest.dir/rule
 .PHONY : test/CMakeFiles/runOperationTest.dir/rule
 
 # Convenience name for target.
@@ -200,12 +155,12 @@ runOperationTest: test/CMakeFiles/runOperationTest.dir/rule
 
 # fast build rule for target.
 runOperationTest/fast:
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runOperationTest.dir/build.make test/CMakeFiles/runOperationTest.dir/build
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runOperationTest.dir/build.make test/CMakeFiles/runOperationTest.dir/build
 .PHONY : runOperationTest/fast
 
 # Convenience name for target.
 test/CMakeFiles/runScheduledOperationTest.dir/rule:
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test/CMakeFiles/runScheduledOperationTest.dir/rule
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test/CMakeFiles/runScheduledOperationTest.dir/rule
 .PHONY : test/CMakeFiles/runScheduledOperationTest.dir/rule
 
 # Convenience name for target.
@@ -214,7 +169,7 @@ runScheduledOperationTest: test/CMakeFiles/runScheduledOperationTest.dir/rule
 
 # fast build rule for target.
 runScheduledOperationTest/fast:
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runScheduledOperationTest.dir/build.make test/CMakeFiles/runScheduledOperationTest.dir/build
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runScheduledOperationTest.dir/build.make test/CMakeFiles/runScheduledOperationTest.dir/build
 .PHONY : runScheduledOperationTest/fast
 
 BankAccountTest.o: BankAccountTest.cpp.o
@@ -222,8 +177,8 @@ BankAccountTest.o: BankAccountTest.cpp.o
 
 # target to build an object file
 BankAccountTest.cpp.o:
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runAllTests.dir/build.make test/CMakeFiles/runAllTests.dir/BankAccountTest.cpp.o
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runBankAccountTest.dir/build.make test/CMakeFiles/runBankAccountTest.dir/BankAccountTest.cpp.o
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runAllTests.dir/build.make test/CMakeFiles/runAllTests.dir/BankAccountTest.cpp.o
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runBankAccountTest.dir/build.make test/CMakeFiles/runBankAccountTest.dir/BankAccountTest.cpp.o
 .PHONY : BankAccountTest.cpp.o
 
 BankAccountTest.i: BankAccountTest.cpp.i
@@ -231,8 +186,8 @@ BankAccountTest.i: BankAccountTest.cpp.i
 
 # target to preprocess a source file
 BankAccountTest.cpp.i:
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runAllTests.dir/build.make test/CMakeFiles/runAllTests.dir/BankAccountTest.cpp.i
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runBankAccountTest.dir/build.make test/CMakeFiles/runBankAccountTest.dir/BankAccountTest.cpp.i
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runAllTests.dir/build.make test/CMakeFiles/runAllTests.dir/BankAccountTest.cpp.i
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runBankAccountTest.dir/build.make test/CMakeFiles/runBankAccountTest.dir/BankAccountTest.cpp.i
 .PHONY : BankAccountTest.cpp.i
 
 BankAccountTest.s: BankAccountTest.cpp.s
@@ -240,8 +195,8 @@ BankAccountTest.s: BankAccountTest.cpp.s
 
 # target to generate assembly for a file
 BankAccountTest.cpp.s:
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runAllTests.dir/build.make test/CMakeFiles/runAllTests.dir/BankAccountTest.cpp.s
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runBankAccountTest.dir/build.make test/CMakeFiles/runBankAccountTest.dir/BankAccountTest.cpp.s
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runAllTests.dir/build.make test/CMakeFiles/runAllTests.dir/BankAccountTest.cpp.s
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runBankAccountTest.dir/build.make test/CMakeFiles/runBankAccountTest.dir/BankAccountTest.cpp.s
 .PHONY : BankAccountTest.cpp.s
 
 OperationTest.o: OperationTest.cpp.o
@@ -249,8 +204,8 @@ OperationTest.o: OperationTest.cpp.o
 
 # target to build an object file
 OperationTest.cpp.o:
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runAllTests.dir/build.make test/CMakeFiles/runAllTests.dir/OperationTest.cpp.o
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runOperationTest.dir/build.make test/CMakeFiles/runOperationTest.dir/OperationTest.cpp.o
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runAllTests.dir/build.make test/CMakeFiles/runAllTests.dir/OperationTest.cpp.o
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runOperationTest.dir/build.make test/CMakeFiles/runOperationTest.dir/OperationTest.cpp.o
 .PHONY : OperationTest.cpp.o
 
 OperationTest.i: OperationTest.cpp.i
@@ -258,8 +213,8 @@ OperationTest.i: OperationTest.cpp.i
 
 # target to preprocess a source file
 OperationTest.cpp.i:
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runAllTests.dir/build.make test/CMakeFiles/runAllTests.dir/OperationTest.cpp.i
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runOperationTest.dir/build.make test/CMakeFiles/runOperationTest.dir/OperationTest.cpp.i
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runAllTests.dir/build.make test/CMakeFiles/runAllTests.dir/OperationTest.cpp.i
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runOperationTest.dir/build.make test/CMakeFiles/runOperationTest.dir/OperationTest.cpp.i
 .PHONY : OperationTest.cpp.i
 
 OperationTest.s: OperationTest.cpp.s
@@ -267,8 +222,8 @@ OperationTest.s: OperationTest.cpp.s
 
 # target to generate assembly for a file
 OperationTest.cpp.s:
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runAllTests.dir/build.make test/CMakeFiles/runAllTests.dir/OperationTest.cpp.s
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runOperationTest.dir/build.make test/CMakeFiles/runOperationTest.dir/OperationTest.cpp.s
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runAllTests.dir/build.make test/CMakeFiles/runAllTests.dir/OperationTest.cpp.s
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runOperationTest.dir/build.make test/CMakeFiles/runOperationTest.dir/OperationTest.cpp.s
 .PHONY : OperationTest.cpp.s
 
 ScheduledOperationTest.o: ScheduledOperationTest.cpp.o
@@ -276,8 +231,8 @@ ScheduledOperationTest.o: ScheduledOperationTest.cpp.o
 
 # target to build an object file
 ScheduledOperationTest.cpp.o:
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runAllTests.dir/build.make test/CMakeFiles/runAllTests.dir/ScheduledOperationTest.cpp.o
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runScheduledOperationTest.dir/build.make test/CMakeFiles/runScheduledOperationTest.dir/ScheduledOperationTest.cpp.o
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runAllTests.dir/build.make test/CMakeFiles/runAllTests.dir/ScheduledOperationTest.cpp.o
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runScheduledOperationTest.dir/build.make test/CMakeFiles/runScheduledOperationTest.dir/ScheduledOperationTest.cpp.o
 .PHONY : ScheduledOperationTest.cpp.o
 
 ScheduledOperationTest.i: ScheduledOperationTest.cpp.i
@@ -285,8 +240,8 @@ ScheduledOperationTest.i: ScheduledOperationTest.cpp.i
 
 # target to preprocess a source file
 ScheduledOperationTest.cpp.i:
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runAllTests.dir/build.make test/CMakeFiles/runAllTests.dir/ScheduledOperationTest.cpp.i
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runScheduledOperationTest.dir/build.make test/CMakeFiles/runScheduledOperationTest.dir/ScheduledOperationTest.cpp.i
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runAllTests.dir/build.make test/CMakeFiles/runAllTests.dir/ScheduledOperationTest.cpp.i
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runScheduledOperationTest.dir/build.make test/CMakeFiles/runScheduledOperationTest.dir/ScheduledOperationTest.cpp.i
 .PHONY : ScheduledOperationTest.cpp.i
 
 ScheduledOperationTest.s: ScheduledOperationTest.cpp.s
@@ -294,8 +249,8 @@ ScheduledOperationTest.s: ScheduledOperationTest.cpp.s
 
 # target to generate assembly for a file
 ScheduledOperationTest.cpp.s:
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runAllTests.dir/build.make test/CMakeFiles/runAllTests.dir/ScheduledOperationTest.cpp.s
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runScheduledOperationTest.dir/build.make test/CMakeFiles/runScheduledOperationTest.dir/ScheduledOperationTest.cpp.s
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runAllTests.dir/build.make test/CMakeFiles/runAllTests.dir/ScheduledOperationTest.cpp.s
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runScheduledOperationTest.dir/build.make test/CMakeFiles/runScheduledOperationTest.dir/ScheduledOperationTest.cpp.s
 .PHONY : ScheduledOperationTest.cpp.s
 
 runAllTests.o: runAllTests.cpp.o
@@ -303,7 +258,7 @@ runAllTests.o: runAllTests.cpp.o
 
 # target to build an object file
 runAllTests.cpp.o:
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runAllTests.dir/build.make test/CMakeFiles/runAllTests.dir/runAllTests.cpp.o
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runAllTests.dir/build.make test/CMakeFiles/runAllTests.dir/runAllTests.cpp.o
 .PHONY : runAllTests.cpp.o
 
 runAllTests.i: runAllTests.cpp.i
@@ -311,7 +266,7 @@ runAllTests.i: runAllTests.cpp.i
 
 # target to preprocess a source file
 runAllTests.cpp.i:
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runAllTests.dir/build.make test/CMakeFiles/runAllTests.dir/runAllTests.cpp.i
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runAllTests.dir/build.make test/CMakeFiles/runAllTests.dir/runAllTests.cpp.i
 .PHONY : runAllTests.cpp.i
 
 runAllTests.s: runAllTests.cpp.s
@@ -319,7 +274,7 @@ runAllTests.s: runAllTests.cpp.s
 
 # target to generate assembly for a file
 runAllTests.cpp.s:
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runAllTests.dir/build.make test/CMakeFiles/runAllTests.dir/runAllTests.cpp.s
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/runAllTests.dir/build.make test/CMakeFiles/runAllTests.dir/runAllTests.cpp.s
 .PHONY : runAllTests.cpp.s
 
 # Help Target
@@ -329,10 +284,6 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... edit_cache"
-	@echo "... install"
-	@echo "... install/local"
-	@echo "... install/strip"
-	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... runAllTests"
 	@echo "... runBankAccountTest"
@@ -361,6 +312,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

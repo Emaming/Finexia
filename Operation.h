@@ -1,34 +1,34 @@
 #ifndef OPERATION_H
 #define OPERATION_H
 
-#include <chrono>
 #include <string>
+#include <chrono>
 
-enum class OperationType { Deposit, Withdrawal, Transfer,DebitCard,  // New type for Debit Card creation
-    CreditCard };
+enum class OperationType {
+    Deposit,
+    Withdrawal,
+    Transfer
+};
 
 class Operation {
-private:
-    int id; // Identificativo dell'operazione
-    double amount;
-    OperationType type;
-    std::chrono::system_clock::time_point date;
-
 public:
-    // Costruttore per creare un'operazione con tutti i dati
-    Operation(int id, double amount, OperationType type, std::chrono::system_clock::time_point date);
+    Operation(double amount, OperationType type, std::chrono::system_clock::time_point date);
+    Operation(double amount, OperationType type);
+    Operation(const std::string& description);
+    Operation(double amount, OperationType type, const std::string& description);
 
-    // Costruttore per creare un'operazione con solo amount e type
-    Operation(double a, OperationType type);
-
-    int getId() const;
     double getAmount() const;
     OperationType getType() const;
     std::chrono::system_clock::time_point getDate() const;
-
+    std::string getDescription() const;
 
     std::string printOperationType() const;
 
+private:
+    double amount;
+    OperationType type;
+    std::chrono::system_clock::time_point date;
+    std::string description;
 };
 
 #endif // OPERATION_H

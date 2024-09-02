@@ -53,10 +53,10 @@ RM = /snap/clion/291/bin/cmake/linux/x64/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/user/ClionProjects/TestFinexa
+CMAKE_SOURCE_DIR = /home/user/ClionProjects/FinexiaTest
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/user/ClionProjects/TestFinexa/cmake-build-debug
+CMAKE_BINARY_DIR = /home/user/ClionProjects/FinexiaTest/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include test/CMakeFiles/runBankAccountTest.dir/depend.make
@@ -70,18 +70,18 @@ include test/CMakeFiles/runBankAccountTest.dir/progress.make
 include test/CMakeFiles/runBankAccountTest.dir/flags.make
 
 test/CMakeFiles/runBankAccountTest.dir/BankAccountTest.cpp.o: test/CMakeFiles/runBankAccountTest.dir/flags.make
-test/CMakeFiles/runBankAccountTest.dir/BankAccountTest.cpp.o: /home/user/ClionProjects/TestFinexa/test/BankAccountTest.cpp
+test/CMakeFiles/runBankAccountTest.dir/BankAccountTest.cpp.o: /home/user/ClionProjects/FinexiaTest/test/BankAccountTest.cpp
 test/CMakeFiles/runBankAccountTest.dir/BankAccountTest.cpp.o: test/CMakeFiles/runBankAccountTest.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/user/ClionProjects/TestFinexa/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object test/CMakeFiles/runBankAccountTest.dir/BankAccountTest.cpp.o"
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug/test && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT test/CMakeFiles/runBankAccountTest.dir/BankAccountTest.cpp.o -MF CMakeFiles/runBankAccountTest.dir/BankAccountTest.cpp.o.d -o CMakeFiles/runBankAccountTest.dir/BankAccountTest.cpp.o -c /home/user/ClionProjects/TestFinexa/test/BankAccountTest.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/user/ClionProjects/FinexiaTest/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object test/CMakeFiles/runBankAccountTest.dir/BankAccountTest.cpp.o"
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug/test && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT test/CMakeFiles/runBankAccountTest.dir/BankAccountTest.cpp.o -MF CMakeFiles/runBankAccountTest.dir/BankAccountTest.cpp.o.d -o CMakeFiles/runBankAccountTest.dir/BankAccountTest.cpp.o -c /home/user/ClionProjects/FinexiaTest/test/BankAccountTest.cpp
 
 test/CMakeFiles/runBankAccountTest.dir/BankAccountTest.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/runBankAccountTest.dir/BankAccountTest.cpp.i"
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug/test && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/ClionProjects/TestFinexa/test/BankAccountTest.cpp > CMakeFiles/runBankAccountTest.dir/BankAccountTest.cpp.i
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug/test && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/ClionProjects/FinexiaTest/test/BankAccountTest.cpp > CMakeFiles/runBankAccountTest.dir/BankAccountTest.cpp.i
 
 test/CMakeFiles/runBankAccountTest.dir/BankAccountTest.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/runBankAccountTest.dir/BankAccountTest.cpp.s"
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug/test && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/ClionProjects/TestFinexa/test/BankAccountTest.cpp -o CMakeFiles/runBankAccountTest.dir/BankAccountTest.cpp.s
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug/test && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/ClionProjects/FinexiaTest/test/BankAccountTest.cpp -o CMakeFiles/runBankAccountTest.dir/BankAccountTest.cpp.s
 
 # Object files for target runBankAccountTest
 runBankAccountTest_OBJECTS = \
@@ -97,18 +97,18 @@ test/runBankAccountTest: lib/libgtest_main.a
 test/runBankAccountTest: libFinexia_lib.a
 test/runBankAccountTest: lib/libgtest.a
 test/runBankAccountTest: test/CMakeFiles/runBankAccountTest.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/user/ClionProjects/TestFinexa/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable runBankAccountTest"
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug/test && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/runBankAccountTest.dir/link.txt --verbose=$(VERBOSE)
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/user/ClionProjects/FinexiaTest/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable runBankAccountTest"
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug/test && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/runBankAccountTest.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 test/CMakeFiles/runBankAccountTest.dir/build: test/runBankAccountTest
 .PHONY : test/CMakeFiles/runBankAccountTest.dir/build
 
 test/CMakeFiles/runBankAccountTest.dir/clean:
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug/test && $(CMAKE_COMMAND) -P CMakeFiles/runBankAccountTest.dir/cmake_clean.cmake
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug/test && $(CMAKE_COMMAND) -P CMakeFiles/runBankAccountTest.dir/cmake_clean.cmake
 .PHONY : test/CMakeFiles/runBankAccountTest.dir/clean
 
 test/CMakeFiles/runBankAccountTest.dir/depend:
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/user/ClionProjects/TestFinexa /home/user/ClionProjects/TestFinexa/test /home/user/ClionProjects/TestFinexa/cmake-build-debug /home/user/ClionProjects/TestFinexa/cmake-build-debug/test /home/user/ClionProjects/TestFinexa/cmake-build-debug/test/CMakeFiles/runBankAccountTest.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/user/ClionProjects/FinexiaTest /home/user/ClionProjects/FinexiaTest/test /home/user/ClionProjects/FinexiaTest/cmake-build-debug /home/user/ClionProjects/FinexiaTest/cmake-build-debug/test /home/user/ClionProjects/FinexiaTest/cmake-build-debug/test/CMakeFiles/runBankAccountTest.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : test/CMakeFiles/runBankAccountTest.dir/depend
 

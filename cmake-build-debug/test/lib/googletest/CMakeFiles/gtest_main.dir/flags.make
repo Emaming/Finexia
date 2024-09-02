@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -isystem /home/user/ClionProjects/TestFinexa/test/lib/googletest/include -isystem /home/user/ClionProjects/TestFinexa/test/lib/googletest
+CXX_INCLUDES = -isystem /home/user/ClionProjects/FinexiaTest/test/lib/googletest/include -isystem /home/user/ClionProjects/FinexiaTest/test/lib/googletest
 
 CXX_FLAGS = -g -std=gnu++23 -fdiagnostics-color=always -Wall -Wshadow -Wundef -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers
 

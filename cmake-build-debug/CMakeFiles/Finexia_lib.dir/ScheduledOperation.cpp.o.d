@@ -1,7 +1,7 @@
 CMakeFiles/Finexia_lib.dir/ScheduledOperation.cpp.o: \
- /home/user/ClionProjects/TestFinexa/ScheduledOperation.cpp \
+ /home/user/ClionProjects/FinexiaTest/ScheduledOperation.cpp \
  /usr/include/stdc-predef.h \
- /home/user/ClionProjects/TestFinexa/ScheduledOperation.h \
+ /home/user/ClionProjects/FinexiaTest/ScheduledOperation.h \
  /usr/include/c++/11/chrono /usr/include/c++/11/ratio \
  /usr/include/c++/11/type_traits \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
@@ -204,7 +204,7 @@ CMakeFiles/Finexia_lib.dir/ScheduledOperation.cpp.o: \
  /usr/include/c++/11/bits/uses_allocator_args.h \
  /usr/include/c++/11/pstl/glue_memory_defs.h \
  /usr/include/c++/11/pstl/execution_defs.h \
- /home/user/ClionProjects/TestFinexa/Operation.h \
+ /home/user/ClionProjects/FinexiaTest/Operation.h \
  /usr/include/c++/11/sstream /usr/include/c++/11/istream \
  /usr/include/c++/11/bits/istream.tcc \
  /usr/include/c++/11/bits/sstream.tcc /usr/include/c++/11/iomanip \

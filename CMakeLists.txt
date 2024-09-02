@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD 23)
 add_subdirectory(test)
 #settaggio dei file sorgente
 set(SOURCE_FILES Operation.cpp Operation.h ScheduledOperation.cpp ScheduledOperation.h
-        BankAccount.cpp BankAccount.h CardOperation.cpp CardOperation.h CreditCard.cpp
+        BankAccount.cpp BankAccount.h CreditCard.cpp
         CreditCard.h DebitCard.cpp DebitCard.h Card.cpp Card.h
 )
 #il nome dell'eseguibile sarà quello del nome progetto e questo eseguibile avrà come file sorgente sarà solamente il main

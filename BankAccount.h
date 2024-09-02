@@ -5,11 +5,11 @@
 #include <memory>
 #include <string>
 #include <chrono>
-#include "list"
-
+#include <list>
+#include <iostream>
 #include "Operation.h"
 #include "ScheduledOperation.h"
-#include "CardOperation.h"
+#include "Card.h"
 
 class BankAccount {
 private:
@@ -17,16 +17,17 @@ private:
     std::string IBAN;
     std::list<std::shared_ptr<Operation>> operations;
     std::list<std::shared_ptr<ScheduledOperation>> scheduledOperations;
-    std::vector<std::shared_ptr<CardOperation>> cardsOperations;
+    std::vector<std::shared_ptr<Card>> cardsOperations;
 
 public:
     BankAccount();
 
+    double getBalance() const;
+
     void saveToFile(const std::string& filename) const;
     void loadFromFile(const std::string& filename);
     void removeCard(const std::string& cardName);
-
-    void addCard(const std::string& cardName, bool isCredit = false);  // isCredit defaults to false
+    void addCard(const std::string& cardName, bool isCredit = false);
     void addTransaction(const std::shared_ptr<Operation>& transaction);
     void cancelOperations(const std::vector<std::shared_ptr<Operation>>& operationsToCancel);
     void removeScheduledOperation(const std::vector<std::shared_ptr<ScheduledOperation>>& scheduledOperationsToRemove);
@@ -38,18 +39,14 @@ public:
     std::vector<std::shared_ptr<ScheduledOperation>> findScheduledByDate(std::chrono::system_clock::time_point date) const;
     std::vector<std::shared_ptr<ScheduledOperation>> findScheduledByType(OperationType type) const;
     std::string printBalance() const;
-
+    void printCardOperations(const std::string& cardName) const;
+    void addOperationToCard(const std::string& cardName, const std::shared_ptr<Operation>& operation);
     void printOperations(const std::vector<std::shared_ptr<Operation>>& operations) const;
-
-    std::vector<std::shared_ptr<CardOperation>> getCardsOperations() const;
-
-    void printCards() const;  // Updated method name
+    std::vector<std::shared_ptr<Card>> getCardsOperations() const;
+    void printCards() const;
     std::string getTransactionHistory() const;
-
     void printPlannedTransactions() const;
-
     std::string timePointToString(std::chrono::system_clock::time_point tp) const;
-
 };
 
 #endif // BANKACCOUNT_H

@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/user/ClionProjects/TestFinexa/test/./lib/googletest/include -I/home/user/ClionProjects/TestFinexa/test/./lib/googletest -isystem /home/user/ClionProjects/TestFinexa/test/lib/googletest/include -isystem /home/user/ClionProjects/TestFinexa/test/lib/googletest
+CXX_INCLUDES = -I/home/user/ClionProjects/FinexiaTest/test/./lib/googletest/include -I/home/user/ClionProjects/FinexiaTest/test/./lib/googletest -isystem /home/user/ClionProjects/FinexiaTest/test/lib/googletest/include -isystem /home/user/ClionProjects/FinexiaTest/test/lib/googletest
 
 CXX_FLAGS = -g -std=gnu++23 -fdiagnostics-color=always
 

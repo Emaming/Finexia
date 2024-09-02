@@ -53,10 +53,10 @@ RM = /snap/clion/291/bin/cmake/linux/x64/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/user/ClionProjects/TestFinexa
+CMAKE_SOURCE_DIR = /home/user/ClionProjects/FinexiaTest
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/user/ClionProjects/TestFinexa/cmake-build-debug
+CMAKE_BINARY_DIR = /home/user/ClionProjects/FinexiaTest/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include test/CMakeFiles/runAllTests.dir/depend.make
@@ -70,60 +70,60 @@ include test/CMakeFiles/runAllTests.dir/progress.make
 include test/CMakeFiles/runAllTests.dir/flags.make
 
 test/CMakeFiles/runAllTests.dir/runAllTests.cpp.o: test/CMakeFiles/runAllTests.dir/flags.make
-test/CMakeFiles/runAllTests.dir/runAllTests.cpp.o: /home/user/ClionProjects/TestFinexa/test/runAllTests.cpp
+test/CMakeFiles/runAllTests.dir/runAllTests.cpp.o: /home/user/ClionProjects/FinexiaTest/test/runAllTests.cpp
 test/CMakeFiles/runAllTests.dir/runAllTests.cpp.o: test/CMakeFiles/runAllTests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/user/ClionProjects/TestFinexa/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object test/CMakeFiles/runAllTests.dir/runAllTests.cpp.o"
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug/test && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT test/CMakeFiles/runAllTests.dir/runAllTests.cpp.o -MF CMakeFiles/runAllTests.dir/runAllTests.cpp.o.d -o CMakeFiles/runAllTests.dir/runAllTests.cpp.o -c /home/user/ClionProjects/TestFinexa/test/runAllTests.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/user/ClionProjects/FinexiaTest/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object test/CMakeFiles/runAllTests.dir/runAllTests.cpp.o"
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug/test && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT test/CMakeFiles/runAllTests.dir/runAllTests.cpp.o -MF CMakeFiles/runAllTests.dir/runAllTests.cpp.o.d -o CMakeFiles/runAllTests.dir/runAllTests.cpp.o -c /home/user/ClionProjects/FinexiaTest/test/runAllTests.cpp
 
 test/CMakeFiles/runAllTests.dir/runAllTests.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/runAllTests.dir/runAllTests.cpp.i"
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug/test && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/ClionProjects/TestFinexa/test/runAllTests.cpp > CMakeFiles/runAllTests.dir/runAllTests.cpp.i
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug/test && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/ClionProjects/FinexiaTest/test/runAllTests.cpp > CMakeFiles/runAllTests.dir/runAllTests.cpp.i
 
 test/CMakeFiles/runAllTests.dir/runAllTests.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/runAllTests.dir/runAllTests.cpp.s"
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug/test && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/ClionProjects/TestFinexa/test/runAllTests.cpp -o CMakeFiles/runAllTests.dir/runAllTests.cpp.s
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug/test && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/ClionProjects/FinexiaTest/test/runAllTests.cpp -o CMakeFiles/runAllTests.dir/runAllTests.cpp.s
 
 test/CMakeFiles/runAllTests.dir/BankAccountTest.cpp.o: test/CMakeFiles/runAllTests.dir/flags.make
-test/CMakeFiles/runAllTests.dir/BankAccountTest.cpp.o: /home/user/ClionProjects/TestFinexa/test/BankAccountTest.cpp
+test/CMakeFiles/runAllTests.dir/BankAccountTest.cpp.o: /home/user/ClionProjects/FinexiaTest/test/BankAccountTest.cpp
 test/CMakeFiles/runAllTests.dir/BankAccountTest.cpp.o: test/CMakeFiles/runAllTests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/user/ClionProjects/TestFinexa/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object test/CMakeFiles/runAllTests.dir/BankAccountTest.cpp.o"
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug/test && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT test/CMakeFiles/runAllTests.dir/BankAccountTest.cpp.o -MF CMakeFiles/runAllTests.dir/BankAccountTest.cpp.o.d -o CMakeFiles/runAllTests.dir/BankAccountTest.cpp.o -c /home/user/ClionProjects/TestFinexa/test/BankAccountTest.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/user/ClionProjects/FinexiaTest/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object test/CMakeFiles/runAllTests.dir/BankAccountTest.cpp.o"
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug/test && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT test/CMakeFiles/runAllTests.dir/BankAccountTest.cpp.o -MF CMakeFiles/runAllTests.dir/BankAccountTest.cpp.o.d -o CMakeFiles/runAllTests.dir/BankAccountTest.cpp.o -c /home/user/ClionProjects/FinexiaTest/test/BankAccountTest.cpp
 
 test/CMakeFiles/runAllTests.dir/BankAccountTest.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/runAllTests.dir/BankAccountTest.cpp.i"
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug/test && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/ClionProjects/TestFinexa/test/BankAccountTest.cpp > CMakeFiles/runAllTests.dir/BankAccountTest.cpp.i
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug/test && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/ClionProjects/FinexiaTest/test/BankAccountTest.cpp > CMakeFiles/runAllTests.dir/BankAccountTest.cpp.i
 
 test/CMakeFiles/runAllTests.dir/BankAccountTest.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/runAllTests.dir/BankAccountTest.cpp.s"
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug/test && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/ClionProjects/TestFinexa/test/BankAccountTest.cpp -o CMakeFiles/runAllTests.dir/BankAccountTest.cpp.s
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug/test && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/ClionProjects/FinexiaTest/test/BankAccountTest.cpp -o CMakeFiles/runAllTests.dir/BankAccountTest.cpp.s
 
 test/CMakeFiles/runAllTests.dir/OperationTest.cpp.o: test/CMakeFiles/runAllTests.dir/flags.make
-test/CMakeFiles/runAllTests.dir/OperationTest.cpp.o: /home/user/ClionProjects/TestFinexa/test/OperationTest.cpp
+test/CMakeFiles/runAllTests.dir/OperationTest.cpp.o: /home/user/ClionProjects/FinexiaTest/test/OperationTest.cpp
 test/CMakeFiles/runAllTests.dir/OperationTest.cpp.o: test/CMakeFiles/runAllTests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/user/ClionProjects/TestFinexa/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object test/CMakeFiles/runAllTests.dir/OperationTest.cpp.o"
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug/test && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT test/CMakeFiles/runAllTests.dir/OperationTest.cpp.o -MF CMakeFiles/runAllTests.dir/OperationTest.cpp.o.d -o CMakeFiles/runAllTests.dir/OperationTest.cpp.o -c /home/user/ClionProjects/TestFinexa/test/OperationTest.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/user/ClionProjects/FinexiaTest/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object test/CMakeFiles/runAllTests.dir/OperationTest.cpp.o"
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug/test && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT test/CMakeFiles/runAllTests.dir/OperationTest.cpp.o -MF CMakeFiles/runAllTests.dir/OperationTest.cpp.o.d -o CMakeFiles/runAllTests.dir/OperationTest.cpp.o -c /home/user/ClionProjects/FinexiaTest/test/OperationTest.cpp
 
 test/CMakeFiles/runAllTests.dir/OperationTest.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/runAllTests.dir/OperationTest.cpp.i"
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug/test && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/ClionProjects/TestFinexa/test/OperationTest.cpp > CMakeFiles/runAllTests.dir/OperationTest.cpp.i
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug/test && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/ClionProjects/FinexiaTest/test/OperationTest.cpp > CMakeFiles/runAllTests.dir/OperationTest.cpp.i
 
 test/CMakeFiles/runAllTests.dir/OperationTest.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/runAllTests.dir/OperationTest.cpp.s"
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug/test && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/ClionProjects/TestFinexa/test/OperationTest.cpp -o CMakeFiles/runAllTests.dir/OperationTest.cpp.s
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug/test && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/ClionProjects/FinexiaTest/test/OperationTest.cpp -o CMakeFiles/runAllTests.dir/OperationTest.cpp.s
 
 test/CMakeFiles/runAllTests.dir/ScheduledOperationTest.cpp.o: test/CMakeFiles/runAllTests.dir/flags.make
-test/CMakeFiles/runAllTests.dir/ScheduledOperationTest.cpp.o: /home/user/ClionProjects/TestFinexa/test/ScheduledOperationTest.cpp
+test/CMakeFiles/runAllTests.dir/ScheduledOperationTest.cpp.o: /home/user/ClionProjects/FinexiaTest/test/ScheduledOperationTest.cpp
 test/CMakeFiles/runAllTests.dir/ScheduledOperationTest.cpp.o: test/CMakeFiles/runAllTests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/user/ClionProjects/TestFinexa/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object test/CMakeFiles/runAllTests.dir/ScheduledOperationTest.cpp.o"
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug/test && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT test/CMakeFiles/runAllTests.dir/ScheduledOperationTest.cpp.o -MF CMakeFiles/runAllTests.dir/ScheduledOperationTest.cpp.o.d -o CMakeFiles/runAllTests.dir/ScheduledOperationTest.cpp.o -c /home/user/ClionProjects/TestFinexa/test/ScheduledOperationTest.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/user/ClionProjects/FinexiaTest/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object test/CMakeFiles/runAllTests.dir/ScheduledOperationTest.cpp.o"
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug/test && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT test/CMakeFiles/runAllTests.dir/ScheduledOperationTest.cpp.o -MF CMakeFiles/runAllTests.dir/ScheduledOperationTest.cpp.o.d -o CMakeFiles/runAllTests.dir/ScheduledOperationTest.cpp.o -c /home/user/ClionProjects/FinexiaTest/test/ScheduledOperationTest.cpp
 
 test/CMakeFiles/runAllTests.dir/ScheduledOperationTest.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/runAllTests.dir/ScheduledOperationTest.cpp.i"
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug/test && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/ClionProjects/TestFinexa/test/ScheduledOperationTest.cpp > CMakeFiles/runAllTests.dir/ScheduledOperationTest.cpp.i
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug/test && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/ClionProjects/FinexiaTest/test/ScheduledOperationTest.cpp > CMakeFiles/runAllTests.dir/ScheduledOperationTest.cpp.i
 
 test/CMakeFiles/runAllTests.dir/ScheduledOperationTest.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/runAllTests.dir/ScheduledOperationTest.cpp.s"
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug/test && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/ClionProjects/TestFinexa/test/ScheduledOperationTest.cpp -o CMakeFiles/runAllTests.dir/ScheduledOperationTest.cpp.s
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug/test && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/ClionProjects/FinexiaTest/test/ScheduledOperationTest.cpp -o CMakeFiles/runAllTests.dir/ScheduledOperationTest.cpp.s
 
 # Object files for target runAllTests
 runAllTests_OBJECTS = \
@@ -145,18 +145,18 @@ test/runAllTests: lib/libgtest_main.a
 test/runAllTests: libFinexia_lib.a
 test/runAllTests: lib/libgtest.a
 test/runAllTests: test/CMakeFiles/runAllTests.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/user/ClionProjects/TestFinexa/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable runAllTests"
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug/test && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/runAllTests.dir/link.txt --verbose=$(VERBOSE)
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/user/ClionProjects/FinexiaTest/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable runAllTests"
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug/test && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/runAllTests.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 test/CMakeFiles/runAllTests.dir/build: test/runAllTests
 .PHONY : test/CMakeFiles/runAllTests.dir/build
 
 test/CMakeFiles/runAllTests.dir/clean:
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug/test && $(CMAKE_COMMAND) -P CMakeFiles/runAllTests.dir/cmake_clean.cmake
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug/test && $(CMAKE_COMMAND) -P CMakeFiles/runAllTests.dir/cmake_clean.cmake
 .PHONY : test/CMakeFiles/runAllTests.dir/clean
 
 test/CMakeFiles/runAllTests.dir/depend:
-	cd /home/user/ClionProjects/TestFinexa/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/user/ClionProjects/TestFinexa /home/user/ClionProjects/TestFinexa/test /home/user/ClionProjects/TestFinexa/cmake-build-debug /home/user/ClionProjects/TestFinexa/cmake-build-debug/test /home/user/ClionProjects/TestFinexa/cmake-build-debug/test/CMakeFiles/runAllTests.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/user/ClionProjects/FinexiaTest/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/user/ClionProjects/FinexiaTest /home/user/ClionProjects/FinexiaTest/test /home/user/ClionProjects/FinexiaTest/cmake-build-debug /home/user/ClionProjects/FinexiaTest/cmake-build-debug/test /home/user/ClionProjects/FinexiaTest/cmake-build-debug/test/CMakeFiles/runAllTests.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : test/CMakeFiles/runAllTests.dir/depend
 

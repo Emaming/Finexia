@@ -1,4 +1,4 @@
-# Install script for directory: /home/user/ClionProjects/TestFinexa/test
+# Install script for directory: /home/user/ClionProjects/FinexiaTest/test
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -44,6 +44,6 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/user/ClionProjects/TestFinexa/cmake-build-debug/test/lib/googletest/cmake_install.cmake")
+  include("/home/user/ClionProjects/FinexiaTest/cmake-build-debug/test/lib/googletest/cmake_install.cmake")
 endif()
 

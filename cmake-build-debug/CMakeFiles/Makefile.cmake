@@ -7,24 +7,19 @@ set(CMAKE_DEPENDS_GENERATOR "Unix Makefiles")
 # The top level Makefile was generated from the following files:
 set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
-  "/home/user/ClionProjects/TestFinexa/CMakeLists.txt"
+  "/home/user/ClionProjects/FinexiaTest/CMakeLists.txt"
   "CMakeFiles/3.29.6/CMakeCCompiler.cmake"
   "CMakeFiles/3.29.6/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.29.6/CMakeSystem.cmake"
-  "/home/user/ClionProjects/TestFinexa/test/CMakeLists.txt"
-  "/home/user/ClionProjects/TestFinexa/test/lib/googletest/CMakeLists.txt"
-  "/home/user/ClionProjects/TestFinexa/test/lib/googletest/cmake/Config.cmake.in"
-  "/home/user/ClionProjects/TestFinexa/test/lib/googletest/cmake/gtest.pc.in"
-  "/home/user/ClionProjects/TestFinexa/test/lib/googletest/cmake/gtest_main.pc.in"
-  "/home/user/ClionProjects/TestFinexa/test/lib/googletest/cmake/internal_utils.cmake"
-  "/snap/clion/291/bin/cmake/linux/x64/share/cmake-3.29/Modules/BasicConfigVersion-AnyNewerVersion.cmake.in"
+  "/home/user/ClionProjects/FinexiaTest/test/CMakeLists.txt"
+  "/home/user/ClionProjects/FinexiaTest/test/lib/googletest/CMakeLists.txt"
+  "/home/user/ClionProjects/FinexiaTest/test/lib/googletest/cmake/internal_utils.cmake"
   "/snap/clion/291/bin/cmake/linux/x64/share/cmake-3.29/Modules/CMakeCInformation.cmake"
   "/snap/clion/291/bin/cmake/linux/x64/share/cmake-3.29/Modules/CMakeCXXInformation.cmake"
   "/snap/clion/291/bin/cmake/linux/x64/share/cmake-3.29/Modules/CMakeCommonLanguageInclude.cmake"
   "/snap/clion/291/bin/cmake/linux/x64/share/cmake-3.29/Modules/CMakeGenericSystem.cmake"
   "/snap/clion/291/bin/cmake/linux/x64/share/cmake-3.29/Modules/CMakeInitializeConfigs.cmake"
   "/snap/clion/291/bin/cmake/linux/x64/share/cmake-3.29/Modules/CMakeLanguageInformation.cmake"
-  "/snap/clion/291/bin/cmake/linux/x64/share/cmake-3.29/Modules/CMakePackageConfigHelpers.cmake"
   "/snap/clion/291/bin/cmake/linux/x64/share/cmake-3.29/Modules/CMakeSystemSpecificInformation.cmake"
   "/snap/clion/291/bin/cmake/linux/x64/share/cmake-3.29/Modules/CMakeSystemSpecificInitialize.cmake"
   "/snap/clion/291/bin/cmake/linux/x64/share/cmake-3.29/Modules/CheckCSourceCompiles.cmake"
@@ -46,7 +41,6 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/snap/clion/291/bin/cmake/linux/x64/share/cmake-3.29/Modules/Platform/Linux-Initialize.cmake"
   "/snap/clion/291/bin/cmake/linux/x64/share/cmake-3.29/Modules/Platform/Linux.cmake"
   "/snap/clion/291/bin/cmake/linux/x64/share/cmake-3.29/Modules/Platform/UnixPaths.cmake"
-  "/snap/clion/291/bin/cmake/linux/x64/share/cmake-3.29/Modules/WriteBasicConfigVersionFile.cmake"
   )
 
 # The corresponding makefile is:
@@ -59,10 +53,6 @@ set(CMAKE_MAKEFILE_OUTPUTS
 set(CMAKE_MAKEFILE_PRODUCTS
   "CMakeFiles/CMakeDirectoryInformation.cmake"
   "test/CMakeFiles/CMakeDirectoryInformation.cmake"
-  "test/lib/googletest/generated/GTestConfigVersion.cmake"
-  "test/lib/googletest/generated/GTestConfig.cmake"
-  "test/lib/googletest/generated/gtest.pc"
-  "test/lib/googletest/generated/gtest_main.pc"
   "test/lib/googletest/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 

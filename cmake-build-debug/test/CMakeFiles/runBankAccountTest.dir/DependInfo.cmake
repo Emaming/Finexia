@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/user/ClionProjects/TestFinexa/test/BankAccountTest.cpp" "test/CMakeFiles/runBankAccountTest.dir/BankAccountTest.cpp.o" "gcc" "test/CMakeFiles/runBankAccountTest.dir/BankAccountTest.cpp.o.d"
+  "/home/user/ClionProjects/FinexiaTest/test/BankAccountTest.cpp" "test/CMakeFiles/runBankAccountTest.dir/BankAccountTest.cpp.o" "gcc" "test/CMakeFiles/runBankAccountTest.dir/BankAccountTest.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

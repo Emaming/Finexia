@@ -73,10 +73,6 @@ void Card::addOperation(const std::shared_ptr<Operation>& op) {
     cardOperations.push_back(op);
 }
 
-void Card::removeOperation(const std::shared_ptr<Operation>& op) {
-    cardOperations.remove(op);
-}
-
 std::list<std::shared_ptr<Operation>> Card::getOperations() const {
     return cardOperations;
 }

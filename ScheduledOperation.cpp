@@ -5,9 +5,6 @@
 #include <chrono>
 #include <ctime>
 
-
-
-
 const std::chrono::system_clock::time_point& ScheduledOperation::getScheduledExecutionDate() const {
     return scheduledExecutionDate;
 }
@@ -15,7 +12,6 @@ const std::chrono::system_clock::time_point& ScheduledOperation::getScheduledExe
 Frequency ScheduledOperation::getFrequency() const {
     return frequency;
 }
-
 
 std::string ScheduledOperation::frequencyToString() const {
     switch (frequency) {

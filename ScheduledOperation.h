@@ -22,6 +22,7 @@ public:
     Frequency getFrequency() const;
     std::shared_ptr<Operation> getOperation() const { return operation; }
     std::string frequencyToString() const;
+    void setScheduledExecutionDate(std::chrono::system_clock::time_point newDate);
 
 };
 

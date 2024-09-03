@@ -7,7 +7,6 @@
 #include "Operation.h"
 #include "ScheduledOperation.h"
 
-
 void printMenu() {
     std::cout << "Select an option:" << std::endl;
     std::cout << "---- Non-scheduled Transactions ----" << std::endl;
@@ -21,68 +20,88 @@ void printMenu() {
     std::cout << "6. Schedule Transaction" << std::endl;
     std::cout << "7. Print Planned Transactions History" << std::endl;
     std::cout << "8. Cancel Planned Transactions" << std::endl;
+    std::cout << "9. Execute Scheduled Operations" << std::endl;  // Nuova opzione
 
-
-    std::cout << "9. Save to File" << std::endl;
-    std::cout << "10. Load from File" << std::endl;
-    std::cout << "11. Print Balance" << std::endl;
+    std::cout << "10. Save to File" << std::endl;
+    std::cout << "11. Load from File" << std::endl;
+    std::cout << "12. Print Balance" << std::endl;
+    std::cout << "13. Print IBAN" << std::endl;
     std::cout << "0. Exit" << std::endl;
 }
 
+void handlePrintIBAN(const BankAccount& account) {
+    std::cout << "IBAN: " << account.getIBAN() << std::endl;
+}
+
+void handleExecuteScheduledOperations(BankAccount& account) {
+    std::cout << "Executing scheduled operations..." << std::endl;
+    account.executeScheduledOperations();
+    std::cout << "Scheduled operations executed successfully." << std::endl;
+}
 
 void handleAddTransaction(BankAccount& account) {
-    int transactionType;
-    do {
+    while (true) {
+        // Display transaction type menu
         std::cout << "Select transaction type" << std::endl;
         std::cout << "1. Deposit" << std::endl;
         std::cout << "2. Withdrawal" << std::endl;
         std::cout << "3. Transfer" << std::endl;
         std::cout << "0. Return to main menu" << std::endl;
+
+        int transactionType;
         std::cin >> transactionType;
 
-        switch (transactionType) {
-            case 0:
-                return;
-
-            case 1:  // Deposit
-            case 2:  // Withdrawal
-            case 3:  // Transfer
-                break;
-
-            default:
-                std::cerr << "Invalid choice!" << std::endl;
-                continue;
+        // Handle invalid input for transaction type
+        if (std::cin.fail() || (transactionType < 0 || transactionType > 3)) {
+            std::cin.clear(); // Clear error flag
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Discard invalid input
+            std::cerr << "Invalid choice! Please enter a number between 0 and 3." << std::endl;
+            continue;
         }
 
+        // Return to the main menu if the choice is 0
+        if (transactionType == 0) return;
+
+        // Handle the amount input
         double amount;
-        std::cout << "Enter amount (or 0 to return to previous menu): " << std::endl;
+        std::cout << "Enter amount (or 0 to return to previous menu): ";
         std::cin >> amount;
 
-        switch (static_cast<int>(amount > 0 ? 1 : (amount < 0 ? -1 : 0))) {
-            case 0:
-                return;
-
-            case -1:
-                std::cerr << "Error: The amount cannot be negative. Please enter a valid amount." << std::endl;
-                continue;
-
-            case 1:
-                break;
+        // Handle invalid input for amount
+        if (std::cin.fail() || amount < 0) {
+            std::cin.clear(); // Clear error flag
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Discard invalid input
+            std::cerr << "Error: The amount must be a positive number. Please enter a valid amount." << std::endl;
+            continue;
         }
 
-        auto now = std::chrono::system_clock::now();
+        // Return to the previous menu if the amount is 0
+        if (amount == 0) return;
+
+        // Handle description input
+        std::cin.ignore(); // Ignore newline character left in the input buffer
+        std::string description;
+        std::cout << "Enter description (or press Enter to skip): ";
+        std::getline(std::cin, description);
+
+        // Map transaction type to OperationType
         OperationType type;
         switch (transactionType) {
             case 1: type = OperationType::Deposit; break;
             case 2: type = OperationType::Withdrawal; break;
             case 3: type = OperationType::Transfer; break;
+            default:
+                std::cerr << "Invalid transaction type!" << std::endl;
+                continue;
         }
 
-        auto transaction = std::make_shared<Operation>(amount, type, now);
+        // Create and add the transaction
+        auto now = std::chrono::system_clock::now();
+        auto transaction = std::make_shared<Operation>(amount, type, description);
         account.addTransaction(transaction);
         std::cout << "Transaction added successfully." << std::endl;
-        break;
-    } while (true);
+        break; // Exit loop after successful transaction
+    }
 }
 
 void handleSearchOperations(BankAccount& account) {
@@ -234,7 +253,7 @@ void handleCancelRegularTransactions(BankAccount& account) {
         return;
     }
 
-    account.cancelOperations(toCancel);
+    account.removeOperations(toCancel);
     std::cout << "Selected regular transactions have been canceled." << std::endl;
 }
 
@@ -465,34 +484,23 @@ void handleScheduleTransaction(BankAccount& account) {
         std::cout << "0. Return to main menu" << std::endl;
 
         std::cin >> transactionType;
-        switch (transactionType) {
-            case 0:
-                return;  // Ritorna al menu principale
-
-            case 1:  // Deposit
-            case 2:  // Withdrawal
-            case 3:  // Transfer
-                break;  // Prosegue con l'inserimento dell'importo
-
-            default:
-                std::cerr << "Invalid choice!" << std::endl;
-                continue;  // Torna al menu di selezione del tipo di transazione
+        if (transactionType == 0) {
+            return;  // Ritorna al menu principale
         }
 
-        std::cout << "Enter amount: ";
-        std::cout << "0. Return to main menu" << std::endl;
+        if (transactionType < 1 || transactionType > 3) {
+            std::cerr << "Invalid choice!" << std::endl;
+            continue;  // Torna al menu di selezione del tipo di transazione
+        }
+
+        std::cout << "Enter amount (or 0 to return to main menu): ";
         std::cin >> amount;
 
-        switch (static_cast<int>(amount > 0 ? 1 : (amount < 0 ? -1 : 0))) {
-            case 0:  // Se amount è 0, ritorna al menu principale
-                return;
-
-            case -1:  // Se amount è negativo
-                std::cerr << "Error: The amount cannot be negative. Please enter a valid amount." << std::endl;
-                continue;  // Torna al menu di inserimento dell'importo
-
-            case 1:  // Se amount è positivo
-                break;  // Prosegue con la creazione della transazione
+        if (amount == 0) {
+            return;  // Ritorna al menu principale
+        } else if (amount < 0) {
+            std::cerr << "Error: The amount cannot be negative. Please enter a valid amount." << std::endl;
+            continue;  // Torna al menu di inserimento dell'importo
         }
 
         OperationType type;
@@ -502,18 +510,17 @@ void handleScheduleTransaction(BankAccount& account) {
             case 3: type = OperationType::Transfer; break;
         }
 
-        std::cout << "Enter start date (year month day): ";
-        std::cout << "Enter start year (or 0 to return to previous menu):";
+        std::cout << "Enter start date (year month day): " << std::endl;
+
+        std::cout << "Enter start year (or 0 to return to previous menu): ";
         std::cin >> startYear;
         if (startYear == 0) return;
 
-        std::cout << "Enter start month (1-12) (or 0 to return to previous menu):";
-
+        std::cout << "Enter start month (1-12) (or 0 to return to previous menu): ";
         std::cin >> startMonth;
         if (startMonth == 0) return;
 
-        std::cout << "Enter start day (1-31) (or 0 to return to previous menu):";
-
+        std::cout << "Enter start day (1-31) (or 0 to return to previous menu): ";
         std::cin >> startDay;
         if (startDay == 0) return;
 
@@ -523,18 +530,9 @@ void handleScheduleTransaction(BankAccount& account) {
         tm.tm_mday = startDay;
         auto startDate = std::chrono::system_clock::from_time_t(std::mktime(&tm));
 
-        // Get the current date
         auto now = std::chrono::system_clock::now();
-        auto nowTimeT = std::chrono::system_clock::to_time_t(now);
-        std::tm nowTm = *std::localtime(&nowTimeT);
-        std::tm today = {};
-        today.tm_year = nowTm.tm_year;
-        today.tm_mon = nowTm.tm_mon;
-        today.tm_mday = nowTm.tm_mday;
-        auto todayDate = std::chrono::system_clock::from_time_t(std::mktime(&today));
-
-        if (startDate < todayDate) {
-            std::cout << "Invalid date: Start date cannot be in the past." << std::endl;
+        if (startDate < now) {
+            std::cerr << "Invalid date: Start date cannot be in the past." << std::endl;
             continue;  // Permetti all'utente di reinserire la data
         }
 
@@ -545,23 +543,24 @@ void handleScheduleTransaction(BankAccount& account) {
         std::cout << "4. Yearly" << std::endl;
         std::cout << "0. Return to main menu" << std::endl;
         std::cin >> freqChoice;
+
+        if (freqChoice == 0) {
+            return;  // Ritorna al menu principale
+        }
+
         Frequency freq;
         switch (freqChoice) {
-            case 0:
-                return;  // Ritorna al menu principale
-
             case 1: freq = Frequency::Daily; break;
             case 2: freq = Frequency::Weekly; break;
             case 3: freq = Frequency::Monthly; break;
             case 4: freq = Frequency::Yearly; break;
-
             default:
                 std::cerr << "Invalid choice!" << std::endl;
                 continue;  // Torna al menu di selezione della frequenza
         }
 
-        auto transaction = std::make_shared<Operation>( amount, type, startDate);
-        account.scheduleOperation(transaction, startDate, freq);
+        auto transaction = std::make_shared<Operation>(amount, type, startDate);
+        account.addScheduleOperation(transaction, startDate, freq);
         std::cout << "Transaction scheduled successfully." << std::endl;
         break;  // Esci dal ciclo se la data è valida e l'operazione è programmata
     }
@@ -592,10 +591,12 @@ int main() {
             case 5: handleCardOperations(account); break;
             case 6: handleScheduleTransaction(account); break;
             case 7: handlePrintPlannedTransactions(account); break;
-            case 8: handleCancelScheduledTransactions(account); break;
-            case 9: handleSaveToFile(account); break;
-            case 10: handleLoadFromFile(account); break;
-            case 11: handlePrintBalance(account); break;  // Add this line
+            case 8:handleCancelScheduledTransactions(account); break;
+            case 9: handleExecuteScheduledOperations(account); break;
+            case 10: handleSaveToFile(account); break;
+            case 11: handleLoadFromFile(account); break;
+            case 12: handlePrintBalance(account); break;
+            case 13:handlePrintIBAN(account);break;
             case 0: std::cout << "Exiting program." << std::endl; break;
             default: std::cerr << "Invalid choice! Please try again." << std::endl; break;
         }

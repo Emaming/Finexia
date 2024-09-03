@@ -31,3 +31,7 @@ std::string ScheduledOperation::frequencyToString() const {
             return "Unknown";
     }
 }
+
+void ScheduledOperation::setScheduledExecutionDate(std::chrono::system_clock::time_point newDate) {
+    scheduledExecutionDate = newDate;
+}

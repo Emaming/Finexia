@@ -5,10 +5,27 @@
 #include <random>
 #include <chrono>
 #include <iomanip>
-#include <algorithm> // Per std::find_if
 
-BankAccount::BankAccount() : balance(0.0) {}
+//costruttore
+BankAccount::BankAccount() : balance(0.0) {
+    generateIBAN(); // Genera l'IBAN quando l'oggetto è creato
+}
+void BankAccount::generateIBAN() {
+    // Codice paese (esempio: IT per Italia)
+    std::string countryCode = "IT";
 
+    // Numero di controllo (simulato come due numeri casuali)
+    int controlDigits = rand() % 90 + 10; // Genera un numero tra 10 e 99
+
+    // Numero di conto bancario (esempio, generato casualmente)
+    std::ostringstream accountNumber;
+    accountNumber << std::setw(12) << std::setfill('0') << rand() % 100000000000; // Numero di conto bancario fittizio
+
+    // Componi l'IBAN
+    IBAN = countryCode + std::to_string(controlDigits) + accountNumber.str();
+}
+
+// Metodi di salvataggio e caricamento
 void BankAccount::saveToFile(const std::string& filename) const {
     std::ofstream file(filename);
 
@@ -39,7 +56,7 @@ void BankAccount::saveToFile(const std::string& filename) const {
                 << static_cast<int>(schedOp->getFrequency()) << '\n';
     }
 
-    // Salvataggio carte
+    // Salvataggio carte e relative operazioni
     file << cardsOperations.size() << '\n';
     for (const auto& card : cardsOperations) {
         file
@@ -48,6 +65,15 @@ void BankAccount::saveToFile(const std::string& filename) const {
                 << card->getCvv() << ' '
                 << std::chrono::system_clock::to_time_t(card->getExpirationDate()) << ' '
                 << card->getAmount() << '\n';
+
+        // Salvataggio delle operazioni associate alla carta
+        file << card->getOperations().size() << '\n';
+        for (const auto& op : card->getOperations()) {
+            file << op->getAmount() << ' '
+                 << static_cast<int>(op->getType()) << ' '
+                 << std::chrono::system_clock::to_time_t(op->getDate()) << ' '
+                 << op->getDescription() << '\n';
+        }
     }
 
     file.close();
@@ -97,7 +123,7 @@ void BankAccount::loadFromFile(const std::string& filename) {
         scheduledOperations.push_back(schedOp);
     }
 
-    // Load cards
+    // Load cards and their operations
     size_t numCards;
     file >> numCards;
     cardsOperations.clear();
@@ -116,25 +142,31 @@ void BankAccount::loadFromFile(const std::string& filename) {
         card->setExpirationDate(std::chrono::system_clock::from_time_t(expDate));
         card->setAmount(amount);
 
+        // Load operations associated with this card
+        size_t numCardOperations;
+        file >> numCardOperations;
+        for (size_t j = 0; j < numCardOperations; ++j) {
+            double opAmount;
+            int opType;
+            std::time_t opDate;
+            std::string description;
+
+            file >> opAmount >> opType >> opDate;
+            file.ignore();  // Ignore the space before the description
+            std::getline(file, description);  // Read the rest of the line as the description
+
+            auto cardOp = std::make_shared<Operation>(opAmount, static_cast<OperationType>(opType), std::chrono::system_clock::from_time_t(opDate));
+            cardOp->setDescription(description);
+            card->addOperation(cardOp);
+        }
+
         cardsOperations.push_back(card);
     }
 
     file.close();
 }
 
-void BankAccount::removeCard(const std::string& cardName) {
-    auto it = std::remove_if(cardsOperations.begin(), cardsOperations.end(),
-                             [&cardName](const std::shared_ptr<Card>& card) {
-                                 return card->getCardName() == cardName;
-                             });
-    cardsOperations.erase(it, cardsOperations.end());
-}
-
-void BankAccount::addCard(const std::string& cardName, bool isCredit) {
-    auto card = std::make_shared<Card>(cardName);
-    cardsOperations.push_back(card);
-}
-
+// Metodi per le operazioni normali
 void BankAccount::addTransaction(const std::shared_ptr<Operation>& transaction) {
     // Aggiungi l'operazione alla lista
     operations.push_back(transaction);
@@ -147,29 +179,7 @@ void BankAccount::addTransaction(const std::shared_ptr<Operation>& transaction) 
     }
 }
 
-void BankAccount::addOperationToCard(const std::string& cardName, const std::shared_ptr<Operation>& operation) {
-    auto cardIt = std::find_if(cardsOperations.begin(), cardsOperations.end(),
-                               [&cardName](const std::shared_ptr<Card>& card) {
-                                   return card->getCardName() == cardName;
-                               });
-
-    if (cardIt != cardsOperations.end()) {
-        (*cardIt)->addOperation(operation);
-
-        // Aggiorna il saldo del conto corrente se l'operazione è un deposito o prelievo
-        if (operation->getType() == OperationType::Deposit) {
-            balance -= operation->getAmount();  // Il conto corrente diminuisce
-            (*cardIt)->setAmount((*cardIt)->getAmount() + operation->getAmount()); // La carta aumenta
-        } else if (operation->getType() == OperationType::Withdrawal) {
-            balance += operation->getAmount();  // Il conto corrente aumenta
-            (*cardIt)->setAmount((*cardIt)->getAmount() - operation->getAmount()); // La carta diminuisce
-        }
-    } else {
-        std::cerr << "Card not found. Cannot add operation." << std::endl;
-    }
-}
-
-void BankAccount::cancelOperations(const std::vector<std::shared_ptr<Operation>>& operationsToCancel) {
+void BankAccount::removeOperations(const std::vector<std::shared_ptr<Operation>>& operationsToCancel) {
     for (const auto& op : operationsToCancel) {
         auto it = std::remove_if(operations.begin(), operations.end(),
                                  [&op](const std::shared_ptr<Operation>& o) {
@@ -177,21 +187,6 @@ void BankAccount::cancelOperations(const std::vector<std::shared_ptr<Operation>>
                                  });
         operations.erase(it, operations.end());
     }
-}
-
-void BankAccount::removeScheduledOperation(const std::vector<std::shared_ptr<ScheduledOperation>>& scheduledOperationsToRemove) {
-    for (const auto& schedOp : scheduledOperationsToRemove) {
-        auto it = std::remove_if(scheduledOperations.begin(), scheduledOperations.end(),
-                                 [&schedOp](const std::shared_ptr<ScheduledOperation>& so) {
-                                     return so == schedOp;
-                                 });
-        scheduledOperations.erase(it, scheduledOperations.end());
-    }
-}
-
-void BankAccount::scheduleOperation(const std::shared_ptr<Operation>& operation, std::chrono::system_clock::time_point startDate, Frequency frequency) {
-    auto schedOp = std::make_shared<ScheduledOperation>(operation, startDate, frequency);
-    scheduledOperations.push_back(schedOp);
 }
 
 std::vector<std::shared_ptr<Operation>> BankAccount::findOperationByAmount(double amount) const {
@@ -224,6 +219,44 @@ std::vector<std::shared_ptr<Operation>> BankAccount::findOperationByDate(std::ch
     return result;
 }
 
+std::string BankAccount::getTransactionHistory() const {
+    std::ostringstream oss;
+    for (const auto& op : operations) {
+        oss << "Amount: " << op->getAmount()
+            << ", Type: " << operationTypeToString(op->getType())
+            << ", Date: " << timePointToString(op->getDate())
+                << ", Description: " << op->getDescription()
+            << '\n';
+    }
+    return oss.str();
+}
+
+void BankAccount::printOperations(const std::vector<std::shared_ptr<Operation>>& operations) const {
+    for (const auto& op : operations) {
+        std::cout << "Amount: " << op->getAmount()
+                  << ", Type: " << operationTypeToString(op->getType())
+                  << ", Date: " << timePointToString(op->getDate())
+                  << ", Description: " << op->getDescription()
+                  << '\n';
+    }
+}
+
+// Metodi per le operazioni programmate
+void BankAccount::addScheduleOperation(const std::shared_ptr<Operation>& operation, std::chrono::system_clock::time_point startDate, Frequency frequency) {
+    auto schedOp = std::make_shared<ScheduledOperation>(operation, startDate, frequency);
+    scheduledOperations.push_back(schedOp);
+}
+
+void BankAccount::removeScheduledOperation(const std::vector<std::shared_ptr<ScheduledOperation>>& scheduledOperationsToRemove) {
+    for (const auto& schedOp : scheduledOperationsToRemove) {
+        auto it = std::remove_if(scheduledOperations.begin(), scheduledOperations.end(),
+                                 [&schedOp](const std::shared_ptr<ScheduledOperation>& so) {
+                                     return so == schedOp;
+                                 });
+        scheduledOperations.erase(it, scheduledOperations.end());
+    }
+}
+
 std::vector<std::shared_ptr<ScheduledOperation>> BankAccount::findScheduledByAmount(double amount) const {
     std::vector<std::shared_ptr<ScheduledOperation>> result;
     for (const auto& schedOp : scheduledOperations) {
@@ -254,23 +287,123 @@ std::vector<std::shared_ptr<ScheduledOperation>> BankAccount::findScheduledByTyp
     return result;
 }
 
-std::string BankAccount::printBalance() const {
-    std::ostringstream oss;
-    oss << "Balance: " << balance;
-    return oss.str();
-}
-
-void BankAccount::printOperations(const std::vector<std::shared_ptr<Operation>>& operations) const {
-    for (const auto& op : operations) {
-        std::cout << "Amount: " << op->getAmount()
-                  << ", Type: " << static_cast<int>(op->getType())
-                  << ", Date: " << std::chrono::system_clock::to_time_t(op->getDate())
+void BankAccount::printPlannedTransactions() const {
+    for (const auto& schedOp : scheduledOperations) {
+        std::cout << "Operation Amount: " << schedOp->getOperation()->getAmount()
+                  << ", Type: " << operationTypeToString(schedOp->getOperation()->getType())
+                  << ", Operation Date: " << timePointToString(schedOp->getOperation()->getDate())
+                  << ", Scheduled Execution Date: " << timePointToString(schedOp->getScheduledExecutionDate())
+                  << ", Frequency: " << frequencyToString(schedOp->getFrequency())
                   << '\n';
     }
 }
 
-std::vector<std::shared_ptr<Card>> BankAccount::getCardsOperations() const {
-    return cardsOperations;
+void BankAccount::executeScheduledOperations() {
+    auto now = std::chrono::system_clock::now();
+    std::vector<std::shared_ptr<ScheduledOperation>> operationsToExecute;
+
+    // Trova le operazioni pianificate che devono essere eseguite
+    for (const auto& schedOp : scheduledOperations) {
+        if (schedOp->getScheduledExecutionDate() <= now) {
+            operationsToExecute.push_back(schedOp);
+        }
+    }
+
+    // Esegui le operazioni e aggiorna il saldo
+    for (const auto& schedOp : operationsToExecute) {
+        auto operation = schedOp->getOperation();
+        if (operation->getType() == OperationType::Deposit) {
+            balance += operation->getAmount();
+        } else if (operation->getType() == OperationType::Withdrawal) {
+            if (balance >= operation->getAmount()) {
+                balance -= operation->getAmount();
+            } else {
+                std::cerr << "Error: Insufficient funds for scheduled withdrawal." << std::endl;
+                continue;
+            }
+        }
+        operations.push_back(operation);
+
+        // Aggiorna la data di esecuzione pianificata in base alla frequenza
+        auto frequency = schedOp->getFrequency();
+        auto newExecutionDate = schedOp->getScheduledExecutionDate();
+        switch (frequency) {
+            case Frequency::Daily:
+                newExecutionDate += std::chrono::hours(24);
+                break;
+            case Frequency::Weekly:
+                newExecutionDate += std::chrono::hours(24 * 7);
+                break;
+            case Frequency::Monthly:
+                newExecutionDate += std::chrono::hours(24 * 30);
+                break;
+            case Frequency::Yearly:
+                newExecutionDate += std::chrono::hours(24 * 365);  // Approximation for a year
+                break;
+            default:
+                std::cerr << "Error: Unknown frequency type." << std::endl;
+                break;
+        }
+
+        schedOp->setScheduledExecutionDate(newExecutionDate);
+    }
+
+    // Rimuovi le operazioni pianificate eseguite
+    scheduledOperations.erase(std::remove_if(scheduledOperations.begin(), scheduledOperations.end(),
+                                             [&operationsToExecute](const std::shared_ptr<ScheduledOperation>& schedOp) {
+                                                 return std::find(operationsToExecute.begin(), operationsToExecute.end(), schedOp) != operationsToExecute.end();
+                                             }), scheduledOperations.end());
+}
+
+// Metodi per le carte
+void BankAccount::addCard(const std::string& cardName, bool isCredit) {
+    auto card = std::make_shared<Card>(cardName);
+    cardsOperations.push_back(card);
+}
+
+void BankAccount::removeCard(const std::string& cardName) {
+    auto it = std::remove_if(cardsOperations.begin(), cardsOperations.end(),
+                             [&cardName](const std::shared_ptr<Card>& card) {
+                                 return card->getCardName() == cardName;
+                             });
+    cardsOperations.erase(it, cardsOperations.end());
+}
+
+void BankAccount::addOperationToCard(const std::string& cardName, const std::shared_ptr<Operation>& operation) {
+    // Trova la carta con il nome specificato
+    auto cardIt = std::find_if(cardsOperations.begin(), cardsOperations.end(),
+                               [&cardName](const std::shared_ptr<Card>& card) {
+                                   return card->getCardName() == cardName;
+                               });
+
+    if (cardIt != cardsOperations.end()) {
+        // Se l'operazione è di tipo "Deposit" (ricarica carta)
+        if (operation->getType() == OperationType::Deposit) {
+            // Controlla se il bilancio del conto è sufficiente
+            if (balance >= operation->getAmount()) {
+                // Sottrai l'importo dal bilancio del conto
+                balance -= operation->getAmount();
+                // Aggiungi l'importo al saldo della carta
+                (*cardIt)->setAmount((*cardIt)->getAmount() + operation->getAmount());
+                // Aggiungi l'operazione alla lista delle operazioni della carta
+                (*cardIt)->addOperation(operation);
+            } else {
+                std::cerr << "Error: Insufficient funds in the bank account for this operation." << std::endl;
+                return;
+            }
+        }
+            // Se l'operazione è di tipo "Withdrawal" (prelievo dalla carta)
+        else if (operation->getType() == OperationType::Withdrawal) {
+            // Aggiungi l'importo al bilancio del conto
+            balance += operation->getAmount();
+            // Sottrai l'importo dal saldo della carta
+            (*cardIt)->setAmount((*cardIt)->getAmount() - operation->getAmount());
+            // Aggiungi l'operazione alla lista delle operazioni della carta
+            (*cardIt)->addOperation(operation);
+        }
+    } else {
+        std::cerr << "Error: Card not found. Cannot add operation." << std::endl;
+    }
 }
 
 void BankAccount::printCardOperations(const std::string& cardName) const {
@@ -283,9 +416,9 @@ void BankAccount::printCardOperations(const std::string& cardName) const {
         std::cout << "Operations for card " << cardName << ":\n";
         for (const auto& op : (*cardIt)->getOperations()) {
             std::cout << "Amount: " << op->getAmount()
-                      << ", Type: " << op->printOperationType()
-                      << ", Date: " << std::chrono::system_clock::to_time_t(op->getDate())
-                      << ", Description: " << op->getDescription()
+                      << ", Type: " << operationTypeToString(op->getType())
+                      << ", Date: " << timePointToString(op->getDate())
+                      << ", Description: " << op->getDescription()  // Stampa la descrizione
                       << '\n';
         }
     } else {
@@ -304,26 +437,11 @@ void BankAccount::printCards() const {
     }
 }
 
-std::string BankAccount::getTransactionHistory() const {
+// Metodi di stampa e formattazione
+std::string BankAccount::printBalance() const {
     std::ostringstream oss;
-    for (const auto& op : operations) {
-        oss << "Amount: " << op->getAmount()
-            << ", Type: " << static_cast<int>(op->getType())
-            << ", Date: " << std::chrono::system_clock::to_time_t(op->getDate())
-            << '\n';
-    }
+    oss << "Balance: " << balance;
     return oss.str();
-}
-
-void BankAccount::printPlannedTransactions() const {
-    for (const auto& schedOp : scheduledOperations) {
-        std::cout << "Operation Amount: " << schedOp->getOperation()->getAmount()
-                  << ", Type: " << static_cast<int>(schedOp->getOperation()->getType())
-                  << ", Operation Date: " << std::chrono::system_clock::to_time_t(schedOp->getOperation()->getDate())
-                  << ", Scheduled Execution Date: " << std::chrono::system_clock::to_time_t(schedOp->getScheduledExecutionDate())
-                  << ", Frequency: " << static_cast<int>(schedOp->getFrequency())
-                  << '\n';
-    }
 }
 
 std::string BankAccount::timePointToString(std::chrono::system_clock::time_point tp) const {
@@ -333,7 +451,62 @@ std::string BankAccount::timePointToString(std::chrono::system_clock::time_point
     return oss.str();
 }
 
+// Nuovi metodi per contare le operazioni
+int BankAccount::getNormalOperationCount() const {
+    return operations.size();
+}
+
+int BankAccount::getScheduledOperationCount() const {
+    return scheduledOperations.size();
+}
+
+int BankAccount::getCardOperationCount() const {
+    int cardOps = 0;
+    for (const auto& card : cardsOperations) {
+        cardOps += card->getOperations().size();
+    }
+    return cardOps;
+}
+
+std::string BankAccount::getIBAN() const {
+    return IBAN;
+}
+
 double BankAccount::getBalance() const {
     return balance;
 }
 
+std::vector<std::shared_ptr<Card>> BankAccount::getCardsOperations() const {
+    return cardsOperations;
+}
+
+// Conversione di OperationType in stringa
+std::string BankAccount::operationTypeToString(OperationType type) const {
+    switch (type) {
+        case OperationType::Deposit:
+            return "Deposit";
+        case OperationType::Withdrawal:
+            return "Withdrawal";
+        case OperationType::Transfer:
+            return "Trasfer";
+        default:
+            return "Unknown";
+    }
+}
+
+// Conversione di Frequency in stringa
+std::string BankAccount::frequencyToString(Frequency freq) const {
+    switch (freq) {
+        case Frequency::Daily:
+            return "Daily";
+        case Frequency::Weekly:
+            return "Weekly";
+        case Frequency::Monthly:
+            return "Monthly";
+        case Frequency::Yearly:
+            return "Monthly";
+
+        default:
+            return "Unknown";
+    }
+}

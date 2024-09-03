@@ -21,7 +21,7 @@ public:
     OperationType getType() const;
     std::chrono::system_clock::time_point getDate() const;
     std::string getDescription() const;
-
+    void setDescription(const std::string &description);
     std::string printOperationType() const;
 
 private:

@@ -58,7 +58,7 @@ TEST(BankAccountTest, PrintBalance) {
 
 
 
-// Test cancelOperations
+// Test removeOperations
 TEST(BankAccountTest, CancelOperations) {
     BankAccount account;
     auto op1 = std::make_shared<Operation>(1, 100.0, OperationType::Deposit, std::chrono::system_clock::now());
@@ -67,7 +67,7 @@ TEST(BankAccountTest, CancelOperations) {
     account.addTransaction(op2);
 
     std::vector<std::shared_ptr<Operation>> toCancel = {op1};
-    account.cancelOperations(toCancel);
+    account.removeOperations(toCancel);
 
     auto operations = account.findOperationByAmount(100.0);
     EXPECT_EQ(operations.size(), 0);  // Operation 1 should be canceled
@@ -79,7 +79,7 @@ TEST(BankAccountTest, CancelOperations) {
 TEST(BankAccountTest, RemoveScheduledOperation) {
     BankAccount account;
     auto op = std::make_shared<Operation>(1, 400.0, OperationType::Deposit, std::chrono::system_clock::now());
-    account.scheduleOperation(op, std::chrono::system_clock::now() + std::chrono::hours(24), Frequency::One);
+    account.addScheduleOperation(op, std::chrono::system_clock::now() + std::chrono::hours(24), Frequency::One);
 
     auto scheduledOps = account.findScheduledByAmount(400.0);
     ASSERT_EQ(scheduledOps.size(), 1);
@@ -93,7 +93,7 @@ TEST(BankAccountTest, RemoveScheduledOperation) {
 TEST(BankAccountTest, PrintPlannedTransactions) {
     BankAccount account;
     auto op = std::make_shared<Operation>(1, 500.0, OperationType::Deposit, std::chrono::system_clock::now());
-    account.scheduleOperation(op, std::chrono::system_clock::now() + std::chrono::hours(24), Frequency::One);
+    account.addScheduleOperation(op, std::chrono::system_clock::now() + std::chrono::hours(24), Frequency::One);
 
     testing::internal::CaptureStdout();
     account.printPlannedTransactions();

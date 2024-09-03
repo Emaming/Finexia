@@ -45,10 +45,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /snap/clion/291/bin/cmake/linux/x64/bin/cmake
+CMAKE_COMMAND = /snap/clion/292/bin/cmake/linux/x64/bin/cmake
 
 # The command to remove a file.
-RM = /snap/clion/291/bin/cmake/linux/x64/bin/cmake -E rm -f
+RM = /snap/clion/292/bin/cmake/linux/x64/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -174,9 +174,9 @@ CMakeFiles/Finexia_lib.dir/clean:
 # Target rules for target test/CMakeFiles/runAllTests.dir
 
 # All Build rule for target.
+test/CMakeFiles/runAllTests.dir/all: CMakeFiles/Finexia_lib.dir/all
 test/CMakeFiles/runAllTests.dir/all: test/lib/googletest/CMakeFiles/gtest.dir/all
 test/CMakeFiles/runAllTests.dir/all: test/lib/googletest/CMakeFiles/gtest_main.dir/all
-test/CMakeFiles/runAllTests.dir/all: CMakeFiles/Finexia_lib.dir/all
 	$(MAKE) $(MAKESILENT) -f test/CMakeFiles/runAllTests.dir/build.make test/CMakeFiles/runAllTests.dir/depend
 	$(MAKE) $(MAKESILENT) -f test/CMakeFiles/runAllTests.dir/build.make test/CMakeFiles/runAllTests.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/user/ClionProjects/FinexiaTest/cmake-build-debug/CMakeFiles --progress-num=14,15,16,17,18 "Built target runAllTests"
@@ -202,9 +202,9 @@ test/CMakeFiles/runAllTests.dir/clean:
 # Target rules for target test/CMakeFiles/runBankAccountTest.dir
 
 # All Build rule for target.
+test/CMakeFiles/runBankAccountTest.dir/all: CMakeFiles/Finexia_lib.dir/all
 test/CMakeFiles/runBankAccountTest.dir/all: test/lib/googletest/CMakeFiles/gtest.dir/all
 test/CMakeFiles/runBankAccountTest.dir/all: test/lib/googletest/CMakeFiles/gtest_main.dir/all
-test/CMakeFiles/runBankAccountTest.dir/all: CMakeFiles/Finexia_lib.dir/all
 	$(MAKE) $(MAKESILENT) -f test/CMakeFiles/runBankAccountTest.dir/build.make test/CMakeFiles/runBankAccountTest.dir/depend
 	$(MAKE) $(MAKESILENT) -f test/CMakeFiles/runBankAccountTest.dir/build.make test/CMakeFiles/runBankAccountTest.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/user/ClionProjects/FinexiaTest/cmake-build-debug/CMakeFiles --progress-num=19,20 "Built target runBankAccountTest"
@@ -230,9 +230,9 @@ test/CMakeFiles/runBankAccountTest.dir/clean:
 # Target rules for target test/CMakeFiles/runOperationTest.dir
 
 # All Build rule for target.
+test/CMakeFiles/runOperationTest.dir/all: CMakeFiles/Finexia_lib.dir/all
 test/CMakeFiles/runOperationTest.dir/all: test/lib/googletest/CMakeFiles/gtest.dir/all
 test/CMakeFiles/runOperationTest.dir/all: test/lib/googletest/CMakeFiles/gtest_main.dir/all
-test/CMakeFiles/runOperationTest.dir/all: CMakeFiles/Finexia_lib.dir/all
 	$(MAKE) $(MAKESILENT) -f test/CMakeFiles/runOperationTest.dir/build.make test/CMakeFiles/runOperationTest.dir/depend
 	$(MAKE) $(MAKESILENT) -f test/CMakeFiles/runOperationTest.dir/build.make test/CMakeFiles/runOperationTest.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/user/ClionProjects/FinexiaTest/cmake-build-debug/CMakeFiles --progress-num=21,22 "Built target runOperationTest"
@@ -258,9 +258,9 @@ test/CMakeFiles/runOperationTest.dir/clean:
 # Target rules for target test/CMakeFiles/runScheduledOperationTest.dir
 
 # All Build rule for target.
+test/CMakeFiles/runScheduledOperationTest.dir/all: CMakeFiles/Finexia_lib.dir/all
 test/CMakeFiles/runScheduledOperationTest.dir/all: test/lib/googletest/CMakeFiles/gtest.dir/all
 test/CMakeFiles/runScheduledOperationTest.dir/all: test/lib/googletest/CMakeFiles/gtest_main.dir/all
-test/CMakeFiles/runScheduledOperationTest.dir/all: CMakeFiles/Finexia_lib.dir/all
 	$(MAKE) $(MAKESILENT) -f test/CMakeFiles/runScheduledOperationTest.dir/build.make test/CMakeFiles/runScheduledOperationTest.dir/depend
 	$(MAKE) $(MAKESILENT) -f test/CMakeFiles/runScheduledOperationTest.dir/build.make test/CMakeFiles/runScheduledOperationTest.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/user/ClionProjects/FinexiaTest/cmake-build-debug/CMakeFiles --progress-num=23,24 "Built target runScheduledOperationTest"

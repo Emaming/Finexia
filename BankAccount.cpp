@@ -14,12 +14,16 @@ void BankAccount::generateIBAN() {
     // Codice paese (esempio: IT per Italia)
     std::string countryCode = "IT";
 
-    // Numero di controllo (simulato come due numeri casuali)
-    int controlDigits = rand() % 90 + 10; // Genera un numero tra 10 e 99
+    // Generazione sicura del numero di controllo
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<int> dist(10, 99);
+    int controlDigits = dist(gen);
 
-    // Numero di conto bancario (esempio, generato casualmente)
+    // Generazione sicura del numero di conto bancario
+    std::uniform_int_distribution<std::uint64_t> distAccount(0, 999999999999);
     std::ostringstream accountNumber;
-    accountNumber << std::setw(12) << std::setfill('0') << rand() % 100000000000; // Numero di conto bancario fittizio
+    accountNumber << std::setw(12) << std::setfill('0') << distAccount(gen);
 
     // Componi l'IBAN
     IBAN = countryCode + std::to_string(controlDigits) + accountNumber.str();
@@ -133,10 +137,11 @@ void BankAccount::loadFromFile(const std::string& filename) {
         std::string cvv;
         std::time_t expDate;
         double amount;
+        bool isCredit;
 
-        file >> cardName >> cardNumber >> cvv >> expDate >> amount;
+        file >> cardName >> cardNumber >> cvv >> expDate >> amount >> isCredit;
 
-        auto card = std::make_shared<Card>(cardName);
+        auto card = std::make_shared<Card>(cardName,isCredit);
         card->setCardNumber(cardNumber);
         card->setCvv(cvv);
         card->setExpirationDate(std::chrono::system_clock::from_time_t(expDate));
@@ -175,6 +180,9 @@ void BankAccount::addTransaction(const std::shared_ptr<Operation>& transaction) 
     if (transaction->getType() == OperationType::Deposit) {
         balance += transaction->getAmount();
     } else if (transaction->getType() == OperationType::Withdrawal) {
+        balance -= transaction->getAmount();
+    }
+    else if (transaction->getType() == OperationType::Transfer) {
         balance -= transaction->getAmount();
     }
 }
@@ -357,7 +365,7 @@ void BankAccount::executeScheduledOperations() {
 
 // Metodi per le carte
 void BankAccount::addCard(const std::string& cardName, bool isCredit) {
-    auto card = std::make_shared<Card>(cardName);
+    auto card = std::make_shared<Card>(cardName,isCredit);
     cardsOperations.push_back(card);
 }
 
@@ -370,36 +378,34 @@ void BankAccount::removeCard(const std::string& cardName) {
 }
 
 void BankAccount::addOperationToCard(const std::string& cardName, const std::shared_ptr<Operation>& operation) {
-    // Trova la carta con il nome specificato
     auto cardIt = std::find_if(cardsOperations.begin(), cardsOperations.end(),
                                [&cardName](const std::shared_ptr<Card>& card) {
                                    return card->getCardName() == cardName;
                                });
 
     if (cardIt != cardsOperations.end()) {
-        // Se l'operazione è di tipo "Deposit" (ricarica carta)
+        auto& card = *cardIt;
         if (operation->getType() == OperationType::Deposit) {
-            // Controlla se il bilancio del conto è sufficiente
+            // Verifica e gestisci il deposito
             if (balance >= operation->getAmount()) {
-                // Sottrai l'importo dal bilancio del conto
                 balance -= operation->getAmount();
-                // Aggiungi l'importo al saldo della carta
-                (*cardIt)->setAmount((*cardIt)->getAmount() + operation->getAmount());
-                // Aggiungi l'operazione alla lista delle operazioni della carta
-                (*cardIt)->addOperation(operation);
+                card->setAmount(card->getAmount() + operation->getAmount());
+                card->addOperation(operation);
             } else {
-                std::cerr << "Error: Insufficient funds in the bank account for this operation." << std::endl;
-                return;
+                std::cerr << "Error: Insufficient funds in the bank account for this deposit." << std::endl;
             }
-        }
-            // Se l'operazione è di tipo "Withdrawal" (prelievo dalla carta)
-        else if (operation->getType() == OperationType::Withdrawal) {
-            // Aggiungi l'importo al bilancio del conto
-            balance += operation->getAmount();
-            // Sottrai l'importo dal saldo della carta
-            (*cardIt)->setAmount((*cardIt)->getAmount() - operation->getAmount());
-            // Aggiungi l'operazione alla lista delle operazioni della carta
-            (*cardIt)->addOperation(operation);
+        } else if (operation->getType() == OperationType::Withdrawal) {
+            // Verifica e gestisci il prelievo
+            double newCardAmount = card->getAmount() - operation->getAmount();
+            if (card->isCreditCardBool() || newCardAmount >= 0) {
+                // Se la carta è di credito o ci sono fondi sufficienti sulla carta di debito
+                card->setAmount(newCardAmount);
+                card->addOperation(operation);
+            } else {
+                std::cerr << "Error: Insufficient funds on the debit card for this withdrawal." << std::endl;
+            }
+        } else {
+            std::cerr << "Error: Unsupported operation type." << std::endl;
         }
     } else {
         std::cerr << "Error: Card not found. Cannot add operation." << std::endl;

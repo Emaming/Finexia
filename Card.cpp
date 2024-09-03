@@ -4,14 +4,16 @@
 #include <random>
 #include <iostream>
 
-Card::Card(const std::string& name)
+Card::Card(const std::string& name, bool isCredit)
         : cardName(name),
+          isCreditCard(isCredit),
           cardNumber(generateCardNumber()),
           cvv(generateCvv()),
           pin(generatePin()),
           expirationDate(generateExpirationDate()),
-          amount(0) {
+          amount(0) {  // Default amount is 0
 }
+
 
 std::string Card::generateCardNumber() {
     std::random_device rd;
@@ -43,6 +45,19 @@ std::chrono::system_clock::time_point Card::generateExpirationDate() {
     return future;
 }
 
+void Card::setAmount(double newAmount) {
+    if (isCreditCard) {
+        // Le carte di credito possono avere saldo negativo
+        amount = newAmount;
+    } else {
+        // Le carte di debito non possono andare in negativo
+        if (newAmount >= 0) {
+            amount = newAmount;
+        } else {
+            std::cerr << "Error: Insufficient funds. Debit card cannot have a negative balance." << std::endl;
+        }
+    }
+}
 
 
 const std::string &Card::getCardName() const {
@@ -89,6 +104,6 @@ void Card::setExpirationDate(std::chrono::system_clock::time_point expDate) {
     expirationDate = expDate;
 }
 
-void Card::setAmount(double amount) {
-    this->amount = amount;
+bool Card::isCreditCardBool() const {
+    return isCreditCard;
 }

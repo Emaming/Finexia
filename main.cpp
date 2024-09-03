@@ -395,10 +395,12 @@ void handleCardOperations(BankAccount& account) {
                 break;
             }
 
+
             case 4: {
                 std::string cardName;
                 double amount;
                 std::string description;
+                int operationType;
 
                 std::cin.ignore();  // Ignora il newline residuo
                 std::cout << "Enter card name to associate operation: ";
@@ -412,7 +414,15 @@ void handleCardOperations(BankAccount& account) {
                 std::cout << "Enter operation amount: ";
                 std::cin >> amount;
 
-                std::cin.ignore();  // Ignora il newline residuo
+                std::cout << "Enter operation type (1 for Deposit, 2 for Withdrawal): ";
+                std::cin >> operationType;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+                if (operationType != 1 && operationType != 2) {
+                    std::cerr << "Invalid operation type. Please enter 1 for Deposit or 2 for Withdrawal." << std::endl;
+                    continue;
+                }
+
                 std::cout << "Enter operation description: ";
                 std::getline(std::cin, description);
 
@@ -421,7 +431,8 @@ void handleCardOperations(BankAccount& account) {
                     continue;
                 }
 
-                auto operation = std::make_shared<Operation>(amount, OperationType::Deposit, description);
+                auto opType = (operationType == 1) ? OperationType::Deposit : OperationType::Withdrawal;
+                auto operation = std::make_shared<Operation>(amount, opType, description);
 
                 account.addOperationToCard(cardName, operation);
                 std::cout << "Operation added to card successfully." << std::endl;

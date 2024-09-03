@@ -2,8 +2,10 @@
 #include "iostream"
 
 DebitCard::DebitCard(const std::string& name)
-        : Card(name) {
+        : Card(name,isCreditCard) {
+    this->isCreditCard= false;
 }
+
 
 bool DebitCard::canProcessTransaction(double amount) const {
     return (amount <= getAmount());

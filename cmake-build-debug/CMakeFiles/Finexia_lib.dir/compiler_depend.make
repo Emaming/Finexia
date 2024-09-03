@@ -640,6 +640,7 @@ CMakeFiles/Finexia_lib.dir/CreditCard.cpp.o: /home/user/ClionProjects/FinexiaTes
   /usr/include/c++/11/bits/hash_bytes.h \
   /usr/include/c++/11/bits/invoke.h \
   /usr/include/c++/11/bits/ios_base.h \
+  /usr/include/c++/11/bits/istream.tcc \
   /usr/include/c++/11/bits/iterator_concepts.h \
   /usr/include/c++/11/bits/list.tcc \
   /usr/include/c++/11/bits/locale_classes.h \
@@ -718,6 +719,8 @@ CMakeFiles/Finexia_lib.dir/CreditCard.cpp.o: /home/user/ClionProjects/FinexiaTes
   /usr/include/c++/11/initializer_list \
   /usr/include/c++/11/ios \
   /usr/include/c++/11/iosfwd \
+  /usr/include/c++/11/iostream \
+  /usr/include/c++/11/istream \
   /usr/include/c++/11/iterator \
   /usr/include/c++/11/limits \
   /usr/include/c++/11/list \
@@ -895,6 +898,7 @@ CMakeFiles/Finexia_lib.dir/DebitCard.cpp.o: /home/user/ClionProjects/FinexiaTest
   /usr/include/c++/11/bits/hash_bytes.h \
   /usr/include/c++/11/bits/invoke.h \
   /usr/include/c++/11/bits/ios_base.h \
+  /usr/include/c++/11/bits/istream.tcc \
   /usr/include/c++/11/bits/iterator_concepts.h \
   /usr/include/c++/11/bits/list.tcc \
   /usr/include/c++/11/bits/locale_classes.h \
@@ -973,6 +977,8 @@ CMakeFiles/Finexia_lib.dir/DebitCard.cpp.o: /home/user/ClionProjects/FinexiaTest
   /usr/include/c++/11/initializer_list \
   /usr/include/c++/11/ios \
   /usr/include/c++/11/iosfwd \
+  /usr/include/c++/11/iostream \
+  /usr/include/c++/11/istream \
   /usr/include/c++/11/iterator \
   /usr/include/c++/11/limits \
   /usr/include/c++/11/list \

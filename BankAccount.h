@@ -17,7 +17,7 @@ private:
     std::string IBAN;
     std::list<std::shared_ptr<Operation>> operations;
     std::list<std::shared_ptr<ScheduledOperation>> scheduledOperations;
-    std::vector<std::shared_ptr<Card>> cardsOperations;
+    std::vector<std::shared_ptr<Card>> cards;
 
 public:
     // Costruttore
@@ -42,7 +42,7 @@ public:
     void printOperations(const std::vector<std::shared_ptr<Operation>>& operations) const;
 
     // Metodi per le operazioni programmate
-    void addScheduleOperation(const std::shared_ptr<Operation>& operation, std::chrono::system_clock::time_point startDate, Frequency frequency);
+    void addScheduleOperation(std::shared_ptr<ScheduledOperation> scheduledOperationsToRemove);
     void removeScheduledOperation(const std::vector<std::shared_ptr<ScheduledOperation>>& scheduledOperationsToRemove);
     std::vector<std::shared_ptr<ScheduledOperation>> findScheduledByAmount(double amount) const;
     std::vector<std::shared_ptr<ScheduledOperation>> findScheduledByDate(std::chrono::system_clock::time_point date) const;
@@ -56,7 +56,7 @@ public:
     void addOperationToCard(const std::string& cardName, const std::shared_ptr<Operation>& operation);
     void printCardOperations(const std::string& cardName) const;
     void printCards() const;
-
+int getCardOperationsSize();
     // Metodi di conversione
     std::string operationTypeToString(OperationType type) const;
     std::string frequencyToString(Frequency freq) const;

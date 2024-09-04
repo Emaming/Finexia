@@ -8,19 +8,17 @@
 
 enum class Frequency { One, Daily, Weekly, Monthly, Yearly };
 
-class ScheduledOperation {
+class ScheduledOperation : public Operation{
 private:
-    std::shared_ptr<Operation> operation;  // Verifica che Operation sia definito e incluso
     std::chrono::system_clock::time_point scheduledExecutionDate;
     Frequency frequency;
 
 public:
-    ScheduledOperation(std::shared_ptr<Operation> op, std::chrono::system_clock::time_point date, Frequency freq)
-            : operation(op), scheduledExecutionDate(date), frequency(freq) {}
+    ScheduledOperation(double amount,OperationType type, std::chrono::system_clock::time_point date, Frequency freq)
+            : Operation(amount,type), scheduledExecutionDate(date), frequency(freq) {}
 
     const std::chrono::system_clock::time_point& getScheduledExecutionDate() const;
     Frequency getFrequency() const;
-    std::shared_ptr<Operation> getOperation() const { return operation; }
     std::string frequencyToString() const;
     void setScheduledExecutionDate(std::chrono::system_clock::time_point newDate);
 

@@ -36,14 +36,14 @@ public:
     std::chrono::system_clock::time_point getExpirationDate() const;
 
     std::list<std::shared_ptr<Operation>> getOperations() const;
-
+    void removeLastOperation();
     virtual void addOperation(const std::shared_ptr<Operation>& op);
     void setCardNumber(const std::string& number);
     void setCvv(const std::string& cvv);
     void setExpirationDate(std::chrono::system_clock::time_point expDate);
 
     bool isCreditCardBool() const;
-
+    int getOperationSize();
     virtual ~Card() = default;
 };
 

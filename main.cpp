@@ -570,8 +570,8 @@ void handleScheduleTransaction(BankAccount& account) {
                 continue;  // Torna al menu di selezione della frequenza
         }
 
-        auto transaction = std::make_shared<Operation>(amount, type, startDate);
-        account.addScheduleOperation(transaction, startDate, freq);
+        auto transaction = std::make_shared<ScheduledOperation>(amount, type, startDate,freq);
+        account.addScheduleOperation(transaction);
         std::cout << "Transaction scheduled successfully." << std::endl;
         break;  // Esci dal ciclo se la data è valida e l'operazione è programmata
     }
@@ -592,8 +592,20 @@ int main() {
 
     do {
         printMenu();
+
+        // Gestisci l'input dell'utente
         std::cin >> choice;
 
+        // Verifica se l'input è valido
+        if (std::cin.fail()) {
+            // Rileva errore di input
+            std::cin.clear(); // Ripristina lo stato di cin
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Ignora il resto dell'input
+            std::cerr << "Invalid input! Please enter a number associated with the menu options." << std::endl;
+            choice = -1; // Imposta una scelta non valida per continuare il ciclo
+        }
+
+        // Gestisci la scelta dell'utente
         switch (choice) {
             case 1: handleAddTransaction(account); break;
             case 2: handleSearchOperations(account); break;
@@ -602,15 +614,16 @@ int main() {
             case 5: handleCardOperations(account); break;
             case 6: handleScheduleTransaction(account); break;
             case 7: handlePrintPlannedTransactions(account); break;
-            case 8:handleCancelScheduledTransactions(account); break;
+            case 8: handleCancelScheduledTransactions(account); break;
             case 9: handleExecuteScheduledOperations(account); break;
             case 10: handleSaveToFile(account); break;
             case 11: handleLoadFromFile(account); break;
             case 12: handlePrintBalance(account); break;
-            case 13:handlePrintIBAN(account);break;
+            case 13: handlePrintIBAN(account); break;
             case 0: std::cout << "Exiting program." << std::endl; break;
             default: std::cerr << "Invalid choice! Please try again." << std::endl; break;
         }
+
     } while (choice != 0);
 
     return 0;

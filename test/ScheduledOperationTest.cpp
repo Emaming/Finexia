@@ -1,60 +1,62 @@
-#include "../ScheduledOperation.h"
 #include <gtest/gtest.h>
+#include "../ScheduledOperation.h"
 #include <chrono>
-#include <sstream>
-#include <iomanip>
+#include <string>
 
-// Funzione libera per convertire il time_point in una stringa
-std::string timePointToString(const std::chrono::system_clock::time_point& timePoint) {
-    std::time_t time = std::chrono::system_clock::to_time_t(timePoint);
-    std::stringstream ss;
-    ss << std::put_time(std::localtime(&time), "%Y-%m-%d %H:%M:%S");
-    return ss.str();
-}
+using namespace std::chrono;
 
-// Test Fixture per ScheduledOperation
 class ScheduledOperationTest : public ::testing::Test {
 protected:
+    // You can define common setup code here if needed.
     void SetUp() override {
-        // Inizializzazione prima di ogni test
-        op = std::make_shared<Operation>(100.0, OperationType::Deposit);
-        now = std::chrono::system_clock::now();
+        // Common setup code, if needed
     }
 
     void TearDown() override {
-        // Pulizia dopo ogni test
+        // Common teardown code, if needed
     }
-
-    std::shared_ptr<Operation> op;
-    std::chrono::system_clock::time_point now;
 };
 
-// Test del costruttore e dei getter
-TEST_F(ScheduledOperationTest, ConstructorAndGetters) {
-    ScheduledOperation schedOp(op, now, Frequency::Daily);
-
-    EXPECT_EQ(schedOp.getOperation(), op);
-    EXPECT_EQ(schedOp.getScheduledExecutionDate(), now);
-    EXPECT_EQ(schedOp.getFrequency(), Frequency::Daily);
+// Helper function to get a fixed time point
+system_clock::time_point getFixedTimePoint() {
+    return system_clock::now() + std::chrono::hours(1);
 }
 
+TEST_F(ScheduledOperationTest, Constructor) {
+    auto now = getFixedTimePoint();
+    ScheduledOperation op(100.0, OperationType::Deposit, now, Frequency::Weekly);
 
-// Test di printOperationString
+    EXPECT_DOUBLE_EQ(op.getAmount(), 100.0);
+    EXPECT_EQ(op.getType(), OperationType::Deposit);
+    EXPECT_EQ(op.getScheduledExecutionDate(), now);
+    EXPECT_EQ(op.getFrequency(), Frequency::Weekly);
+}
 
-// Test di frequencyToString
 TEST_F(ScheduledOperationTest, FrequencyToString) {
-    ScheduledOperation schedOp(op, now, Frequency::Daily);
-    EXPECT_EQ(schedOp.frequencyToString(), "Daily");
+    ScheduledOperation dailyOp(100.0, OperationType::Deposit, getFixedTimePoint(), Frequency::Daily);
+    ScheduledOperation weeklyOp(100.0, OperationType::Deposit, getFixedTimePoint(), Frequency::Weekly);
+    ScheduledOperation monthlyOp(100.0, OperationType::Deposit, getFixedTimePoint(), Frequency::Monthly);
+    ScheduledOperation yearlyOp(100.0, OperationType::Deposit, getFixedTimePoint(), Frequency::Yearly);
 
-    schedOp = ScheduledOperation(op, now, Frequency::Weekly);
-    EXPECT_EQ(schedOp.frequencyToString(), "Weekly");
-
-    schedOp = ScheduledOperation(op, now, Frequency::Monthly);
-    EXPECT_EQ(schedOp.frequencyToString(), "Monthly");
-
-    schedOp = ScheduledOperation(op, now, Frequency::Yearly);
-    EXPECT_EQ(schedOp.frequencyToString(), "Yearly");
-
-    schedOp = ScheduledOperation(op, now, Frequency::One);
-    EXPECT_EQ(schedOp.frequencyToString(), "Unknown"); // Gestione tipo sconosciuto
+    EXPECT_EQ(dailyOp.frequencyToString(), "Daily");
+    EXPECT_EQ(weeklyOp.frequencyToString(), "Weekly");
+    EXPECT_EQ(monthlyOp.frequencyToString(), "Monthly");
+    EXPECT_EQ(yearlyOp.frequencyToString(), "Yearly");
 }
+
+TEST_F(ScheduledOperationTest, SetScheduledExecutionDate) {
+    auto now = getFixedTimePoint();
+    ScheduledOperation op(100.0, OperationType::Deposit, now, Frequency::Weekly);
+
+    auto newDate = now + std::chrono::days(10);
+    op.setScheduledExecutionDate(newDate);
+
+    EXPECT_EQ(op.getScheduledExecutionDate(), newDate);
+}
+
+TEST_F(ScheduledOperationTest, DefaultFrequencyToString) {
+    ScheduledOperation op(100.0, OperationType::Deposit, getFixedTimePoint(), Frequency::One);
+
+    EXPECT_EQ(op.frequencyToString(), "Unknown");
+}
+

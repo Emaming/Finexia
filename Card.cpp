@@ -14,7 +14,17 @@ Card::Card(const std::string& name, bool isCredit)
           amount(0) {  // Default amount is 0
 }
 
+void Card::removeLastOperation() {
+    if (!cardOperations.empty()) {
+        cardOperations.pop_back();
+    } else {
+        std::cerr << "Error: No operations to remove." << std::endl;
+    }
+}
 
+int Card::getOperationSize() {
+    return cardOperations.size() ;
+}
 std::string Card::generateCardNumber() {
     std::random_device rd;
     std::mt19937 gen(rd());

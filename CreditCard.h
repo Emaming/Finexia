@@ -5,24 +5,25 @@
 
 class CreditCard : public Card {
 private:
+    // Attributi specifici della carta di credito
     double creditLimit;
     double interestRate;
 
 public:
-    // Constructor
+    // Costruttore
     CreditCard(const std::string& name, double limit, double rate);
 
-    // Getters and setters
+    // Getters e setters
     double getCreditLimit() const;
     void setCreditLimit(double limit);
 
     double getInterestRate() const;
     void setInterestRate(double rate);
 
-    // Method to check if a transaction can be processed
+    // Metodo per verificare se una transazione può essere processata
     bool canProcessTransaction(double amount) const;
 
-    // Override methods if needed
+    // Override del metodo addOperation
     void addOperation(const std::shared_ptr<Operation>& op) override;
 };
 

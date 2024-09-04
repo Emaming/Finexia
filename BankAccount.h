@@ -56,7 +56,7 @@ public:
     void addOperationToCard(const std::string& cardName, const std::shared_ptr<Operation>& operation);
     void printCardOperations(const std::string& cardName) const;
     void printCards() const;
-int getCardOperationsSize();
+
     // Metodi di conversione
     std::string operationTypeToString(OperationType type) const;
     std::string frequencyToString(Frequency freq) const;

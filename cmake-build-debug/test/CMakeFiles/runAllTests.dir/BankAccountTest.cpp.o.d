@@ -1,7 +1,7 @@
 test/CMakeFiles/runAllTests.dir/BankAccountTest.cpp.o: \
- /home/user/ClionProjects/TestFinexa/test/BankAccountTest.cpp \
+ /home/user/ClionProjects/FinexiaTest/test/BankAccountTest.cpp \
  /usr/include/stdc-predef.h \
- /home/user/ClionProjects/TestFinexa/test/lib/googletest/include/gtest/gtest.h \
+ /home/user/ClionProjects/FinexiaTest/test/lib/googletest/include/gtest/gtest.h \
  /usr/include/c++/11/cstddef \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
@@ -219,9 +219,9 @@ test/CMakeFiles/runAllTests.dir/BankAccountTest.cpp.o: \
  /usr/include/c++/11/bits/stl_vector.h \
  /usr/include/c++/11/bits/stl_bvector.h \
  /usr/include/c++/11/bits/vector.tcc \
- /home/user/ClionProjects/TestFinexa/test/lib/googletest/include/gtest/gtest-assertion-result.h \
- /home/user/ClionProjects/TestFinexa/test/lib/googletest/include/gtest/gtest-message.h \
- /home/user/ClionProjects/TestFinexa/test/lib/googletest/include/gtest/internal/gtest-port.h \
+ /home/user/ClionProjects/FinexiaTest/test/lib/googletest/include/gtest/gtest-assertion-result.h \
+ /home/user/ClionProjects/FinexiaTest/test/lib/googletest/include/gtest/gtest-message.h \
+ /home/user/ClionProjects/FinexiaTest/test/lib/googletest/include/gtest/internal/gtest-port.h \
  /usr/include/c++/11/stdlib.h /usr/include/string.h \
  /usr/include/strings.h /usr/include/c++/11/iostream \
  /usr/include/x86_64-linux-gnu/sys/stat.h \
@@ -239,8 +239,8 @@ test/CMakeFiles/runAllTests.dir/BankAccountTest.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/statx-generic.h \
  /usr/include/x86_64-linux-gnu/bits/types/struct_statx_timestamp.h \
  /usr/include/x86_64-linux-gnu/bits/types/struct_statx.h \
- /home/user/ClionProjects/TestFinexa/test/lib/googletest/include/gtest/internal/custom/gtest-port.h \
- /home/user/ClionProjects/TestFinexa/test/lib/googletest/include/gtest/internal/gtest-port-arch.h \
+ /home/user/ClionProjects/FinexiaTest/test/lib/googletest/include/gtest/internal/custom/gtest-port.h \
+ /home/user/ClionProjects/FinexiaTest/test/lib/googletest/include/gtest/internal/gtest-port-arch.h \
  /usr/include/regex.h /usr/include/c++/11/condition_variable \
  /usr/include/c++/11/chrono /usr/include/c++/11/ratio \
  /usr/include/c++/11/bits/parse_numbers.h \
@@ -254,15 +254,15 @@ test/CMakeFiles/runAllTests.dir/BankAccountTest.cpp.o: \
  /usr/include/c++/11/any /usr/include/c++/11/optional \
  /usr/include/c++/11/bits/enable_special_members.h \
  /usr/include/c++/11/variant \
- /home/user/ClionProjects/TestFinexa/test/lib/googletest/include/gtest/gtest-death-test.h \
- /home/user/ClionProjects/TestFinexa/test/lib/googletest/include/gtest/internal/gtest-death-test-internal.h \
- /home/user/ClionProjects/TestFinexa/test/lib/googletest/include/gtest/gtest-matchers.h \
+ /home/user/ClionProjects/FinexiaTest/test/lib/googletest/include/gtest/gtest-death-test.h \
+ /home/user/ClionProjects/FinexiaTest/test/lib/googletest/include/gtest/internal/gtest-death-test-internal.h \
+ /home/user/ClionProjects/FinexiaTest/test/lib/googletest/include/gtest/gtest-matchers.h \
  /usr/include/c++/11/functional /usr/include/c++/11/bits/std_function.h \
  /usr/include/c++/11/unordered_map /usr/include/c++/11/bits/hashtable.h \
  /usr/include/c++/11/bits/hashtable_policy.h \
  /usr/include/c++/11/bits/unordered_map.h \
- /home/user/ClionProjects/TestFinexa/test/lib/googletest/include/gtest/gtest-printers.h \
- /home/user/ClionProjects/TestFinexa/test/lib/googletest/include/gtest/internal/gtest-internal.h \
+ /home/user/ClionProjects/FinexiaTest/test/lib/googletest/include/gtest/gtest-printers.h \
+ /home/user/ClionProjects/FinexiaTest/test/lib/googletest/include/gtest/internal/gtest-internal.h \
  /usr/include/x86_64-linux-gnu/sys/wait.h /usr/include/signal.h \
  /usr/include/x86_64-linux-gnu/bits/signum-generic.h \
  /usr/include/x86_64-linux-gnu/bits/signum-arch.h \
@@ -288,30 +288,22 @@ test/CMakeFiles/runAllTests.dir/BankAccountTest.cpp.o: \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/float.h /usr/include/c++/11/map \
  /usr/include/c++/11/bits/stl_map.h \
  /usr/include/c++/11/bits/stl_multimap.h \
- /home/user/ClionProjects/TestFinexa/test/lib/googletest/include/gtest/internal/gtest-filepath.h \
- /home/user/ClionProjects/TestFinexa/test/lib/googletest/include/gtest/internal/gtest-string.h \
- /home/user/ClionProjects/TestFinexa/test/lib/googletest/include/gtest/internal/gtest-type-util.h \
+ /home/user/ClionProjects/FinexiaTest/test/lib/googletest/include/gtest/internal/gtest-filepath.h \
+ /home/user/ClionProjects/FinexiaTest/test/lib/googletest/include/gtest/internal/gtest-string.h \
+ /home/user/ClionProjects/FinexiaTest/test/lib/googletest/include/gtest/internal/gtest-type-util.h \
  /usr/include/c++/11/cxxabi.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/cxxabi_tweaks.h \
- /home/user/ClionProjects/TestFinexa/test/lib/googletest/include/gtest/internal/custom/gtest-printers.h \
- /home/user/ClionProjects/TestFinexa/test/lib/googletest/include/gtest/gtest-param-test.h \
- /home/user/ClionProjects/TestFinexa/test/lib/googletest/include/gtest/internal/gtest-param-util.h \
+ /home/user/ClionProjects/FinexiaTest/test/lib/googletest/include/gtest/internal/custom/gtest-printers.h \
+ /home/user/ClionProjects/FinexiaTest/test/lib/googletest/include/gtest/gtest-param-test.h \
+ /home/user/ClionProjects/FinexiaTest/test/lib/googletest/include/gtest/internal/gtest-param-util.h \
  /usr/include/c++/11/cassert /usr/include/assert.h \
- /home/user/ClionProjects/TestFinexa/test/lib/googletest/include/gtest/gtest-test-part.h \
- /home/user/ClionProjects/TestFinexa/test/lib/googletest/include/gtest/gtest-typed-test.h \
- /home/user/ClionProjects/TestFinexa/test/lib/googletest/include/gtest/gtest_pred_impl.h \
- /home/user/ClionProjects/TestFinexa/test/lib/googletest/include/gtest/gtest_prod.h \
- /home/user/ClionProjects/TestFinexa/test/../BankAccount.h \
+ /home/user/ClionProjects/FinexiaTest/test/lib/googletest/include/gtest/gtest-test-part.h \
+ /home/user/ClionProjects/FinexiaTest/test/lib/googletest/include/gtest/gtest-typed-test.h \
+ /home/user/ClionProjects/FinexiaTest/test/lib/googletest/include/gtest/gtest_pred_impl.h \
+ /home/user/ClionProjects/FinexiaTest/test/lib/googletest/include/gtest/gtest_prod.h \
+ /home/user/ClionProjects/FinexiaTest/test/../BankAccount.h \
  /usr/include/c++/11/list /usr/include/c++/11/bits/stl_list.h \
  /usr/include/c++/11/bits/list.tcc \
- /home/user/ClionProjects/TestFinexa/test/../Operation.h \
- /home/user/ClionProjects/TestFinexa/test/../ScheduledOperation.h \
- /home/user/ClionProjects/TestFinexa/test/../CardOperation.h \
- /home/user/ClionProjects/TestFinexa/test/../CreditCard.h \
- /home/user/ClionProjects/TestFinexa/test/../Card.h \
- /home/user/ClionProjects/TestFinexa/test/../DebitCard.h \
- /home/user/ClionProjects/TestFinexa/test/../Operation.h \
- /home/user/ClionProjects/TestFinexa/test/../ScheduledOperation.h \
- /home/user/ClionProjects/TestFinexa/test/../CardOperation.h \
- /home/user/ClionProjects/TestFinexa/test/../CreditCard.h \
- /home/user/ClionProjects/TestFinexa/test/../DebitCard.h
+ /home/user/ClionProjects/FinexiaTest/test/../Operation.h \
+ /home/user/ClionProjects/FinexiaTest/test/../ScheduledOperation.h \
+ /home/user/ClionProjects/FinexiaTest/test/../Card.h

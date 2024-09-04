@@ -7,21 +7,23 @@ using namespace std::chrono;
 
 class ScheduledOperationTest : public ::testing::Test {
 protected:
-    // You can define common setup code here if needed.
+    // Codice di setup comune (se necessario)
     void SetUp() override {
-        // Common setup code, if needed
+        // Codice di setup, se necessario
     }
 
+    // Codice di teardown comune (se necessario)
     void TearDown() override {
-        // Common teardown code, if needed
+        // Codice di teardown, se necessario
     }
 };
 
-// Helper function to get a fixed time point
+// Funzione di supporto per ottenere un punto temporale fisso
 system_clock::time_point getFixedTimePoint() {
     return system_clock::now() + std::chrono::hours(1);
 }
 
+// Test del costruttore di ScheduledOperation
 TEST_F(ScheduledOperationTest, Constructor) {
     auto now = getFixedTimePoint();
     ScheduledOperation op(100.0, OperationType::Deposit, now, Frequency::Weekly);
@@ -32,6 +34,7 @@ TEST_F(ScheduledOperationTest, Constructor) {
     EXPECT_EQ(op.getFrequency(), Frequency::Weekly);
 }
 
+// Test della conversione della frequenza in stringa
 TEST_F(ScheduledOperationTest, FrequencyToString) {
     ScheduledOperation dailyOp(100.0, OperationType::Deposit, getFixedTimePoint(), Frequency::Daily);
     ScheduledOperation weeklyOp(100.0, OperationType::Deposit, getFixedTimePoint(), Frequency::Weekly);
@@ -44,6 +47,7 @@ TEST_F(ScheduledOperationTest, FrequencyToString) {
     EXPECT_EQ(yearlyOp.frequencyToString(), "Yearly");
 }
 
+// Test del metodo setScheduledExecutionDate
 TEST_F(ScheduledOperationTest, SetScheduledExecutionDate) {
     auto now = getFixedTimePoint();
     ScheduledOperation op(100.0, OperationType::Deposit, now, Frequency::Weekly);
@@ -54,9 +58,9 @@ TEST_F(ScheduledOperationTest, SetScheduledExecutionDate) {
     EXPECT_EQ(op.getScheduledExecutionDate(), newDate);
 }
 
+// Test della frequenza predefinita in stringa
 TEST_F(ScheduledOperationTest, DefaultFrequencyToString) {
     ScheduledOperation op(100.0, OperationType::Deposit, getFixedTimePoint(), Frequency::One);
 
     EXPECT_EQ(op.frequencyToString(), "Unknown");
 }
-

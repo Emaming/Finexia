@@ -5,13 +5,13 @@
 
 class DebitCard : public Card {
 public:
-    // Constructor
+    // Costruttore
     DebitCard(const std::string& name);
 
-    // Method to check if a transaction can be processed
+    // Metodo per verificare se una transazione può essere processata
     bool canProcessTransaction(double amount) const;
 
-    // Override methods if needed
+    // Override del metodo addOperation
     void addOperation(const std::shared_ptr<Operation>& op) override;
 };
 

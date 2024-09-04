@@ -512,9 +512,6 @@ std::vector<std::shared_ptr<Card>> BankAccount::getCardsOperations() const {
     return cards;
 }
 
-int BankAccount::getCardOperationsSize() {
-    return cards.size();
-}
 // Conversione di OperationType in stringa
 std::string BankAccount::operationTypeToString(OperationType type) const {
     switch (type) {

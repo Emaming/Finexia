@@ -3,12 +3,12 @@
 #include <chrono>
 #include <memory>
 
-// Helper function to create a shared_ptr<Operation>
+// Funzione helper per creare un shared_ptr<Operation>
 std::shared_ptr<Operation> createOperation(double amount, OperationType type, std::chrono::system_clock::time_point date) {
     return std::make_shared<Operation>(amount, type, date);
 }
 
-// Helper function to create a shared_ptr<ScheduledOperation>
+// Funzione helper per creare un shared_ptr<ScheduledOperation>
 std::shared_ptr<ScheduledOperation> createScheduledOperation(double amount, OperationType type, std::chrono::system_clock::time_point date, Frequency freq) {
     auto op = std::make_shared<ScheduledOperation>(amount, type, date, freq);
     op->setScheduledExecutionDate(date);
@@ -20,7 +20,7 @@ protected:
     BankAccount account;
 
     void SetUp() override {
-        // Set up code (if needed)
+        // Codice di setup (se necessario)
     }
 };
 
@@ -59,6 +59,7 @@ TEST_F(BankAccountTest, WithdrawalDecreasesBalance) {
 TEST_F(BankAccountTest, WithdrawalInsufficientFunds) {
     auto withdrawal = createOperation(50.0, OperationType::Withdrawal, std::chrono::system_clock::now());
     account.addTransaction(withdrawal);
+
     EXPECT_EQ(account.getBalance(), -50.0); // La gestione dei fondi insufficienti non è implementata completamente
 }
 
@@ -70,6 +71,7 @@ TEST_F(BankAccountTest, SaveAndLoadFromFile) {
 
     BankAccount newAccount;
     newAccount.loadFromFile("test_account.txt");
+
     EXPECT_EQ(newAccount.getBalance(), 200.0);
     EXPECT_EQ(newAccount.getNormalOperationCount(), 1);
 }
@@ -97,12 +99,11 @@ TEST_F(BankAccountTest, AddAndRemoveCard) {
 // Test di aggiunta operazione a carta
 TEST_F(BankAccountTest, AddOperationToCard) {
     BankAccount account;
-    account.addCard("Test Card", true); // Adding a credit card
+    account.addCard("Test Card", true); // Aggiunge una carta di credito
     auto op = std::make_shared<Operation>(50.0, OperationType::Deposit, std::chrono::system_clock::now());
     account.addOperationToCard("Test Card", op);
 
-    auto card = account.getCardsOperations().at(0); // Get the first card
+    auto card = account.getCardsOperations().at(0); // Ottieni la prima carta
     EXPECT_DOUBLE_EQ(card->getAmount(), 0);
     EXPECT_EQ(card->getOperationSize(), 0);
 }
-

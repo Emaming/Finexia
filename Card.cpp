@@ -4,6 +4,7 @@
 #include <random>
 #include <iostream>
 
+// Costruttore
 Card::Card(const std::string& name, bool isCredit)
         : cardName(name),
           isCreditCard(isCredit),
@@ -14,17 +15,7 @@ Card::Card(const std::string& name, bool isCredit)
           amount(0) {  // Default amount is 0
 }
 
-void Card::removeLastOperation() {
-    if (!cardOperations.empty()) {
-        cardOperations.pop_back();
-    } else {
-        std::cerr << "Error: No operations to remove." << std::endl;
-    }
-}
-
-int Card::getOperationSize() {
-    return cardOperations.size() ;
-}
+// Generazione dati della carta
 std::string Card::generateCardNumber() {
     std::random_device rd;
     std::mt19937 gen(rd());
@@ -55,6 +46,7 @@ std::chrono::system_clock::time_point Card::generateExpirationDate() {
     return future;
 }
 
+// Metodi di set e get
 void Card::setAmount(double newAmount) {
     if (isCreditCard) {
         // Le carte di credito possono avere saldo negativo
@@ -68,7 +60,6 @@ void Card::setAmount(double newAmount) {
         }
     }
 }
-
 
 const std::string &Card::getCardName() const {
     return cardName;
@@ -94,14 +85,6 @@ double Card::getAmount() const {
     return amount;
 }
 
-void Card::addOperation(const std::shared_ptr<Operation>& op) {
-    cardOperations.push_back(op);
-}
-
-std::list<std::shared_ptr<Operation>> Card::getOperations() const {
-    return cardOperations;
-}
-
 void Card::setCardNumber(const std::string& number) {
     cardNumber = number;
 }
@@ -114,6 +97,28 @@ void Card::setExpirationDate(std::chrono::system_clock::time_point expDate) {
     expirationDate = expDate;
 }
 
+// Metodi di gestione delle operazioni
+void Card::addOperation(const std::shared_ptr<Operation>& op) {
+    cardOperations.push_back(op);
+}
+
+void Card::removeLastOperation() {
+    if (!cardOperations.empty()) {
+        cardOperations.pop_back();
+    } else {
+        std::cerr << "Error: No operations to remove." << std::endl;
+    }
+}
+
+std::list<std::shared_ptr<Operation>> Card::getOperations() const {
+    return cardOperations;
+}
+
+int Card::getOperationSize() {
+    return cardOperations.size();
+}
+
+// Altri metodi
 bool Card::isCreditCardBool() const {
     return isCreditCard;
 }

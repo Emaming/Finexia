@@ -4,24 +4,37 @@
 #include <chrono>
 #include <memory>
 #include <string>
-#include "Operation.h"  // Assicurati di includere la dichiarazione della classe Operation
+#include "Operation.h"  // Includi la dichiarazione della classe Operation
 
-enum class Frequency { One, Daily, Weekly, Monthly, Yearly };
+// Enum per la frequenza dell'operazione programmata
+enum class Frequency {
+    One,
+    Daily,
+    Weekly,
+    Monthly,
+    Yearly
+};
 
-class ScheduledOperation : public Operation{
+class ScheduledOperation : public Operation {
 private:
+    // Attributi privati
     std::chrono::system_clock::time_point scheduledExecutionDate;
     Frequency frequency;
 
 public:
-    ScheduledOperation(double amount,OperationType type, std::chrono::system_clock::time_point date, Frequency freq)
-            : Operation(amount,type), scheduledExecutionDate(date), frequency(freq) {}
+    // Costruttore
+    ScheduledOperation(double amount, OperationType type, std::chrono::system_clock::time_point date, Frequency freq)
+            : Operation(amount, type), scheduledExecutionDate(date), frequency(freq) {}
 
+    // Metodi getter
     const std::chrono::system_clock::time_point& getScheduledExecutionDate() const;
     Frequency getFrequency() const;
-    std::string frequencyToString() const;
-    void setScheduledExecutionDate(std::chrono::system_clock::time_point newDate);
 
+    // Metodo per convertire la frequenza in stringa
+    std::string frequencyToString() const;
+
+    // Metodo setter
+    void setScheduledExecutionDate(std::chrono::system_clock::time_point newDate);
 };
 
 #endif // SCHEDULEDOPERATION_H

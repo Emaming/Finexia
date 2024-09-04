@@ -9,6 +9,7 @@
 
 class Card {
 protected:
+    // Attributi della carta
     std::string cardName;
     std::string cardNumber;
     std::string cvv;
@@ -25,25 +26,33 @@ protected:
     std::chrono::system_clock::time_point generateExpirationDate();
 
 public:
-    // Costruttore che accetta solo il nome
-    Card(const std::string& name,bool isCredit);
+    // Costruttore
+    Card(const std::string& name, bool isCredit);
+
+    // Metodi di set e get
     void setAmount(double newAmount);
     const std::string& getCardName() const;
     const std::string& getCardNumber() const;
     const std::string& getCvv() const;
-    double getAmount() const;
     const std::string& getPin() const;
+    double getAmount() const;
     std::chrono::system_clock::time_point getExpirationDate() const;
 
+    // Metodi di gestione delle operazioni
     std::list<std::shared_ptr<Operation>> getOperations() const;
     void removeLastOperation();
     virtual void addOperation(const std::shared_ptr<Operation>& op);
+
+    // Metodi di set per i dettagli della carta
     void setCardNumber(const std::string& number);
     void setCvv(const std::string& cvv);
     void setExpirationDate(std::chrono::system_clock::time_point expDate);
 
+    // Altri metodi
     bool isCreditCardBool() const;
     int getOperationSize();
+
+    // Distruttore virtuale
     virtual ~Card() = default;
 };
 

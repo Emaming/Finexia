@@ -5,7 +5,6 @@
 
 class CreditCard : public Card {
 private:
-    // Attributi specifici della carta di credito
     double creditLimit;
     double interestRate;
 
@@ -23,7 +22,7 @@ public:
     // Metodo per verificare se una transazione può essere processata
     bool canProcessTransaction(double amount) const;
 
-    // Override del metodo addOperation
+    // Override del metodo addOperation (implementazione del metodo virtuale puro)
     void addOperation(const std::shared_ptr<Operation>& op) override;
 };
 

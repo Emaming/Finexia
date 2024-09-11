@@ -3,23 +3,32 @@
 
 // Costruttore
 DebitCard::DebitCard(const std::string& name)
-        : Card(name, isCreditCard) {
-    this->isCreditCard = false;
+        : Card(name, false) { // Pass false direttamente al costruttore base
 }
 
-// Verifica se la transazione può essere processata
+// Gestione delle transazioni
 bool DebitCard::canProcessTransaction(double amount) const {
     return (amount <= getAmount());
 }
 
-// Override del metodo addOperation
 void DebitCard::addOperation(const std::shared_ptr<Operation>& op) {
-    // Controllo dei fondi per prelievi
-    if (op->getType() == OperationType::Withdrawal && !canProcessTransaction(op->getAmount())) {
-        std::cerr << "Error: Insufficient funds" << std::endl;
-        return;
-    }
+    try {
+        double operationAmount = op->getAmount();
 
-    // Aggiungi l'operazione alla lista delle operazioni della carta
-    Card::addOperation(op);
+        if (op->getType() == OperationType::Withdrawal && !canProcessTransaction(operationAmount)) {
+            throw std::runtime_error("Error: Insufficient funds on the debit card");
+        }
+
+        // Aggiorna l'ammontare della carta
+        if (op->getType() == OperationType::Deposit) {
+            setAmount(getAmount() + operationAmount);
+        } else if (op->getType() == OperationType::Withdrawal) {
+            setAmount(getAmount() - operationAmount);
+        }
+
+        // Aggiungi l'operazione alla lista delle operazioni della carta
+        Card::addOperation(op);
+    } catch (const std::exception& e) {
+        std::cerr << e.what() << std::endl;
+    }
 }

@@ -17,7 +17,6 @@ protected:
     std::chrono::system_clock::time_point expirationDate;
     double amount;
     std::list<std::shared_ptr<Operation>> cardOperations;
-    bool isCreditCard;
 
     // Metodi per generare i dettagli della carta
     std::string generateCardNumber();
@@ -41,7 +40,9 @@ public:
     // Metodi di gestione delle operazioni
     std::list<std::shared_ptr<Operation>> getOperations() const;
     void removeLastOperation();
-    virtual void addOperation(const std::shared_ptr<Operation>& op);
+
+    // Metodo virtuale puro per aggiungere operazioni (classe astratta)
+    virtual void addOperation(const std::shared_ptr<Operation>& op) = 0;
 
     // Metodi di set per i dettagli della carta
     void setCardNumber(const std::string& number);
@@ -54,6 +55,8 @@ public:
 
     // Distruttore virtuale
     virtual ~Card() = default;
+
+    bool isCreditCard;
 };
 
 #endif // CARD_H

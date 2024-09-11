@@ -211,8 +211,10 @@ CMakeFiles/Finexia_lib.dir/BankAccount.cpp.o: \
  /usr/include/c++/11/istream /usr/include/c++/11/bits/istream.tcc \
  /home/user/ClionProjects/FinexiaTest/Operation.h \
  /home/user/ClionProjects/FinexiaTest/ScheduledOperation.h \
- /home/user/ClionProjects/FinexiaTest/Card.h /usr/include/c++/11/fstream \
- /usr/include/c++/11/bits/codecvt.h \
+ /home/user/ClionProjects/FinexiaTest/Card.h \
+ /home/user/ClionProjects/FinexiaTest/CreditCard.h \
+ /home/user/ClionProjects/FinexiaTest/DebitCard.h \
+ /usr/include/c++/11/fstream /usr/include/c++/11/bits/codecvt.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
  /usr/include/c++/11/bits/fstream.tcc /usr/include/c++/11/sstream \

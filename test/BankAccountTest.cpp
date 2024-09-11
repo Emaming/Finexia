@@ -18,10 +18,6 @@ std::shared_ptr<ScheduledOperation> createScheduledOperation(double amount, Oper
 class BankAccountTest : public ::testing::Test {
 protected:
     BankAccount account;
-
-    void SetUp() override {
-        // Codice di setup (se necessario)
-    }
 };
 
 // Test del costruttore e IBAN
@@ -56,12 +52,24 @@ TEST_F(BankAccountTest, WithdrawalDecreasesBalance) {
 }
 
 // Test di prelievo con fondi insufficienti
-TEST_F(BankAccountTest, WithdrawalInsufficientFunds) {
-    auto withdrawal = createOperation(50.0, OperationType::Withdrawal, std::chrono::system_clock::now());
-    account.addTransaction(withdrawal);
+TEST_F(BankAccountTest, WithdrawalInsufficientFundsDebitCard) {
+    account.addCard("DebitCard", false); // Aggiunge una carta di debito
 
-    EXPECT_EQ(account.getBalance(), -50.0); // La gestione dei fondi insufficienti non è implementata completamente
+    auto deposit = createOperation(100.0, OperationType::Deposit, std::chrono::system_clock::now());
+    account.addTransaction(deposit);
+
+    auto withdrawal = createOperation(50.0, OperationType::Withdrawal, std::chrono::system_clock::now());
+
+        account.addOperationToCard("DebitCard", withdrawal); // Prelievo maggiore del saldo
+
+
+
+    EXPECT_EQ(account.getBalance(), 50.0); // Il saldo del conto non dovrebbe cambiare
+    auto card = account.getCardsOperations().at(0); // Ottieni la carta di debito
+    EXPECT_DOUBLE_EQ(card->getAmount(), 0); // Il saldo della carta deve rimanere invariato
+    EXPECT_EQ(card->getOperationSize(), 0); // Nessuna operazione dovrebbe essere aggiunta alla carta
 }
+
 
 // Test di salvataggio e caricamento
 TEST_F(BankAccountTest, SaveAndLoadFromFile) {
@@ -99,11 +107,12 @@ TEST_F(BankAccountTest, AddAndRemoveCard) {
 // Test di aggiunta operazione a carta
 TEST_F(BankAccountTest, AddOperationToCard) {
     BankAccount account;
+    account.addTransaction(createOperation(100.0, OperationType::Deposit, std::chrono::system_clock::now()));
     account.addCard("Test Card", true); // Aggiunge una carta di credito
     auto op = std::make_shared<Operation>(50.0, OperationType::Deposit, std::chrono::system_clock::now());
     account.addOperationToCard("Test Card", op);
 
     auto card = account.getCardsOperations().at(0); // Ottieni la prima carta
-    EXPECT_DOUBLE_EQ(card->getAmount(), 0);
-    EXPECT_EQ(card->getOperationSize(), 0);
+    EXPECT_DOUBLE_EQ(card->getAmount(), 50);
+    EXPECT_EQ(card->getOperationSize(), 1);
 }

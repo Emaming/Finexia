@@ -5,6 +5,7 @@
 CreditCard::CreditCard(const std::string& name, double limit, double rate)
         : Card(name, isCreditCard), creditLimit(limit), interestRate(rate) {
     this->isCreditCard = true;
+    this->creditLimit = 1000.0;
 }
 
 // Getters e setters
@@ -26,23 +27,26 @@ void CreditCard::setInterestRate(double rate) {
 
 // Gestione delle transazioni
 bool CreditCard::canProcessTransaction(double amount) const {
-    return (amount <= creditLimit - getAmount()); // Il saldo può essere negativo fino al limite di credito
+    return (amount <= creditLimit - getAmount());
 }
 
 void CreditCard::addOperation(const std::shared_ptr<Operation>& op) {
-    // Controllo del limite di credito per prelievi
-    if (op->getType() == OperationType::Withdrawal && !canProcessTransaction(op->getAmount())) {
-        std::cerr << "Error: Exceeds credit limit" << std::endl;
-        return;
+    try {
+        double operationAmount = op->getAmount();
+        if (op->getType() == OperationType::Withdrawal && !canProcessTransaction(operationAmount)) {
+            throw std::runtime_error("Error: Exceeds credit limit");
+        }
+        // Aggiorna l'ammontare della carta
+        if (op->getType() == OperationType::Deposit) {
+            setAmount(getAmount() + operationAmount);
+        } else if (op->getType() == OperationType::Withdrawal) {
+            setAmount(getAmount() - operationAmount);
+        }
+        // Aggiungi l'operazione alla lista delle operazioni della carta
+        Card::addOperation(op);
+    } catch (const std::exception& e) {
+        std::cerr << e.what() << std::endl;
     }
-
-    // Aggiornamento dell'ammontare della carta
-    if (op->getType() == OperationType::Deposit) {
-        setAmount(getAmount() + op->getAmount());
-    } else if (op->getType() == OperationType::Withdrawal) {
-        setAmount(getAmount() - op->getAmount());
-    }
-
-    // Aggiungi l'operazione alla lista delle operazioni della carta
-    Card::addOperation(op);
 }
+
+

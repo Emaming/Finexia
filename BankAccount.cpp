@@ -1,4 +1,6 @@
 #include "BankAccount.h"
+#include "CreditCard.h"
+#include "DebitCard.h"
 #include <fstream>
 #include <sstream>
 #include <iostream>
@@ -31,193 +33,235 @@ void BankAccount::generateIBAN() {
 
 // Metodi di salvataggio e caricamento
 void BankAccount::saveToFile(const std::string& filename) const {
-    std::ofstream file(filename);
+    try {
+        std::ofstream file(filename);
 
-    if (!file) {
-        std::cerr << "Error opening file for writing: " << filename << std::endl;
-        return;
-    }
+        if (!file) {
+            throw std::ios_base::failure("Error opening file for writing: " + filename);
+        }
 
-    // Salvataggio saldo e IBAN
-    file << balance << '\n' << IBAN << '\n';
+        // Salvataggio saldo e IBAN
+        file << balance << '\n' << IBAN << '\n';
 
-    // Salvataggio operazioni
-    file << operations.size() << '\n';
-    for (const auto& op : operations) {
-        file << op->getAmount() << ' '
-             << static_cast<int>(op->getType()) << ' '
-             << std::chrono::system_clock::to_time_t(op->getDate()) << '\n';
-    }
-
-    // Salvataggio operazioni pianificate
-    file << scheduledOperations.size() << '\n';
-    for (const auto& schedOp : scheduledOperations) {
-        file
-                << schedOp->getAmount() << ' '
-                << static_cast<int>(schedOp->getType()) << ' '
-                << std::chrono::system_clock::to_time_t(schedOp->getDate()) << ' '
-                << std::chrono::system_clock::to_time_t(schedOp->getScheduledExecutionDate()) << ' '
-                << static_cast<int>(schedOp->getFrequency()) << '\n';
-    }
-
-    // Salvataggio carte e relative operazioni
-    file << cards.size() << '\n';
-    for (const auto& card : cards) {
-        file
-                << card->getCardName() << ' '
-                << card->getCardNumber() << ' '
-                << card->getCvv() << ' '
-                << std::chrono::system_clock::to_time_t(card->getExpirationDate()) << ' '
-                << card->getAmount() << ' '
-            << card->isCreditCardBool() <<'\n';
-
-        // Salvataggio delle operazioni associate alla carta
-        file << card->getOperations().size() << '\n';
-        for (const auto& op : card->getOperations()) {
+        // Salvataggio operazioni
+        file << operations.size() << '\n';
+        for (const auto& op : operations) {
             file << op->getAmount() << ' '
                  << static_cast<int>(op->getType()) << ' '
-                 << std::chrono::system_clock::to_time_t(op->getDate()) << ' '
-                 << op->getDescription() << '\n';
+                 << std::chrono::system_clock::to_time_t(op->getDate()) << '\n';
         }
-    }
 
-    file.close();
+        // Salvataggio operazioni pianificate
+        file << scheduledOperations.size() << '\n';
+        for (const auto& schedOp : scheduledOperations) {
+            file
+                    << schedOp->getAmount() << ' '
+                    << static_cast<int>(schedOp->getType()) << ' '
+                    << std::chrono::system_clock::to_time_t(schedOp->getDate()) << ' '
+                    << std::chrono::system_clock::to_time_t(schedOp->getScheduledExecutionDate()) << ' '
+                    << static_cast<int>(schedOp->getFrequency()) << '\n';
+        }
+
+        // Salvataggio carte e relative operazioni
+        file << cards.size() << '\n';
+        for (const auto& card : cards) {
+            file
+                    << card->getCardName() << ' '
+                    << card->getCardNumber() << ' '
+                    << card->getCvv() << ' '
+                    << std::chrono::system_clock::to_time_t(card->getExpirationDate()) << ' '
+                    << card->getAmount() << ' '
+                    << card->isCreditCardBool() << '\n';
+
+            // Salvataggio delle operazioni associate alla carta
+            file << card->getOperations().size() << '\n';
+            for (const auto& op : card->getOperations()) {
+                file << op->getAmount() << ' '
+                     << static_cast<int>(op->getType()) << ' '
+                     << std::chrono::system_clock::to_time_t(op->getDate()) << ' '
+                     << op->getDescription() << '\n';
+            }
+        }
+
+        file.close();
+    } catch (const std::ios_base::failure& e) {
+        std::cerr << "File I/O error: " << e.what() << std::endl;
+    } catch (const std::exception& e) {
+        std::cerr << "Error saving to file: " << e.what() << std::endl;
+    }
 }
 
 void BankAccount::loadFromFile(const std::string& filename) {
-    std::ifstream file(filename);
+    try {
+        std::ifstream file(filename);
 
-    if (!file) {
-        std::cerr << "Error opening file for reading: " << filename << std::endl;
-        return;
-    }
+        if (!file) {
+            throw std::ios_base::failure("Error opening file for reading: " + filename);
+        }
 
-    // Caricamento del saldo e dell'IBAN
-    file >> balance;
-    file.ignore();  // Ignora il carattere newline dopo il saldo
-    std::getline(file, IBAN);
+        // Caricamento del saldo e dell'IBAN
+        file >> balance;
+        file.ignore();  // Ignora il carattere newline dopo il saldo
+        std::getline(file, IBAN);
 
-    // Caricamento delle operazioni
-    size_t operationsCount;
-    file >> operationsCount;
-    file.ignore();  // Ignora il carattere newline
-
-    operations.clear();
-    for (size_t i = 0; i < operationsCount; ++i) {
-        double amount;
-        int typeInt;
-        std::time_t date;
-
-        file >> amount >> typeInt >> date;
+        // Caricamento delle operazioni
+        size_t operationsCount;
+        file >> operationsCount;
         file.ignore();  // Ignora il carattere newline
 
-        OperationType type = static_cast<OperationType>(typeInt);
-        auto operation = std::make_shared<Operation>(amount, type, std::chrono::system_clock::from_time_t(date));
-
-        operations.push_back(operation);
-    }
-
-    // Caricamento delle operazioni pianificate
-    size_t scheduledOperationsCount;
-    file >> scheduledOperationsCount;
-    file.ignore();  // Ignora il carattere newline
-
-    scheduledOperations.clear();
-    for (size_t i = 0; i < scheduledOperationsCount; ++i) {
-        double amount;
-        int typeInt;
-        std::time_t operationDate, scheduledDate;
-        int frequencyInt;
-
-        file >> amount >> typeInt >> operationDate >> scheduledDate >> frequencyInt;
-        file.ignore();  // Ignora il carattere newline
-
-        OperationType type = static_cast<OperationType>(typeInt);
-        Frequency frequency = static_cast<Frequency>(frequencyInt);
-
-        auto scheduledOperation = std::make_shared<ScheduledOperation>(
-                amount, type,
-                std::chrono::system_clock::from_time_t(operationDate),
-                frequency
-        );
-        scheduledOperation->setScheduledExecutionDate(std::chrono::system_clock::from_time_t(scheduledDate));
-
-        scheduledOperations.push_back(scheduledOperation);
-    }
-
-    // Caricamento delle carte e delle relative operazioni
-    size_t cardsCount;
-    file >> cardsCount;
-    file.ignore();  // Ignora il carattere newline
-
-    cards.clear();
-    for (size_t i = 0; i < cardsCount; ++i) {
-        std::string cardName, cardNumber;
-        std::string cvv;
-        std::time_t expirationDate;
-        double cardAmount;
-        bool isCreditCard;  // Aggiungi la variabile per leggere il tipo di carta
-
-        file >> cardName >> cardNumber >> cvv >> expirationDate >> cardAmount >> isCreditCard;
-        file.ignore();  // Ignora il carattere newline
-
-        auto card = std::make_shared<Card>(cardName, isCreditCard);
-        card->setCardNumber(cardNumber);
-        card->setCvv(cvv);
-        card->setExpirationDate(std::chrono::system_clock::from_time_t(expirationDate));
-        card->setAmount(cardAmount);
-
-        // Caricamento delle operazioni associate alla carta
-        size_t cardOperationsCount;
-        file >> cardOperationsCount;
-        file.ignore();  // Ignora il carattere newline
-
-        for (size_t j = 0; j < cardOperationsCount; ++j) {
+        operations.clear();
+        for (size_t i = 0; i < operationsCount; ++i) {
             double amount;
             int typeInt;
             std::time_t date;
-            std::string description;
 
             file >> amount >> typeInt >> date;
             file.ignore();  // Ignora il carattere newline
-            std::getline(file, description);
 
             OperationType type = static_cast<OperationType>(typeInt);
             auto operation = std::make_shared<Operation>(amount, type, std::chrono::system_clock::from_time_t(date));
-            operation->setDescription(description);
 
-            card->addOperation(operation);
+            operations.push_back(operation);
         }
 
-        cards.push_back(card);
-    }
+        // Caricamento delle operazioni pianificate
+        size_t scheduledOperationsCount;
+        file >> scheduledOperationsCount;
+        file.ignore();  // Ignora il carattere newline
 
-    file.close();
+        scheduledOperations.clear();
+        for (size_t i = 0; i < scheduledOperationsCount; ++i) {
+            double amount;
+            int typeInt;
+            std::time_t operationDate, scheduledDate;
+            int frequencyInt;
+
+            file >> amount >> typeInt >> operationDate >> scheduledDate >> frequencyInt;
+            file.ignore();  // Ignora il carattere newline
+
+            OperationType type = static_cast<OperationType>(typeInt);
+            Frequency frequency = static_cast<Frequency>(frequencyInt);
+
+            auto scheduledOperation = std::make_shared<ScheduledOperation>(
+                    amount, type,
+                    std::chrono::system_clock::from_time_t(operationDate),
+                    frequency
+            );
+            scheduledOperation->setScheduledExecutionDate(std::chrono::system_clock::from_time_t(scheduledDate));
+
+            scheduledOperations.push_back(scheduledOperation);
+        }
+
+        // Caricamento delle carte e delle relative operazioni
+        size_t cardsCount;
+        file >> cardsCount;
+        file.ignore();  // Ignora il carattere newline
+
+        cards.clear();
+        for (size_t i = 0; i < cardsCount; ++i) {
+            std::string cardName, cardNumber, cvv;
+            std::time_t expirationDate;
+            double cardAmount;
+            bool isCreditCard;
+
+            file >> cardName >> cardNumber >> cvv >> expirationDate >> cardAmount >> isCreditCard;
+            file.ignore();  // Ignora il carattere newline
+
+            std::shared_ptr<Card> card;
+            if (isCreditCard) {
+                card = std::make_shared<CreditCard>(cardName, cardAmount, 0.0); // Default rate
+            } else {
+                card = std::make_shared<DebitCard>(cardName);
+            }
+
+            card->setCardNumber(cardNumber);
+            card->setCvv(cvv);
+            card->setExpirationDate(std::chrono::system_clock::from_time_t(expirationDate));
+            card->setAmount(cardAmount);
+
+            // Caricamento delle operazioni associate alla carta
+            size_t cardOperationsCount;
+            file >> cardOperationsCount;
+            file.ignore();  // Ignora il carattere newline
+
+            for (size_t j = 0; j < cardOperationsCount; ++j) {
+                double amount;
+                int typeInt;
+                std::time_t date;
+                std::string description;
+
+                file >> amount >> typeInt >> date;
+                file.ignore();  // Ignora il carattere newline
+                std::getline(file, description);
+
+                OperationType type = static_cast<OperationType>(typeInt);
+                auto operation = std::make_shared<Operation>(amount, type, std::chrono::system_clock::from_time_t(date));
+                operation->setDescription(description);
+
+                card->addOperation(operation);
+            }
+
+            cards.push_back(card);
+        }
+
+        file.close();
+    } catch (const std::ios_base::failure& e) {
+        std::cerr << "File I/O error: " << e.what() << std::endl;
+    } catch (const std::exception& e) {
+        std::cerr << "Error loading from file: " << e.what() << std::endl;
+    }
 }
 
 // Metodi per le operazioni normali
 void BankAccount::addTransaction(const std::shared_ptr<Operation>& transaction) {
-    // Aggiungi l'operazione alla lista
-    operations.push_back(transaction);
+    try {
+        // Check if the transaction is valid
+        if (!transaction) {
+            throw std::invalid_argument("Transaction is null");
+        }
 
-    // Aggiorna il saldo
-    if (transaction->getType() == OperationType::Deposit) {
-        balance += transaction->getAmount();
-    } else if (transaction->getType() == OperationType::Withdrawal) {
-        balance -= transaction->getAmount();
-    }
-    else if (transaction->getType() == OperationType::Transfer) {
-        balance -= transaction->getAmount();
+        // Add the operation to the list
+        operations.push_back(transaction);
+
+        // Update the balance based on the operation type
+        if (transaction->getType() == OperationType::Deposit) {
+            balance += transaction->getAmount();
+        } else if (transaction->getType() == OperationType::Withdrawal) {
+            balance -= transaction->getAmount();
+        } else if (transaction->getType() == OperationType::Transfer) {
+            balance -= transaction->getAmount();
+        } else {
+            throw std::invalid_argument("Unsupported operation type");
+        }
+
+        // Verify balance update
+        if (balance < 0) {
+            throw std::runtime_error("Balance cannot be negative");
+        }
+    } catch (const std::exception& e) {
+        std::cerr << "Error adding transaction: " << e.what() << std::endl;
     }
 }
 
+
 void BankAccount::removeOperations(const std::vector<std::shared_ptr<Operation>>& operationsToCancel) {
-    for (const auto& op : operationsToCancel) {
-        auto it = std::remove_if(operations.begin(), operations.end(),
-                                 [&op](const std::shared_ptr<Operation>& o) {
-                                     return o == op;
-                                 });
-        operations.erase(it, operations.end());
+    try {
+        for (const auto& op : operationsToCancel) {
+            if (!op) {
+                throw std::invalid_argument("Operation to cancel is null");
+            }
+
+            auto it = std::remove_if(operations.begin(), operations.end(),
+                                     [&op](const std::shared_ptr<Operation>& o) {
+                                         return o == op;
+                                     });
+            if (it == operations.end()) {
+                throw std::runtime_error("Operation not found in list");
+            }
+            operations.erase(it, operations.end());
+        }
+    } catch (const std::exception& e) {
+        std::cerr << "Error removing operations: " << e.what() << std::endl;
     }
 }
 
@@ -275,16 +319,34 @@ void BankAccount::printOperations(const std::vector<std::shared_ptr<Operation>>&
 
 // Metodi per le operazioni programmate
 void BankAccount::addScheduleOperation(std::shared_ptr<ScheduledOperation> schedOp) {
-    scheduledOperations.push_back(schedOp);
+    try {
+        if (!schedOp) {
+            throw std::invalid_argument("Scheduled operation is null");
+        }
+        scheduledOperations.push_back(schedOp);
+    } catch (const std::exception& e) {
+        std::cerr << "Error adding scheduled operation: " << e.what() << std::endl;
+    }
 }
 
 void BankAccount::removeScheduledOperation(const std::vector<std::shared_ptr<ScheduledOperation>>& scheduledOperationsToRemove) {
-    for (const auto& schedOp : scheduledOperationsToRemove) {
-        auto it = std::remove_if(scheduledOperations.begin(), scheduledOperations.end(),
-                                 [&schedOp](const std::shared_ptr<ScheduledOperation>& so) {
-                                     return so == schedOp;
-                                 });
-        scheduledOperations.erase(it, scheduledOperations.end());
+    try {
+        for (const auto& schedOp : scheduledOperationsToRemove) {
+            if (!schedOp) {
+                throw std::invalid_argument("Scheduled operation to remove is null");
+            }
+
+            auto it = std::remove_if(scheduledOperations.begin(), scheduledOperations.end(),
+                                     [&schedOp](const std::shared_ptr<ScheduledOperation>& so) {
+                                         return so == schedOp;
+                                     });
+            if (it == scheduledOperations.end()) {
+                throw std::runtime_error("Scheduled operation not found in list");
+            }
+            scheduledOperations.erase(it, scheduledOperations.end());
+        }
+    } catch (const std::exception& e) {
+        std::cerr << "Error removing scheduled operations: " << e.what() << std::endl;
     }
 }
 
@@ -372,62 +434,102 @@ void BankAccount::executeScheduledOperations() {
 
 // Metodi per le carte
 void BankAccount::addCard(const std::string& cardName, bool isCredit) {
-    auto card = std::make_shared<Card>(cardName,isCredit);
-    cards.push_back(card);
+    try {
+        if (cardName.empty()) {
+            throw std::invalid_argument("Card name cannot be empty");
+        }
 
+        std::shared_ptr<Card> card;
+
+        if (isCredit) {
+            double defaultCreditLimit = 1000.0; // Set appropriate default value
+            double defaultInterestRate = 0.1;  // Set appropriate default value
+            card = std::make_shared<CreditCard>(cardName, defaultCreditLimit, defaultInterestRate);
+        } else {
+            card = std::make_shared<DebitCard>(cardName);
+        }
+
+        cards.push_back(card);
+    } catch (const std::exception& e) {
+        std::cerr << "Error adding card: " << e.what() << std::endl;
+    }
 }
 
+
+
 void BankAccount::removeCard(const std::string& cardName) {
-    auto it = std::remove_if(cards.begin(), cards.end(),
-                             [&cardName](const std::shared_ptr<Card>& card) {
-                                 return card->getCardName() == cardName;
-                             });
-    cards.erase(it, cards.end());
+    try {
+        auto it = std::remove_if(cards.begin(), cards.end(),
+                                 [&cardName](const std::shared_ptr<Card>& card) {
+                                     return card->getCardName() == cardName;
+                                 });
+        if (it == cards.end()) {
+            throw std::runtime_error("Card not found");
+        }
+        cards.erase(it, cards.end());
+    } catch (const std::exception& e) {
+        std::cerr << "Error removing card: " << e.what() << std::endl;
+    }
 }
 
 void BankAccount::addOperationToCard(const std::string& cardName, const std::shared_ptr<Operation>& operation) {
-    auto cardIt = std::find_if(cards.begin(), cards.end(),
-                               [&cardName](const std::shared_ptr<Card>& card) {
-                                   return card->getCardName() == cardName;
-                               });
+    try {
+        // Trova la carta con il nome specificato
+        auto cardIt = std::find_if(cards.begin(), cards.end(),
+                                   [&cardName](const std::shared_ptr<Card>& card) {
+                                       return card->getCardName() == cardName;
+                                   });
 
-    if (cardIt != cards.end()) {
+        if (cardIt == cards.end()) {
+            throw std::runtime_error("Card not found");
+        }
+
+        if (!operation) {
+            throw std::invalid_argument("Operation is null");
+        }
+
         auto& card = *cardIt;
         double operationAmount = operation->getAmount();
 
         if (operation->getType() == OperationType::Deposit) {
+            // Gestione del deposito
             if (balance >= operationAmount) {
                 balance -= operationAmount;
-                card->setAmount(card->getAmount() + operationAmount);
-                card->addOperation(operation);
+                card->addOperation(operation); // Gestione del deposito delegata alla carta
             } else {
-                std::cerr << "Error: Insufficient funds in the bank account for this deposit." << std::endl;
+                throw std::runtime_error("Insufficient funds in the bank account for this deposit");
             }
         } else if (operation->getType() == OperationType::Withdrawal) {
-            double newCardAmount = card->getAmount() - operationAmount;
+            // Gestione del prelievo
+            double cardAmountBeforeOperation = card->getAmount(); // Per rollback
 
-            if (card->isCreditCardBool() || newCardAmount >= 0) {
-                card->setAmount(newCardAmount);
+            if (card->isCreditCard) {
+                // Per le carte di credito, non è necessario controllare il saldo del conto corrente
                 card->addOperation(operation);
-
-                // Se è una carta di debito, sottrai l'importo dal saldo dell'account
-                if (!card->isCreditCardBool()) {
-                    if (balance >= operationAmount) {
-                        balance -= operationAmount;
-                    } else {
-                        std::cerr << "Error: Insufficient funds in the bank account for this withdrawal." << std::endl;
-                        card->setAmount(card->getAmount() + operationAmount); // Rollback
-                        card->removeLastOperation(); // Rollback
-                    }
-                }
+                balance -= operationAmount; // Aggiorna il saldo del conto corrente
             } else {
-                std::cerr << "Error: Insufficient funds on the debit card for this withdrawal." << std::endl;
+                // Per le carte di debito, verifica il saldo del conto corrente
+                card->addOperation(operation); // Gestione del prelievo delegata alla carta
+
+                if (card->getAmount() < 0) {
+                    // Rollback
+                    card->setAmount(cardAmountBeforeOperation); // Ripristina saldo della carta
+                    card->removeLastOperation(); // Rimuovi ultima operazione
+                    throw std::runtime_error("Insufficient funds on the debit card");
+                }
+                if (balance < operationAmount) {
+                    // Rollback
+                    card->setAmount(cardAmountBeforeOperation); // Ripristina saldo della carta
+                    card->removeLastOperation(); // Rimuovi ultima operazione
+                    throw std::runtime_error("Insufficient funds in the bank account for this withdrawal");
+                }
+                balance -= operationAmount;
             }
         } else {
-            std::cerr << "Error: Unsupported operation type." << std::endl;
+            throw std::invalid_argument("Unsupported operation type");
         }
-    } else {
-        std::cerr << "Error: Card not found. Cannot add operation." << std::endl;
+    } catch (const std::exception& e) {
+        std::cerr << "Error adding operation to card: " << e.what() << std::endl;
     }
 }
 

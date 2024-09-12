@@ -33,8 +33,8 @@ public:
     void loadFromFile(const std::string& filename);
 
     // Metodi per le operazioni normali
-    void addTransaction(const std::shared_ptr<Operation>& transaction);
-    void removeOperations(const std::vector<std::shared_ptr<Operation>>& operationsToCancel);
+    bool addTransaction(const std::shared_ptr<Operation>& transaction);
+    bool removeOperations(const std::vector<std::shared_ptr<Operation>>& operationsToCancel);
     std::vector<std::shared_ptr<Operation>> findOperationByAmount(double amount) const;
     std::vector<std::shared_ptr<Operation>> findOperationByType(OperationType type) const;
     std::vector<std::shared_ptr<Operation>> findOperationByDate(std::chrono::system_clock::time_point date) const;
@@ -51,9 +51,9 @@ public:
     void executeScheduledOperations();
 
     // Metodi per le carte
-    void addCard(const std::string& cardName, bool isCredit = false);
-    void removeCard(const std::string& cardName);
-    void addOperationToCard(const std::string& cardName, const std::shared_ptr<Operation>& operation);
+    bool addCard(const std::string& cardName, bool isCredit = false);
+    bool removeCard(const std::string& cardName);
+    bool addOperationToCard(const std::string& cardName, const std::shared_ptr<Operation>& operation);
     void printCardOperations(const std::string& cardName) const;
     void printCards() const;
 

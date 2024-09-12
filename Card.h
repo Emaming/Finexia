@@ -42,8 +42,8 @@ public:
     void removeLastOperation();
 
     // Metodo virtuale puro per aggiungere operazioni (classe astratta)
-    virtual void addOperation(const std::shared_ptr<Operation>& op) = 0;
-
+    virtual bool addOperation(const std::shared_ptr<Operation>& op) = 0;
+    bool addOperationWithoutUpdate(const std::shared_ptr<Operation>& op);
     // Metodi di set per i dettagli della carta
     void setCardNumber(const std::string& number);
     void setCvv(const std::string& cvv);

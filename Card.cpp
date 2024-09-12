@@ -61,6 +61,12 @@ void Card::setAmount(double newAmount) {
     }
 }
 
+bool Card::addOperationWithoutUpdate(const std::shared_ptr<Operation>& op)
+{
+    cardOperations.push_back(op);
+    return true;
+}
+
 const std::string &Card::getCardName() const {
     return cardName;
 }
@@ -98,15 +104,14 @@ void Card::setExpirationDate(std::chrono::system_clock::time_point expDate) {
 }
 
 // Metodi di gestione delle operazioni
-void Card::addOperation(const std::shared_ptr<Operation>& op) {
+bool Card::addOperation(const std::shared_ptr<Operation>& op) {
     cardOperations.push_back(op);
+    return true;
 }
 
 void Card::removeLastOperation() {
     if (!cardOperations.empty()) {
         cardOperations.pop_back();
-    } else {
-        std::cerr << "Error: No operations to remove." << std::endl;
     }
 }
 

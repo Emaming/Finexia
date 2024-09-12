@@ -12,7 +12,7 @@ public:
     bool canProcessTransaction(double amount) const;
 
     // Override del metodo addOperation (implementazione del metodo virtuale puro)
-    void addOperation(const std::shared_ptr<Operation>& op) override;
+    bool addOperation(const std::shared_ptr<Operation>& op) override;
 };
 
 #endif // DEBITCARD_H

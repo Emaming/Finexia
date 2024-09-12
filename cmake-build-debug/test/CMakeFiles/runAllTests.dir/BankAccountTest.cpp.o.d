@@ -306,4 +306,5 @@ test/CMakeFiles/runAllTests.dir/BankAccountTest.cpp.o: \
  /usr/include/c++/11/bits/list.tcc \
  /home/user/ClionProjects/FinexiaTest/test/../Operation.h \
  /home/user/ClionProjects/FinexiaTest/test/../ScheduledOperation.h \
- /home/user/ClionProjects/FinexiaTest/test/../Card.h
+ /home/user/ClionProjects/FinexiaTest/test/../Card.h \
+ /home/user/ClionProjects/FinexiaTest/test/../CreditCard.h

@@ -11,7 +11,7 @@ bool DebitCard::canProcessTransaction(double amount) const {
     return (amount <= getAmount());
 }
 
-void DebitCard::addOperation(const std::shared_ptr<Operation>& op) {
+bool DebitCard::addOperation(const std::shared_ptr<Operation>& op) {
     try {
         double operationAmount = op->getAmount();
 
@@ -28,7 +28,9 @@ void DebitCard::addOperation(const std::shared_ptr<Operation>& op) {
 
         // Aggiungi l'operazione alla lista delle operazioni della carta
         Card::addOperation(op);
+        return true;
     } catch (const std::exception& e) {
         std::cerr << e.what() << std::endl;
+        return false;
     }
 }

@@ -198,7 +198,7 @@ void BankAccount::loadFromFile(const std::string& filename) {
                 auto operation = std::make_shared<Operation>(amount, type, std::chrono::system_clock::from_time_t(date));
                 operation->setDescription(description);
 
-                card->addOperation(operation);
+                card->addOperationWithoutUpdate(operation);
             }
 
             cards.push_back(card);
@@ -213,38 +213,35 @@ void BankAccount::loadFromFile(const std::string& filename) {
 }
 
 // Metodi per le operazioni normali
-void BankAccount::addTransaction(const std::shared_ptr<Operation>& transaction) {
+bool BankAccount::addTransaction(const std::shared_ptr<Operation>& transaction) {
     try {
-        // Check if the transaction is valid
         if (!transaction) {
             throw std::invalid_argument("Transaction is null");
         }
 
-        // Add the operation to the list
         operations.push_back(transaction);
 
-        // Update the balance based on the operation type
         if (transaction->getType() == OperationType::Deposit) {
             balance += transaction->getAmount();
-        } else if (transaction->getType() == OperationType::Withdrawal) {
-            balance -= transaction->getAmount();
-        } else if (transaction->getType() == OperationType::Transfer) {
+        } else if (transaction->getType() == OperationType::Withdrawal || transaction->getType() == OperationType::Transfer) {
             balance -= transaction->getAmount();
         } else {
             throw std::invalid_argument("Unsupported operation type");
         }
 
-        // Verify balance update
         if (balance < 0) {
             throw std::runtime_error("Balance cannot be negative");
         }
+        return true; // Operazione riuscita
     } catch (const std::exception& e) {
         std::cerr << "Error adding transaction: " << e.what() << std::endl;
+        return false; // Fallimento
     }
 }
 
 
-void BankAccount::removeOperations(const std::vector<std::shared_ptr<Operation>>& operationsToCancel) {
+
+bool BankAccount::removeOperations(const std::vector<std::shared_ptr<Operation>>& operationsToCancel) {
     try {
         for (const auto& op : operationsToCancel) {
             if (!op) {
@@ -260,8 +257,10 @@ void BankAccount::removeOperations(const std::vector<std::shared_ptr<Operation>>
             }
             operations.erase(it, operations.end());
         }
+        return true; // Operazione di rimozione riuscita
     } catch (const std::exception& e) {
         std::cerr << "Error removing operations: " << e.what() << std::endl;
+        return false; // Fallimento
     }
 }
 
@@ -433,7 +432,7 @@ void BankAccount::executeScheduledOperations() {
 }
 
 // Metodi per le carte
-void BankAccount::addCard(const std::string& cardName, bool isCredit) {
+bool BankAccount::addCard(const std::string& cardName, bool isCredit) {
     try {
         if (cardName.empty()) {
             throw std::invalid_argument("Card name cannot be empty");
@@ -442,22 +441,25 @@ void BankAccount::addCard(const std::string& cardName, bool isCredit) {
         std::shared_ptr<Card> card;
 
         if (isCredit) {
-            double defaultCreditLimit = 1000.0; // Set appropriate default value
-            double defaultInterestRate = 0.1;  // Set appropriate default value
+            double defaultCreditLimit = 1000.0;
+            double defaultInterestRate = 0.1;
             card = std::make_shared<CreditCard>(cardName, defaultCreditLimit, defaultInterestRate);
         } else {
             card = std::make_shared<DebitCard>(cardName);
         }
 
         cards.push_back(card);
+        return true; // Carta aggiunta con successo
     } catch (const std::exception& e) {
         std::cerr << "Error adding card: " << e.what() << std::endl;
+        return false; // Fallimento
     }
 }
 
 
 
-void BankAccount::removeCard(const std::string& cardName) {
+
+bool BankAccount::removeCard(const std::string& cardName) {
     try {
         auto it = std::remove_if(cards.begin(), cards.end(),
                                  [&cardName](const std::shared_ptr<Card>& card) {
@@ -467,14 +469,15 @@ void BankAccount::removeCard(const std::string& cardName) {
             throw std::runtime_error("Card not found");
         }
         cards.erase(it, cards.end());
+        return true; // Carta rimossa con successo
     } catch (const std::exception& e) {
         std::cerr << "Error removing card: " << e.what() << std::endl;
+        return false; // Fallimento
     }
 }
 
-void BankAccount::addOperationToCard(const std::string& cardName, const std::shared_ptr<Operation>& operation) {
+bool BankAccount::addOperationToCard(const std::string& cardName, const std::shared_ptr<Operation>& operation) {
     try {
-        // Trova la carta con il nome specificato
         auto cardIt = std::find_if(cards.begin(), cards.end(),
                                    [&cardName](const std::shared_ptr<Card>& card) {
                                        return card->getCardName() == cardName;
@@ -492,44 +495,33 @@ void BankAccount::addOperationToCard(const std::string& cardName, const std::sha
         double operationAmount = operation->getAmount();
 
         if (operation->getType() == OperationType::Deposit) {
-            // Gestione del deposito
             if (balance >= operationAmount) {
                 balance -= operationAmount;
-                card->addOperation(operation); // Gestione del deposito delegata alla carta
+                card->addOperation(operation);
             } else {
-                throw std::runtime_error("Insufficient funds in the bank account for this deposit");
+                return false;
             }
         } else if (operation->getType() == OperationType::Withdrawal) {
-            // Gestione del prelievo
-            double cardAmountBeforeOperation = card->getAmount(); // Per rollback
-
             if (card->isCreditCard) {
-                // Per le carte di credito, non è necessario controllare il saldo del conto corrente
                 card->addOperation(operation);
-                balance -= operationAmount; // Aggiorna il saldo del conto corrente
+                balance -= operationAmount; // Riduce il saldo del conto per carte di credito
             } else {
-                // Per le carte di debito, verifica il saldo del conto corrente
-                card->addOperation(operation); // Gestione del prelievo delegata alla carta
-
-                if (card->getAmount() < 0) {
-                    // Rollback
-                    card->setAmount(cardAmountBeforeOperation); // Ripristina saldo della carta
-                    card->removeLastOperation(); // Rimuovi ultima operazione
-                    throw std::runtime_error("Insufficient funds on the debit card");
+                // Per le carte di debito
+                if (card->getAmount() >= operationAmount && balance >= operationAmount) {
+                    card->addOperation(operation);
+                    balance -= operationAmount; // Riduce il saldo del conto
+                } else {
+                    return false;
                 }
-                if (balance < operationAmount) {
-                    // Rollback
-                    card->setAmount(cardAmountBeforeOperation); // Ripristina saldo della carta
-                    card->removeLastOperation(); // Rimuovi ultima operazione
-                    throw std::runtime_error("Insufficient funds in the bank account for this withdrawal");
-                }
-                balance -= operationAmount;
             }
         } else {
             throw std::invalid_argument("Unsupported operation type");
         }
+
+        return true; // Operazione aggiunta con successo
     } catch (const std::exception& e) {
         std::cerr << "Error adding operation to card: " << e.what() << std::endl;
+        return false; // Fallimento
     }
 }
 

@@ -1,6 +1,8 @@
 #include "CreditCard.h"
 #include <iostream>
 
+#define DEF void
+
 // Costruttore
 CreditCard::CreditCard(const std::string& name, double limit, double rate)
         : Card(name, isCreditCard), creditLimit(limit), interestRate(rate) {
@@ -30,7 +32,7 @@ bool CreditCard::canProcessTransaction(double amount) const {
     return (amount <= creditLimit - getAmount());
 }
 
-void CreditCard::addOperation(const std::shared_ptr<Operation>& op) {
+bool CreditCard::addOperation(const std::shared_ptr<Operation>& op) {
     try {
         double operationAmount = op->getAmount();
         if (op->getType() == OperationType::Withdrawal && !canProcessTransaction(operationAmount)) {
@@ -44,8 +46,11 @@ void CreditCard::addOperation(const std::shared_ptr<Operation>& op) {
         }
         // Aggiungi l'operazione alla lista delle operazioni della carta
         Card::addOperation(op);
+
+        return true; // L'operazione è andata a buon fine
     } catch (const std::exception& e) {
         std::cerr << e.what() << std::endl;
+        return false; // Si è verificato un errore
     }
 }
 
